@@ -44,7 +44,7 @@ public class Request {
 	@JoinColumn(name = "PurchaseFolderID", nullable = false)
 	private Purchase_Folder RPurchaseFolder;
 
-	@NotNull
+	@NotNull(message = "Ingresar presupuesto de la solicitud")
 	@Column(name = "Budget", columnDefinition = "Decimal(5,2)", nullable = false)
 	private Double Budget;
 
