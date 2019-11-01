@@ -14,7 +14,7 @@ public class Supplier {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int SupplierID;
+	private Long SupplierID;
 
 	@NotEmpty(message = "Ingrese el nombre del proveedor")
 	@Column(name = "Name", nullable = false, length = 50)
@@ -32,11 +32,11 @@ public class Supplier {
 	@Column(name = "Address", nullable = false, length = 50)
 	private String Address;
 
-	public int getSupplierID() {
+	public Long getSupplierID() {
 		return SupplierID;
 	}
 
-	public void setSupplierID(int supplierID) {
+	public void setSupplierID(Long supplierID) {
 		SupplierID = supplierID;
 	}
 
@@ -77,7 +77,7 @@ public class Supplier {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Supplier(int supplierID, @NotEmpty(message = "Ingrese el nombre del proveedor") String name,
+	public Supplier(Long supplierID, @NotEmpty(message = "Ingrese el nombre del proveedor") String name,
 			@NotEmpty(message = "Ingrese el RUC del proveedor") String rUC,
 			@NotEmpty(message = "Ingrese el teléfono del proveedor") String phoneNumber,
 			@NotEmpty(message = "Ingrese la dirección del proveedor") String address) {
@@ -97,7 +97,7 @@ public class Supplier {
 		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
 		result = prime * result + ((PhoneNumber == null) ? 0 : PhoneNumber.hashCode());
 		result = prime * result + ((RUC == null) ? 0 : RUC.hashCode());
-		result = prime * result + SupplierID;
+		result = prime * result + ((SupplierID == null) ? 0 : SupplierID.hashCode());
 		return result;
 	}
 
@@ -130,7 +130,10 @@ public class Supplier {
 				return false;
 		} else if (!RUC.equals(other.RUC))
 			return false;
-		if (SupplierID != other.SupplierID)
+		if (SupplierID == null) {
+			if (other.SupplierID != null)
+				return false;
+		} else if (!SupplierID.equals(other.SupplierID))
 			return false;
 		return true;
 	}

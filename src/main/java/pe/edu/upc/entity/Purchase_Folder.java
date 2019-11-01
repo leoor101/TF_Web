@@ -16,7 +16,7 @@ public class Purchase_Folder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int PurchaseFolderID;
+	private Long PurchaseFolderID;
 
 	@ManyToOne
 	@JoinColumn(name = "SupplierID", nullable = false)
@@ -26,11 +26,11 @@ public class Purchase_Folder {
 	@Column(name = "FolderName", nullable = false, length = 50)
 	private String FolderName;
 
-	public int getPurchaseFolderID() {
+	public Long getPurchaseFolderID() {
 		return PurchaseFolderID;
 	}
 
-	public void setPurchaseFolderID(int purchaseFolderID) {
+	public void setPurchaseFolderID(Long purchaseFolderID) {
 		PurchaseFolderID = purchaseFolderID;
 	}
 
@@ -55,7 +55,7 @@ public class Purchase_Folder {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Purchase_Folder(int purchaseFolderID, Supplier pFSupplier,
+	public Purchase_Folder(Long purchaseFolderID, Supplier pFSupplier,
 			@NotEmpty(message = "Ingrese el nombre de la carpeta de nombre") String folderName) {
 		super();
 		PurchaseFolderID = purchaseFolderID;
@@ -69,7 +69,7 @@ public class Purchase_Folder {
 		int result = 1;
 		result = prime * result + ((FolderName == null) ? 0 : FolderName.hashCode());
 		result = prime * result + ((PFSupplier == null) ? 0 : PFSupplier.hashCode());
-		result = prime * result + PurchaseFolderID;
+		result = prime * result + ((PurchaseFolderID == null) ? 0 : PurchaseFolderID.hashCode());
 		return result;
 	}
 
@@ -92,7 +92,10 @@ public class Purchase_Folder {
 				return false;
 		} else if (!PFSupplier.equals(other.PFSupplier))
 			return false;
-		if (PurchaseFolderID != other.PurchaseFolderID)
+		if (PurchaseFolderID == null) {
+			if (other.PurchaseFolderID != null)
+				return false;
+		} else if (!PurchaseFolderID.equals(other.PurchaseFolderID))
 			return false;
 		return true;
 	}

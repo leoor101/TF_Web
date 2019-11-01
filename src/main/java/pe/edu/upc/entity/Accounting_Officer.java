@@ -14,7 +14,7 @@ public class Accounting_Officer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int AccountingOfficerID;
+	private Long AccountingOfficerID;
 
 	@NotEmpty(message = "Ingrese el nombre del encargado")
 	@Column(name = "Name", nullable = false, length = 50)
@@ -24,11 +24,11 @@ public class Accounting_Officer {
 	@Column(name = "DNI", nullable = false, length = 7)
 	private String DNI;
 
-	public int getAccountingOfficerID() {
+	public Long getAccountingOfficerID() {
 		return AccountingOfficerID;
 	}
 
-	public void setAccountingOfficerID(int accountingOfficerID) {
+	public void setAccountingOfficerID(Long accountingOfficerID) {
 		AccountingOfficerID = accountingOfficerID;
 	}
 
@@ -53,7 +53,7 @@ public class Accounting_Officer {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Accounting_Officer(int accountingOfficerID,
+	public Accounting_Officer(Long accountingOfficerID,
 			@NotEmpty(message = "Ingrese el nombre del encargado") String name,
 			@NotEmpty(message = "Ingrese el DNI del encargado") String dNI) {
 		super();
@@ -66,7 +66,7 @@ public class Accounting_Officer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + AccountingOfficerID;
+		result = prime * result + ((AccountingOfficerID == null) ? 0 : AccountingOfficerID.hashCode());
 		result = prime * result + ((DNI == null) ? 0 : DNI.hashCode());
 		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
 		return result;
@@ -81,7 +81,10 @@ public class Accounting_Officer {
 		if (getClass() != obj.getClass())
 			return false;
 		Accounting_Officer other = (Accounting_Officer) obj;
-		if (AccountingOfficerID != other.AccountingOfficerID)
+		if (AccountingOfficerID == null) {
+			if (other.AccountingOfficerID != null)
+				return false;
+		} else if (!AccountingOfficerID.equals(other.AccountingOfficerID))
 			return false;
 		if (DNI == null) {
 			if (other.DNI != null)

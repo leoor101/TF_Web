@@ -15,7 +15,7 @@ public class Supervisor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int SupervisorID;
+	private Long SupervisorID;
 
 	@NotEmpty(message = "Ingrese el nombre del supervisor")
 	@Column(name = "Name", nullable = false, length = 50)
@@ -33,11 +33,11 @@ public class Supervisor {
 	@Column(name = "Address", nullable = false, length = 50)
 	private String Address;
 
-	public int getSupervisorID() {
+	public Long getSupervisorID() {
 		return SupervisorID;
 	}
 
-	public void setSupervisorID(int supervisorID) {
+	public void setSupervisorID(Long supervisorID) {
 		SupervisorID = supervisorID;
 	}
 
@@ -78,8 +78,8 @@ public class Supervisor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Supervisor(int supervisorID, @NotEmpty(message = "Ingrese el nombre del supervisor") String name,
-			@NotEmpty(message = "Ingrese los años de experiencia del supervisor") int yearsExperience,
+	public Supervisor(Long supervisorID, @NotEmpty(message = "Ingrese el nombre del supervisor") String name,
+			@NotNull(message = "Ingrese los años de experiencia del supervisor") int yearsExperience,
 			@NotEmpty(message = "Ingrese el teléfono del supervisor") String phoneNumber,
 			@NotEmpty(message = "Ingrese la dirección del supervisor") String address) {
 		super();
@@ -97,7 +97,7 @@ public class Supervisor {
 		result = prime * result + ((Address == null) ? 0 : Address.hashCode());
 		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
 		result = prime * result + ((PhoneNumber == null) ? 0 : PhoneNumber.hashCode());
-		result = prime * result + SupervisorID;
+		result = prime * result + ((SupervisorID == null) ? 0 : SupervisorID.hashCode());
 		result = prime * result + YearsExperience;
 		return result;
 	}
@@ -126,7 +126,10 @@ public class Supervisor {
 				return false;
 		} else if (!PhoneNumber.equals(other.PhoneNumber))
 			return false;
-		if (SupervisorID != other.SupervisorID)
+		if (SupervisorID == null) {
+			if (other.SupervisorID != null)
+				return false;
+		} else if (!SupervisorID.equals(other.SupervisorID))
 			return false;
 		if (YearsExperience != other.YearsExperience)
 			return false;
