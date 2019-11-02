@@ -53,21 +53,17 @@ public class Accounting_Officer {
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< HEAD
-	public Accounting_Officer(Long accountingOfficerID, String name, String dNI) {
-=======
+
 	public Accounting_Officer(Long accountingOfficerID,
 			@NotEmpty(message = "Ingrese el nombre del encargado") String name,
 			@NotEmpty(message = "Ingrese el DNI del encargado") String dNI) {
->>>>>>> 49ff84860100b262ab4a5b81e1bf306a2ffe17bd
+
 		super();
 		AccountingOfficerID = accountingOfficerID;
 		Name = name;
 		DNI = dNI;
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public int hashCode() {
 		final int prime = 31;
