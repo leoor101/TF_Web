@@ -14,7 +14,7 @@ public class Accounting_Officer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int AccountingOfficerID;
+	private Long AccountingOfficerID;
 
 	@NotEmpty(message = "Ingrese el nombre del encargado")
 	@Column(name = "Name", nullable = false, length = 50)
@@ -24,11 +24,11 @@ public class Accounting_Officer {
 	@Column(name = "DNI", nullable = false, length = 7)
 	private String DNI;
 
-	public int getAccountingOfficerID() {
+	public Long getAccountingOfficerID() {
 		return AccountingOfficerID;
 	}
 
-	public void setAccountingOfficerID(int accountingOfficerID) {
+	public void setAccountingOfficerID(Long accountingOfficerID) {
 		AccountingOfficerID = accountingOfficerID;
 	}
 
@@ -53,47 +53,11 @@ public class Accounting_Officer {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Accounting_Officer(int accountingOfficerID,
-			@NotEmpty(message = "Ingrese el nombre del encargado") String name,
-			@NotEmpty(message = "Ingrese el DNI del encargado") String dNI) {
+	public Accounting_Officer(Long accountingOfficerID, String name, String dNI) {
 		super();
 		AccountingOfficerID = accountingOfficerID;
 		Name = name;
 		DNI = dNI;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + AccountingOfficerID;
-		result = prime * result + ((DNI == null) ? 0 : DNI.hashCode());
-		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Accounting_Officer other = (Accounting_Officer) obj;
-		if (AccountingOfficerID != other.AccountingOfficerID)
-			return false;
-		if (DNI == null) {
-			if (other.DNI != null)
-				return false;
-		} else if (!DNI.equals(other.DNI))
-			return false;
-		if (Name == null) {
-			if (other.Name != null)
-				return false;
-		} else if (!Name.equals(other.Name))
-			return false;
-		return true;
 	}
 
 }
