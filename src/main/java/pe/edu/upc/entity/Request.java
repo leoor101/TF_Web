@@ -22,7 +22,7 @@ public class Request {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int RequestID;
+	private Long RequestID;
 
 	@ManyToOne
 	@JoinColumn(name = "UserID", nullable = false)
@@ -54,11 +54,11 @@ public class Request {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date CreationDate;
 
-	public int getRequestID() {
+	public Long getRequestID() {
 		return RequestID;
 	}
 
-	public void setRequestID(int requestID) {
+	public void setRequestID(Long requestID) {
 		RequestID = requestID;
 	}
 
@@ -123,8 +123,9 @@ public class Request {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Request(int requestID, User rUser, Supervisor rSupervisor, Order_Type rOrderType,
-			Accounting_Officer rAccountingOfficer, Purchase_Folder rPurchaseFolder, @NotNull Double budget,
+	public Request(Long requestID, User rUser, Supervisor rSupervisor, Order_Type rOrderType,
+			Accounting_Officer rAccountingOfficer, Purchase_Folder rPurchaseFolder,
+			@NotNull(message = "Ingresar presupuesto de la solicitud") Double budget,
 			@NotNull(message = "La fecha es obligatoria") Date creationDate) {
 		super();
 		RequestID = requestID;
@@ -148,7 +149,7 @@ public class Request {
 		result = prime * result + ((RPurchaseFolder == null) ? 0 : RPurchaseFolder.hashCode());
 		result = prime * result + ((RSupervisor == null) ? 0 : RSupervisor.hashCode());
 		result = prime * result + ((RUser == null) ? 0 : RUser.hashCode());
-		result = prime * result + RequestID;
+		result = prime * result + ((RequestID == null) ? 0 : RequestID.hashCode());
 		return result;
 	}
 
@@ -196,7 +197,10 @@ public class Request {
 				return false;
 		} else if (!RUser.equals(other.RUser))
 			return false;
-		if (RequestID != other.RequestID)
+		if (RequestID == null) {
+			if (other.RequestID != null)
+				return false;
+		} else if (!RequestID.equals(other.RequestID))
 			return false;
 		return true;
 	}

@@ -14,7 +14,7 @@ public class Product_Requirement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int ProductRequirementID;
+	private Long ProductRequirementID;
 
 	@NotEmpty(message = "Ingrese el nombre del requerimiento de producto")
 	@Column(name = "Name", nullable = false, length = 50)
@@ -24,11 +24,11 @@ public class Product_Requirement {
 	@Column(name = "Description", nullable = false, length = 100)
 	private String Description;
 
-	public int getProductRequirementID() {
+	public Long getProductRequirementID() {
 		return ProductRequirementID;
 	}
 
-	public void setProductRequirementID(int productRequirementID) {
+	public void setProductRequirementID(Long productRequirementID) {
 		ProductRequirementID = productRequirementID;
 	}
 
@@ -53,7 +53,7 @@ public class Product_Requirement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product_Requirement(int productRequirementID,
+	public Product_Requirement(Long productRequirementID,
 			@NotEmpty(message = "Ingrese el nombre del requerimiento de producto") String name,
 			@NotEmpty(message = "Ingrese la descripción del producto") String description) {
 		super();
@@ -68,7 +68,7 @@ public class Product_Requirement {
 		int result = 1;
 		result = prime * result + ((Description == null) ? 0 : Description.hashCode());
 		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
-		result = prime * result + ProductRequirementID;
+		result = prime * result + ((ProductRequirementID == null) ? 0 : ProductRequirementID.hashCode());
 		return result;
 	}
 
@@ -91,7 +91,10 @@ public class Product_Requirement {
 				return false;
 		} else if (!Name.equals(other.Name))
 			return false;
-		if (ProductRequirementID != other.ProductRequirementID)
+		if (ProductRequirementID == null) {
+			if (other.ProductRequirementID != null)
+				return false;
+		} else if (!ProductRequirementID.equals(other.ProductRequirementID))
 			return false;
 		return true;
 	}

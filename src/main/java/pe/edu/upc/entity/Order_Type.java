@@ -14,7 +14,7 @@ public class Order_Type {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int OrderTypeID;
+	private Long OrderTypeID;
 
 	@NotEmpty(message = "Ingrese el nombre del tipo de orden")
 	@Column(name = "OrderName", nullable = false, length = 50)
@@ -24,11 +24,11 @@ public class Order_Type {
 	@Column(name = "Description", nullable = false, length = 100)
 	private String Description;
 
-	public int getOrderTypeID() {
+	public Long getOrderTypeID() {
 		return OrderTypeID;
 	}
 
-	public void setOrderTypeID(int orderTypeID) {
+	public void setOrderTypeID(Long orderTypeID) {
 		OrderTypeID = orderTypeID;
 	}
 
@@ -53,7 +53,7 @@ public class Order_Type {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order_Type(int orderTypeID, @NotEmpty(message = "Ingrese el nombre del tipo de orden") String orderName,
+	public Order_Type(Long orderTypeID, @NotEmpty(message = "Ingrese el nombre del tipo de orden") String orderName,
 			@NotEmpty(message = "Ingrese la descripción del tipo de orden") String description) {
 		super();
 		OrderTypeID = orderTypeID;
@@ -67,7 +67,7 @@ public class Order_Type {
 		int result = 1;
 		result = prime * result + ((Description == null) ? 0 : Description.hashCode());
 		result = prime * result + ((OrderName == null) ? 0 : OrderName.hashCode());
-		result = prime * result + OrderTypeID;
+		result = prime * result + ((OrderTypeID == null) ? 0 : OrderTypeID.hashCode());
 		return result;
 	}
 
@@ -90,7 +90,10 @@ public class Order_Type {
 				return false;
 		} else if (!OrderName.equals(other.OrderName))
 			return false;
-		if (OrderTypeID != other.OrderTypeID)
+		if (OrderTypeID == null) {
+			if (other.OrderTypeID != null)
+				return false;
+		} else if (!OrderTypeID.equals(other.OrderTypeID))
 			return false;
 		return true;
 	}

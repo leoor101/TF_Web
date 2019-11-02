@@ -14,7 +14,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int UserID;
+	private Long UserID;
 
 	@NotEmpty(message = "Ingrese el nombre del usuario")
 	@Column(name = "Name", nullable = false, length = 50)
@@ -36,11 +36,11 @@ public class User {
 	@Column(name = "PhoneNumber", nullable = false, length = 7)
 	private String PhoneNumber;
 
-	public int getUserID() {
+	public Long getUserID() {
 		return UserID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(Long userID) {
 		UserID = userID;
 	}
 
@@ -89,7 +89,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userID, @NotEmpty(message = "Ingrese el nombre del usuario") String name,
+	public User(Long userID, @NotEmpty(message = "Ingrese el nombre del usuario") String name,
 			@NotEmpty(message = "Ingrese la contraseña del usuario") String password,
 			@NotEmpty(message = "Ingrese el nombre del usuario") String username,
 			@NotEmpty(message = "Ingrese el correo del usuario") String emailAddress,
@@ -111,7 +111,7 @@ public class User {
 		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
 		result = prime * result + ((Password == null) ? 0 : Password.hashCode());
 		result = prime * result + ((PhoneNumber == null) ? 0 : PhoneNumber.hashCode());
-		result = prime * result + UserID;
+		result = prime * result + ((UserID == null) ? 0 : UserID.hashCode());
 		result = prime * result + ((Username == null) ? 0 : Username.hashCode());
 		return result;
 	}
@@ -145,7 +145,10 @@ public class User {
 				return false;
 		} else if (!PhoneNumber.equals(other.PhoneNumber))
 			return false;
-		if (UserID != other.UserID)
+		if (UserID == null) {
+			if (other.UserID != null)
+				return false;
+		} else if (!UserID.equals(other.UserID))
 			return false;
 		if (Username == null) {
 			if (other.Username != null)

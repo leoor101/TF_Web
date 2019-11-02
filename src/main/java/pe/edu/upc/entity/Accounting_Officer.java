@@ -53,11 +53,57 @@ public class Accounting_Officer {
 		// TODO Auto-generated constructor stub
 	}
 
+<<<<<<< HEAD
 	public Accounting_Officer(Long accountingOfficerID, String name, String dNI) {
+=======
+	public Accounting_Officer(Long accountingOfficerID,
+			@NotEmpty(message = "Ingrese el nombre del encargado") String name,
+			@NotEmpty(message = "Ingrese el DNI del encargado") String dNI) {
+>>>>>>> 49ff84860100b262ab4a5b81e1bf306a2ffe17bd
 		super();
 		AccountingOfficerID = accountingOfficerID;
 		Name = name;
 		DNI = dNI;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((AccountingOfficerID == null) ? 0 : AccountingOfficerID.hashCode());
+		result = prime * result + ((DNI == null) ? 0 : DNI.hashCode());
+		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Accounting_Officer other = (Accounting_Officer) obj;
+		if (AccountingOfficerID == null) {
+			if (other.AccountingOfficerID != null)
+				return false;
+		} else if (!AccountingOfficerID.equals(other.AccountingOfficerID))
+			return false;
+		if (DNI == null) {
+			if (other.DNI != null)
+				return false;
+		} else if (!DNI.equals(other.DNI))
+			return false;
+		if (Name == null) {
+			if (other.Name != null)
+				return false;
+		} else if (!Name.equals(other.Name))
+			return false;
+		return true;
+	}
+
+>>>>>>> 49ff84860100b262ab4a5b81e1bf306a2ffe17bd
 }

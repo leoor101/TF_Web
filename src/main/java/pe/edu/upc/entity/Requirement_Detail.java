@@ -14,7 +14,7 @@ public class Requirement_Detail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int RequirementDetailID;
+	private Long RequirementDetailID;
 
 	@ManyToOne
 	@JoinColumn(name = "ProductRequirementID", nullable = false)
@@ -24,11 +24,11 @@ public class Requirement_Detail {
 	@JoinColumn(name = "RequestID", nullable = false)
 	private Request RDRequest;
 
-	public int getRequirementDetailID() {
+	public Long getRequirementDetailID() {
 		return RequirementDetailID;
 	}
 
-	public void setRequirementDetailID(int requirementDetailID) {
+	public void setRequirementDetailID(Long requirementDetailID) {
 		RequirementDetailID = requirementDetailID;
 	}
 
@@ -53,7 +53,7 @@ public class Requirement_Detail {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Requirement_Detail(int requirementDetailID, Product_Requirement rDProductRequirement, Request rDRequest) {
+	public Requirement_Detail(Long requirementDetailID, Product_Requirement rDProductRequirement, Request rDRequest) {
 		super();
 		RequirementDetailID = requirementDetailID;
 		RDProductRequirement = rDProductRequirement;
@@ -66,7 +66,7 @@ public class Requirement_Detail {
 		int result = 1;
 		result = prime * result + ((RDProductRequirement == null) ? 0 : RDProductRequirement.hashCode());
 		result = prime * result + ((RDRequest == null) ? 0 : RDRequest.hashCode());
-		result = prime * result + RequirementDetailID;
+		result = prime * result + ((RequirementDetailID == null) ? 0 : RequirementDetailID.hashCode());
 		return result;
 	}
 
@@ -89,7 +89,10 @@ public class Requirement_Detail {
 				return false;
 		} else if (!RDRequest.equals(other.RDRequest))
 			return false;
-		if (RequirementDetailID != other.RequirementDetailID)
+		if (RequirementDetailID == null) {
+			if (other.RequirementDetailID != null)
+				return false;
+		} else if (!RequirementDetailID.equals(other.RequirementDetailID))
 			return false;
 		return true;
 	}
