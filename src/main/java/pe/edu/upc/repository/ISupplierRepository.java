@@ -12,10 +12,10 @@ import pe.edu.upc.entity.Supplier;
 @Repository
 public interface ISupplierRepository extends JpaRepository<Supplier,Long> {
 	@Query("select count(s.Name) from Supplier s where s.Name =:Name")
-	public int findSupplierName(@Param("name") String supplierName);
+	public int findSupplierName(@Param("Name") String supplierName);
 
 	@Query("select s from Supplier s where s.Name like %:Name%")
-	List<Supplier> findByName(String name);
+	List<Supplier> findByName(String Name);
 
-	List<Supplier> findByNameLikeIgnoreCase(String name);
+	
 }

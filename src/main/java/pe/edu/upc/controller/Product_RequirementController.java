@@ -87,24 +87,6 @@ public class Product_RequirementController
 		return "/product_requirement/listproduct";
 
 	}
-
-	@GetMapping("/detalle/{id}")
-	public String detailsProduct(@PathVariable(value = "id") int id, Model model) {
-		try {
-			Optional<Product_Requirement> product = proService.listProduct_RequirementId(id);
-			if (!product.isPresent()) {
-				model.addAttribute("info", "Product doesn't exist");
-				return "redirect:/products/list";
-			} else {
-				model.addAttribute("product_requirement", product.get());
-			}
-
-		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
-		}
-		return "/product_requirement/update";
-	}
-
 	
 	@GetMapping("/listFind")
 	public String listProduct_RequirementFind(Model model) {

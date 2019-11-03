@@ -16,5 +16,4 @@ public interface ISupplierService {
 
 	List<Supplier> findByName(String name);
 
-	List<Supplier> findByNameLikeIgnoreCase(String name);
-}
+	}
