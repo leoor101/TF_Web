@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -23,6 +24,20 @@ public class Product_Requirement {
 	@NotEmpty(message = "Ingrese la descripción del producto")
 	@Column(name = "Description", nullable = false, length = 100)
 	private String Description;
+	
+	@NotEmpty(message = "Ingrese el precio del producto")
+	@Min(0)
+	@Column(name = "Price", nullable = false)
+	private double Price;
+	
+	
+	public double getPrice() {
+		return Price;
+	}
+
+	public void setPrice(double price) {
+		Price = price;
+	}
 
 	public Long getProductRequirementID() {
 		return ProductRequirementID;
@@ -53,50 +68,8 @@ public class Product_Requirement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product_Requirement(Long productRequirementID,
-			@NotEmpty(message = "Ingrese el nombre del requerimiento de producto") String name,
-			@NotEmpty(message = "Ingrese la descripción del producto") String description) {
-		super();
-		ProductRequirementID = productRequirementID;
-		Name = name;
-		Description = description;
-	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((Description == null) ? 0 : Description.hashCode());
-		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
-		result = prime * result + ((ProductRequirementID == null) ? 0 : ProductRequirementID.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product_Requirement other = (Product_Requirement) obj;
-		if (Description == null) {
-			if (other.Description != null)
-				return false;
-		} else if (!Description.equals(other.Description))
-			return false;
-		if (Name == null) {
-			if (other.Name != null)
-				return false;
-		} else if (!Name.equals(other.Name))
-			return false;
-		if (ProductRequirementID == null) {
-			if (other.ProductRequirementID != null)
-				return false;
-		} else if (!ProductRequirementID.equals(other.ProductRequirementID))
-			return false;
-		return true;
-	}
+	
 
 }
