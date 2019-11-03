@@ -40,14 +40,11 @@ public class SupplierServiceImpl implements ISupplierService {
 	}
 
 	@Override
-	public List<Supplier> findByName(String name) {
-		return suR.findByName(name);
+	public List<Supplier> findByName(String Name) {
+		return suR.findByName(Name);
 	}
 
-	@Override
-	public List<Supplier> findByNameLikeIgnoreCase(String name) {
-		return suR.findByNameLikeIgnoreCase(name);
-	}
+
 
 	@Override
 	@Transactional

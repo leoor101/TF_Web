@@ -65,7 +65,7 @@ public class SupervisorController {
 		return "";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/list")
 	public String listSupervisors(Model model) {
 		try {
 			model.addAttribute("supervisor", new Supervisor());
@@ -76,7 +76,7 @@ public class SupervisorController {
 		return "/supervisor/listSupervisors";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/listFind")
 	public String listSupervisorsFind(Model model) {
 		try {
 			model.addAttribute("supervisor", new Supervisor());
@@ -87,14 +87,12 @@ public class SupervisorController {
 		return "supervisor/find";
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("/find")
 	public String findBySupervisor(Map<String, Object> model, @ModelAttribute Supervisor supervisor) throws ParseException {
 		List<Supervisor> listSupervisors;
 		supervisor.setName(supervisor.getName());
 		listSupervisors = sUService.findByName(supervisor.getName());
-		if (listSupervisors.isEmpty()) {
-			listSupervisors = sUService.findByNameLikeIgnoreCase(supervisor.getName());
-		}
+		
 		if (listSupervisors.isEmpty()) {
 			model.put("message", "No se encontró");
 		}

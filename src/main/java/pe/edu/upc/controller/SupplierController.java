@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
@@ -20,23 +21,23 @@ import pe.edu.upc.entity.Supplier;
 import pe.edu.upc.service.ISupplierService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/suppliers")
 public class SupplierController {
 
 	@Autowired
 	private ISupplierService suService;
 
-	@RequestMapping("/")
+	@RequestMapping("/index")
 	public String irWelcome() {
 		return "welcome";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/new")
 	public String newSupplier(Model model) {
 		model.addAttribute("supplier", new Supplier());
 		return "supplier/supplier";
 	}
-
+	@PostMapping("/save")
 	public String saveSupplier(@Valid Supplier supplier, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
@@ -54,7 +55,7 @@ public class SupplierController {
 			return "/supplier/listSuppliers";
 		}
 	}
-
+	@RequestMapping("/delete")
 	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "SupplierID") Long id) {
 		try {
 			if (id != null && id > 0) {
@@ -69,7 +70,7 @@ public class SupplierController {
 		return "";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/list")
 	public String listSuppliers(Model model) {
 		try {
 			model.addAttribute("supplier", new Supplier());
@@ -80,7 +81,7 @@ public class SupplierController {
 		return "/supplier/listSuppliers";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/listFind")
 	public String listSuppliersFind(Model model) {
 		try {
 			model.addAttribute("supplier", new Supplier());
@@ -91,14 +92,12 @@ public class SupplierController {
 		return "supplier/find";
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("/find")
 	public String findBySupplier(Map<String, Object> model, @ModelAttribute Supplier supplier) throws ParseException {
 		List<Supplier> listSuppliers;
 		supplier.setName(supplier.getName());
 		listSuppliers = suService.findByName(supplier.getName());
-		if (listSuppliers.isEmpty()) {
-			listSuppliers = suService.findByNameLikeIgnoreCase(supplier.getName());
-		}
+		
 		if (listSuppliers.isEmpty()) {
 			model.put("message", "No se encontró");
 		}

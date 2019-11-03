@@ -43,18 +43,15 @@ public class SupervisorServiceImpl implements ISupervisorService{
 	}
 
 	@Override
-	public Optional<Supervisor> listarId(long supervisorID) {
+	public Optional<Supervisor> listarSupervisorID(long supervisorID) {
 		return sR.findById(supervisorID);
 	}
 
 	@Override
-	public List<Supervisor> findByName(String name) {
-		return sR.findByName(name);
+	public List<Supervisor> findByName(String Name) {
+		return sR.findByName(Name);
 	}
 
-	@Override
-	public List<Supervisor> findByNameLikeIgnoreCase(String name) {
-		return sR.findByNameLikeIgnoreCase(name);
-	}
+	
 
 }
