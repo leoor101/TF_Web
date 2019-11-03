@@ -9,38 +9,38 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name= "tipos_pedidos")
-public class Tipo_Pedido {
+@Table(name= "types_orders")
+public class Type_Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty(message = "Debe ingresar el nombre del pedido")
-	@Column(name="nombre",nullable = false,length = 50)
-	private String nombre;
+	@Column(name="name  ",nullable = false,length = 50)
+	private String name;
 	
 	@NotEmpty(message = "Debe ingresar la descripción del producto")
-	@Column(name="descripcion",nullable = false,length = 50)
-	private String descripcion;
+	@Column(name="description",nullable = false,length = 50)
+	private String description;
 	
 	public Long getId() {
 		return id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setId(Long id) {
