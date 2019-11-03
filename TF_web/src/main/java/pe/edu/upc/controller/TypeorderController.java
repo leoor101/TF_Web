@@ -92,7 +92,7 @@ public class TypeorderController {
 			Optional<Type_Order> type_order = caService.listId(id);
 			if (!type_order.isPresent()) {
 				model.addAttribute("info", "Tipo de pedido no existe");
-				return "redirect:/typeorders/list";
+				return "redirect:/Typeorders/list";
 			} else {
 				model.addAttribute("type_order", type_order.get());
 			}
