@@ -1,4 +1,4 @@
-package pe.edu.upc.demo;
+package pe.edu.upc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
