@@ -18,5 +18,5 @@ public interface IProduct_RequirementRepository extends JpaRepository<Product_Re
 	@Query("select a from Product_Requirement a where a.Name like %:Name%")
 	List<Product_Requirement> findByName(String Name);
 
-	List<Product_Requirement> findByNameLikeIgnoreCase(String name);
+	
 }

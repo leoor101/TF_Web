@@ -56,10 +56,6 @@ public class Product_RequirementServiceImpl implements IProduct_RequirementServi
 		return productR.findByName(Name);
 	}
 
-	@Override
-	public List<Product_Requirement> findByNameLikeIgnoreCase(String name) {
-		// TODO Auto-generated method stub
-		return productR.findByNameLikeIgnoreCase(name);
-	}
+	
 
 }

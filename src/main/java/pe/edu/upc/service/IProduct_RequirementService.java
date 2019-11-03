@@ -15,6 +15,5 @@ public interface IProduct_RequirementService {
 
 	List<Product_Requirement> findByName(String Name);
 
-	List<Product_Requirement> findByNameLikeIgnoreCase(String name);
-
+	
 }

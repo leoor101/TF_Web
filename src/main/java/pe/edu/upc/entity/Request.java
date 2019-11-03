@@ -24,10 +24,7 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long RequestID;
 
-	@ManyToOne
-	@JoinColumn(name = "UserID", nullable = false)
-	private User RUser;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "SupervisorID", nullable = false)
 	private Supervisor RSupervisor;
@@ -62,13 +59,7 @@ public class Request {
 		RequestID = requestID;
 	}
 
-	public User getRUser() {
-		return RUser;
-	}
-
-	public void setRUser(User rUser) {
-		RUser = rUser;
-	}
+	
 
 	public Supervisor getRSupervisor() {
 		return RSupervisor;
@@ -123,13 +114,13 @@ public class Request {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Request(Long requestID, User rUser, Supervisor rSupervisor, Order_Type rOrderType,
+	public Request(Long requestID, Supervisor rSupervisor, Order_Type rOrderType,
 			Accounting_Officer rAccountingOfficer, Purchase_Folder rPurchaseFolder,
 			@NotNull(message = "Ingresar presupuesto de la solicitud") Double budget,
 			@NotNull(message = "La fecha es obligatoria") Date creationDate) {
 		super();
 		RequestID = requestID;
-		RUser = rUser;
+		
 		RSupervisor = rSupervisor;
 		ROrderType = rOrderType;
 		RAccountingOfficer = rAccountingOfficer;
@@ -138,71 +129,6 @@ public class Request {
 		CreationDate = creationDate;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((Budget == null) ? 0 : Budget.hashCode());
-		result = prime * result + ((CreationDate == null) ? 0 : CreationDate.hashCode());
-		result = prime * result + ((RAccountingOfficer == null) ? 0 : RAccountingOfficer.hashCode());
-		result = prime * result + ((ROrderType == null) ? 0 : ROrderType.hashCode());
-		result = prime * result + ((RPurchaseFolder == null) ? 0 : RPurchaseFolder.hashCode());
-		result = prime * result + ((RSupervisor == null) ? 0 : RSupervisor.hashCode());
-		result = prime * result + ((RUser == null) ? 0 : RUser.hashCode());
-		result = prime * result + ((RequestID == null) ? 0 : RequestID.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Request other = (Request) obj;
-		if (Budget == null) {
-			if (other.Budget != null)
-				return false;
-		} else if (!Budget.equals(other.Budget))
-			return false;
-		if (CreationDate == null) {
-			if (other.CreationDate != null)
-				return false;
-		} else if (!CreationDate.equals(other.CreationDate))
-			return false;
-		if (RAccountingOfficer == null) {
-			if (other.RAccountingOfficer != null)
-				return false;
-		} else if (!RAccountingOfficer.equals(other.RAccountingOfficer))
-			return false;
-		if (ROrderType == null) {
-			if (other.ROrderType != null)
-				return false;
-		} else if (!ROrderType.equals(other.ROrderType))
-			return false;
-		if (RPurchaseFolder == null) {
-			if (other.RPurchaseFolder != null)
-				return false;
-		} else if (!RPurchaseFolder.equals(other.RPurchaseFolder))
-			return false;
-		if (RSupervisor == null) {
-			if (other.RSupervisor != null)
-				return false;
-		} else if (!RSupervisor.equals(other.RSupervisor))
-			return false;
-		if (RUser == null) {
-			if (other.RUser != null)
-				return false;
-		} else if (!RUser.equals(other.RUser))
-			return false;
-		if (RequestID == null) {
-			if (other.RequestID != null)
-				return false;
-		} else if (!RequestID.equals(other.RequestID))
-			return false;
-		return true;
-	}
 
 }
