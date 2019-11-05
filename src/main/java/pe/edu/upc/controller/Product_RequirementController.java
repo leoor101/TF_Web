@@ -3,7 +3,6 @@ package pe.edu.upc.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -13,13 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import pe.edu.upc.entity.Category;
 import pe.edu.upc.entity.Product_Requirement;
 import pe.edu.upc.service.IProduct_RequirementService;
 
@@ -43,23 +40,23 @@ public class Product_RequirementController
 	}
 
 	@PostMapping("/save")
-	public String saveCategory(@Valid Category categoria, BindingResult result, Model model, SessionStatus status)
+	public String saveCategory(@Valid Product_Requirement product, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
-			return "category/category";
+			return "product/product";
 		} else {
-			int rpta = caService.insert(categoria);
+			int rpta = proService.insert(product);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
-				return "/category/category";
+				return "/product/product";
 			} else {
 				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listCategories", caService.list());
+		model.addAttribute("listproduct", proService.list());
 
-		return "/category/category";
+		return "/product/product";
 	}
 
 	@GetMapping("/list")
