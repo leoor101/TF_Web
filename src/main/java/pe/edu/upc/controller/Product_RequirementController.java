@@ -56,7 +56,7 @@ public class Product_RequirementController
 		}
 		model.addAttribute("listproduct", proService.list());
 
-		return "redirect:product/list";
+		return "/product/listproduct";
 	}
 
 	@GetMapping("/list")

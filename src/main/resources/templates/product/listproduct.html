@@ -86,7 +86,7 @@
 				<h1 class="h3 mb-4 text-gray-800">List Products</h1>
 
 
-				<a th:href="@{/products/new/}" class="btn btn-danger btn-xs">New</a>
+				<a th:href="@{/product/new/}" class="btn btn-danger btn-xs">New</a>
 
 				<hr class="sidebar-divider">
 
@@ -103,10 +103,10 @@
 					</thead>
 					<tbody>
 						<tr align="center" th:each="produ: ${listproduct}">
-							<td th:text="${produ.ProductRequirementID}"></td>
-							<td th:text="${produ.Name}"></td>
-							<td th:text="${produ.Description}"></td>
-							<td th:text="${produ.Price}"></td>
+							<td th:text="${produ.productRequirementID}"></td>
+							<td th:text="${produ.name}"></td>
+							<td th:text="${produ.description}"></td>
+							<td th:text="${produ.price}"></td>
 
 						</tr>
 					</tbody>

@@ -15,7 +15,7 @@ public class Product_Requirement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ProductRequirementID;
+	private Long productRequirementID;
 
 	@NotEmpty(message = "Ingrese el nombre del requerimiento de producto")
 	@Column(name = "name", nullable = false, length = 50)
@@ -32,12 +32,12 @@ public class Product_Requirement {
 
 
 	public Long getProductRequirementID() {
-		return ProductRequirementID;
+		return productRequirementID;
 	}
 
 
 	public void setProductRequirementID(Long productRequirementID) {
-		ProductRequirementID = productRequirementID;
+		this.productRequirementID = productRequirementID;
 	}
 
 
