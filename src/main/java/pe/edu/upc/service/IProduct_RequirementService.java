@@ -13,7 +13,7 @@ public interface IProduct_RequirementService {
 
 	Optional<Product_Requirement> listProduct_RequirementId(long id);
 
-	List<Product_Requirement> findByName(String Name);
+	List<Product_Requirement> findByName(String name);
 
 	
 }

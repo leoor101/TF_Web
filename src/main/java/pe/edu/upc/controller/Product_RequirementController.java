@@ -21,7 +21,7 @@ import pe.edu.upc.entity.Product_Requirement;
 import pe.edu.upc.service.IProduct_RequirementService;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class Product_RequirementController 
 {
 	@Autowired
@@ -56,7 +56,7 @@ public class Product_RequirementController
 		}
 		model.addAttribute("listproduct", proService.list());
 
-		return "/product/product";
+		return "redirect:product/list";
 	}
 
 	@GetMapping("/list")

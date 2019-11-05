@@ -38,7 +38,7 @@ public class Product_RequirementServiceImpl implements IProduct_RequirementServi
 	@Override
 	@Transactional(readOnly = true)
 	public List<Product_Requirement> list() {
-		return productR.findAll(Sort.by(Sort.Direction.DESC, "Name"));
+		return productR.findAll(Sort.by(Sort.Direction.DESC, "name"));
 
 	}
 
@@ -49,9 +49,9 @@ public class Product_RequirementServiceImpl implements IProduct_RequirementServi
 	}
 
 	@Override
-	public List<Product_Requirement> findByName(String Name) {
+	public List<Product_Requirement> findByName(String name) {
 		// TODO Auto-generated method stub
-		return productR.findByName(Name);
+		return productR.findByName(name);
 	}
 
 	

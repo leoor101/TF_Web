@@ -18,56 +18,59 @@ public class Product_Requirement {
 	private Long ProductRequirementID;
 
 	@NotEmpty(message = "Ingrese el nombre del requerimiento de producto")
-	@Column(name = "Name", nullable = false, length = 50)
-	private String Name;
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
 
 	@NotEmpty(message = "Ingrese la descripción del producto")
-	@Column(name = "Description", nullable = false, length = 100)
-	private String Description;
+	@Column(name = "description", nullable = false, length = 100)
+	private String description;
 	
 	
 	@Min(0)
-	@Column(name = "Price", nullable = false)
-	private double Price;
-	
-	
-	public double getPrice() {
-		return Price;
-	}
+	@Column(name = "price", nullable = false)
+	private double price;
 
-	public void setPrice(double price) {
-		Price = price;
-	}
 
 	public Long getProductRequirementID() {
 		return ProductRequirementID;
 	}
 
+
 	public void setProductRequirementID(Long productRequirementID) {
 		ProductRequirementID = productRequirementID;
 	}
 
+
 	public String getName() {
-		return Name;
+		return name;
 	}
+
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
+
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
+
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
-	public Product_Requirement() {
-		super();
-		// TODO Auto-generated constructor stub
+
+	public double getPrice() {
+		return price;
 	}
 
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	
 
 
 	
