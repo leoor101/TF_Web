@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+
+import pe.edu.upc.entity.Category;
 import pe.edu.upc.entity.Product_Requirement;
 import pe.edu.upc.service.IProduct_RequirementService;
 
@@ -36,39 +38,39 @@ public class Product_RequirementController
 	@GetMapping("/new")
 	public String newProduct_Requirement(Model model) {
 		model.addAttribute("product", new Product_Requirement());
-		return "product_requirement/product";
+		return "product/product";
 		
 	}
 
 	@PostMapping("/save")
-	public String saveProduct_Requirement(@Valid Product_Requirement product, BindingResult result, Model model, SessionStatus status)
+	public String saveCategory(@Valid Category categoria, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
-			return "product_requirement/product";
+			return "category/category";
 		} else {
-			int rpta = proService.insert(product);
+			int rpta = caService.insert(categoria);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "It alredy exists");
-				return "product_requirement/product";
+				model.addAttribute("mensaje", "Ya existe");
+				return "/category/category";
 			} else {
-				model.addAttribute("mensaje", "It is saved succesfully");
+				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listproduct", proService.list());
+		model.addAttribute("listCategories", caService.list());
 
-		return "product_requirement/product";
+		return "/category/category";
 	}
 
 	@GetMapping("/list")
-	public String listProduct_Requirement(Model model) {
+	public String listproduct(Model model) {
 		try {
 			model.addAttribute("product", new Product_Requirement());
 			model.addAttribute("listproduct", proService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/product_requirement/listproduct";
+		return "/product/listproduct";
 	}
 
 	@RequestMapping("/delete")
@@ -84,7 +86,7 @@ public class Product_RequirementController
 		}
 		model.put("listproduct", proService.list());
 
-		return "/product_requirement/listproduct";
+		return "/product/listproduct";
 
 	}
 	
@@ -96,7 +98,7 @@ public class Product_RequirementController
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/product_requirement/find";
+		return "/product/find";
 	}
 	@RequestMapping("/find")
 	public String findByProduct_Requirement(Map<String, Object> model, @ModelAttribute Product_Requirement product) throws ParseException {
@@ -109,7 +111,7 @@ public class Product_RequirementController
 			model.put("mensaje", "It is not found");
 		}
 		model.put("listproduct", listproducts);
-		return "product_requirement/find";
+		return "product/find";
 
 	}
 }

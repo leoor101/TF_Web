@@ -10,9 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import pe.edu.upc.entity.Product_Requirement;
-
 import pe.edu.upc.repository.IProduct_RequirementRepository;
-
 import pe.edu.upc.service.IProduct_RequirementService;
 
 @Service

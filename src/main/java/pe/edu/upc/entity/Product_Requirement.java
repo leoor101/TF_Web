@@ -25,7 +25,7 @@ public class Product_Requirement {
 	@Column(name = "Description", nullable = false, length = 100)
 	private String Description;
 	
-	@NotEmpty(message = "Ingrese el precio del producto")
+	
 	@Min(0)
 	@Column(name = "Price", nullable = false)
 	private double Price;

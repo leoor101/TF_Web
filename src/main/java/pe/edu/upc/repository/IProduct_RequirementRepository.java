@@ -13,7 +13,7 @@ import pe.edu.upc.entity.Product_Requirement;
 public interface IProduct_RequirementRepository extends JpaRepository<Product_Requirement, Long> {
 
 	@Query("select count(a.Name) from Product_Requirement a where a.Name =:Name")
-	public int searchNameProduct_Requirement(@Param("Name") String Name);
+	public int searchNameProduct_Requirement(@Param("Name") String NameProdutc);
 
 	@Query("select a from Product_Requirement a where a.Name like %:Name%")
 	List<Product_Requirement> findByName(String Name);
