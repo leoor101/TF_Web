@@ -11,9 +11,7 @@ import pe.edu.upc.entity.Type_Order;
 
 @Repository
 public interface ITypeorderRepository extends JpaRepository<Type_Order, Long> {
-	
-	
-	
+
 	@Query("select count(c.name) from Type_Order c where c.name =:name")
 	public int findNameTypeOrder(@Param("name") String nameTypeOrder);
 
