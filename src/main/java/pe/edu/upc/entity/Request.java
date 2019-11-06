@@ -29,9 +29,9 @@ public class Request {
 	@JoinColumn(name = "SupervisorID", nullable = false)
 	private Supervisor RSupervisor;
 
-	@ManyToOne
-	@JoinColumn(name = "OrderTypeID", nullable = false)
-	private Order_Type ROrderType;
+	//@ManyToOne
+	//@JoinColumn(name = "OrderTypeID", nullable = false)
+	//private Order_Type ROrderType;
 
 	@ManyToOne
 	@JoinColumn(name = "AccountingOfficerID", nullable = false)
@@ -69,13 +69,7 @@ public class Request {
 		RSupervisor = rSupervisor;
 	}
 
-	public Order_Type getROrderType() {
-		return ROrderType;
-	}
-
-	public void setROrderType(Order_Type rOrderType) {
-		ROrderType = rOrderType;
-	}
+	
 
 	public Accounting_Officer getRAccountingOfficer() {
 		return RAccountingOfficer;
@@ -114,7 +108,7 @@ public class Request {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Request(Long requestID, Supervisor rSupervisor, Order_Type rOrderType,
+	public Request(Long requestID, Supervisor rSupervisor, 
 			Accounting_Officer rAccountingOfficer, Purchase_Folder rPurchaseFolder,
 			@NotNull(message = "Ingresar presupuesto de la solicitud") Double budget,
 			@NotNull(message = "La fecha es obligatoria") Date creationDate) {
@@ -122,7 +116,7 @@ public class Request {
 		RequestID = requestID;
 		
 		RSupervisor = rSupervisor;
-		ROrderType = rOrderType;
+		//ROrderType = rOrderType;
 		RAccountingOfficer = rAccountingOfficer;
 		RPurchaseFolder = rPurchaseFolder;
 		Budget = budget;
