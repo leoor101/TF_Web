@@ -21,7 +21,7 @@ import pe.edu.upc.entity.Supplier;
 import pe.edu.upc.service.ISupplierService;
 
 @Controller
-@RequestMapping("/suppliers")
+@RequestMapping("/supplier")
 public class SupplierController {
 
 	@Autowired
@@ -45,10 +45,10 @@ public class SupplierController {
 		} else {
 			int rpta = suService.insert(supplier);
 			if (rpta > 0) {
-				model.addAttribute("message", "Ya existe");
+				model.addAttribute("mensaje", "Ya existe");
 				return "/supplier/supplier";
 			} else {
-				model.addAttribute("message", "Se guardó correctamente");
+				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
 			}
 			model.addAttribute("listSuppliers", suService.list());
@@ -60,11 +60,11 @@ public class SupplierController {
 		try {
 			if (id != null && id > 0) {
 				suService.delete(id);
-				model.put("message", "Se eliminó correctamente");
+				model.put("mensaje", "Se eliminó correctamente");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("message", "No se puede eliminar un proveedor");
+			model.put("mensaje", "No se puede eliminar un proveedor");
 		}
 		model.put("listSuppliers", suService.list());
 		return "";
@@ -99,9 +99,9 @@ public class SupplierController {
 		listSuppliers = suService.findByName(supplier.getName());
 		
 		if (listSuppliers.isEmpty()) {
-			model.put("message", "No se encontró");
+			model.put("mensaje", "No se encontró");
 		}
-		model.put("listCategories", listSuppliers);
+		model.put("listSuppliers", listSuppliers);
 		return "supplier/find";
 	}
 }

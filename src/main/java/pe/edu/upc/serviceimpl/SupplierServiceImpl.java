@@ -31,7 +31,7 @@ public class SupplierServiceImpl implements ISupplierService {
 	@Override
 	@Transactional(readOnly=true)
 	public List<Supplier> list() {
-		return suR.findAll(Sort.by(Sort.Direction.DESC, "Name"));
+		return suR.findAll(Sort.by(Sort.Direction.DESC, "name"));
 	}
 
 	@Override
