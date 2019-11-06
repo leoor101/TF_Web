@@ -15,125 +15,63 @@ public class Supervisor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long SupervisorID;
+	private Long supervisorID;
 
 	@NotEmpty(message = "Ingrese el nombre del supervisor")
-	@Column(name = "Name", nullable = false, length = 50)
-	private String Name;
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
 
 	@NotNull(message = "Ingrese los años de experiencia del supervisor")
-	@Column(name = "YearsExperience", nullable = false)
-	private int YearsExperience;
+	@Column(name = "yearsExperience", nullable = false)
+	private int yearsExperience;
 
 	@NotEmpty(message = "Ingrese el teléfono del supervisor")
-	@Column(name = "PhoneNumber", nullable = false, length = 7)
-	private String PhoneNumber;
+	@Column(name = "phoneNumber", nullable = false, length = 7)
+	private String phoneNumber;
 
 	@NotEmpty(message = "Ingrese la dirección del supervisor")
-	@Column(name = "Address", nullable = false, length = 50)
-	private String Address;
+	@Column(name = "address", nullable = false, length = 50)
+	private String address;
 
 	public Long getSupervisorID() {
-		return SupervisorID;
+		return supervisorID;
 	}
 
 	public void setSupervisorID(Long supervisorID) {
-		SupervisorID = supervisorID;
+		this.supervisorID = supervisorID;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public int getYearsExperience() {
-		return YearsExperience;
+		return yearsExperience;
 	}
 
 	public void setYearsExperience(int yearsExperience) {
-		YearsExperience = yearsExperience;
+		this.yearsExperience = yearsExperience;
 	}
 
 	public String getPhoneNumber() {
-		return PhoneNumber;
+		return phoneNumber;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		PhoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 
-	public Supervisor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Supervisor(Long supervisorID, @NotEmpty(message = "Ingrese el nombre del supervisor") String name,
-			@NotNull(message = "Ingrese los años de experiencia del supervisor") int yearsExperience,
-			@NotEmpty(message = "Ingrese el teléfono del supervisor") String phoneNumber,
-			@NotEmpty(message = "Ingrese la dirección del supervisor") String address) {
-		super();
-		SupervisorID = supervisorID;
-		Name = name;
-		YearsExperience = yearsExperience;
-		PhoneNumber = phoneNumber;
-		Address = address;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((Address == null) ? 0 : Address.hashCode());
-		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
-		result = prime * result + ((PhoneNumber == null) ? 0 : PhoneNumber.hashCode());
-		result = prime * result + ((SupervisorID == null) ? 0 : SupervisorID.hashCode());
-		result = prime * result + YearsExperience;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Supervisor other = (Supervisor) obj;
-		if (Address == null) {
-			if (other.Address != null)
-				return false;
-		} else if (!Address.equals(other.Address))
-			return false;
-		if (Name == null) {
-			if (other.Name != null)
-				return false;
-		} else if (!Name.equals(other.Name))
-			return false;
-		if (PhoneNumber == null) {
-			if (other.PhoneNumber != null)
-				return false;
-		} else if (!PhoneNumber.equals(other.PhoneNumber))
-			return false;
-		if (SupervisorID == null) {
-			if (other.SupervisorID != null)
-				return false;
-		} else if (!SupervisorID.equals(other.SupervisorID))
-			return false;
-		if (YearsExperience != other.YearsExperience)
-			return false;
-		return true;
-	}
 
 }

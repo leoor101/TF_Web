@@ -35,8 +35,7 @@ public class Product_RequirementController
 	@GetMapping("/new")
 	public String newProduct_Requirement(Model model) {
 		model.addAttribute("product", new Product_Requirement());
-		return "product/product";
-		
+		return "product/product";		
 	}
 
 	@PostMapping("/save")

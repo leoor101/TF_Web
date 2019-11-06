@@ -39,7 +39,7 @@ public class SupervisorServiceImpl implements ISupervisorService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Supervisor> list() {
-		return sR.findAll(Sort.by(Sort.Direction.DESC, "Name"));
+		return sR.findAll(Sort.by(Sort.Direction.DESC, "name"));
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class SupervisorServiceImpl implements ISupervisorService{
 	}
 
 	@Override
-	public List<Supervisor> findByName(String Name) {
-		return sR.findByName(Name);
+	public List<Supervisor> findByName(String name) {
+		return sR.findByName(name);
 	}
 
 	

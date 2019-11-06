@@ -12,11 +12,11 @@ import pe.edu.upc.entity.Supervisor;
 
 @Repository
 public interface ISupervisorRepository  extends JpaRepository<Supervisor,Long>{
-	@Query("select count(s.Name) from Supervisor s where s.Name =:Name")
-	public int findSupervisorName(@Param("Name") String supervisorName);
+	@Query("select count(s.name) from Supervisor s where s.name =:name")
+	public int findSupervisorName(@Param("name") String supervisorname);
 
-	@Query("select s from Supervisor s where s.Name like %:Name%")
-	List<Supervisor> findByName(String Name);
+	@Query("select s from Supervisor s where s.name like %:name%")
+	List<Supervisor> findByName(String name);
 
 
 }

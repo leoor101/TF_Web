@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
@@ -32,7 +33,7 @@ public class SupervisorController {
 		return "supervisor/supervisor";
 	}
 
-	@GetMapping("/save")
+	@PostMapping("/save")
 	public String saveSupervisor(@Valid Supervisor Supervisor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
@@ -40,26 +41,26 @@ public class SupervisorController {
 		} else {
 			int rpta = sUService.insert(Supervisor);
 			if (rpta > 0) {
-				model.addAttribute("message", "Ya existe");
+				model.addAttribute("mensaje", "Ya existe");
 				return "/supervisor/supervisor";
 			} else {
-				model.addAttribute("message", "Se guardó correctamente");
+				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
 			}
 			model.addAttribute("listSupervisors", sUService.list());
 			return "/supervisor/listSupervisors";
-		}
+			}
 	}
 
 	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "SupervisorID") Long id) {
 		try {
 			if (id != null && id > 0) {
 				sUService.delete(id);
-				model.put("message", "Se eliminó correctamente");
+				model.put("mensaje", "Se eliminó correctamente");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("message", "No se puede eliminar un proveedor");
+			model.put("mensaje", "No se puede eliminar un proveedor");
 		}
 		model.put("listSupervisors", sUService.list());
 		return "";
@@ -94,9 +95,9 @@ public class SupervisorController {
 		listSupervisors = sUService.findByName(supervisor.getName());
 		
 		if (listSupervisors.isEmpty()) {
-			model.put("message", "No se encontró");
+			model.put("mensaje", "No se encontró");
 		}
-		model.put("listCategories", listSupervisors);
+		model.put("listSupervisors", listSupervisors);
 		return "supervisor/find";
 	}
 }
