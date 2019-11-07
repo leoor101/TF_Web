@@ -13,14 +13,16 @@ import pe.edu.upc.entity.Purchase_Folder;
 public interface IPurchase_FolderRepository extends JpaRepository<Purchase_Folder, Long> {
 
 	@Query("select count(a.folderName) from Purchase_Folder a where a.folderName =:folderName")
-	public int searchNamePurchase_Folder(@Param("folderName") String name);
+	public int searchNamePurchase_Folder(@Param("folderName") String folderName);
 
-	@Query("select a from Purchase_Folder a where a.folderName like %:folderName%")
-	List<Purchase_Folder> findByName(String folderName);
+	@Query("select a from Purchase_Folder a where a.folderName like %?1%")
+	List<Purchase_Folder> fetchPurchase_FolderByfolderName(String folderName);
 
-	@Query("select p from Purchase_Folder p where p.Supplier.name like %?1%")
-	public List<Purchase_Folder> findSupplierByNamePurchase_Folder(String name);
+	@Query("select p from Purchase_Folder p where p.supplier.name like %?1%")
+	public List<Purchase_Folder> findPurchase_FolderByNameSupplier(String name);
 
+	
+	
 	
 	
 }

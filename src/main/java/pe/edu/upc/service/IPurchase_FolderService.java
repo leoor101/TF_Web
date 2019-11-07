@@ -16,7 +16,7 @@ public interface IPurchase_FolderService {
 	Optional<Purchase_Folder> listPurchase_FolderId(long id);	
 	List<Purchase_Folder> findByName(String folderName);
 	
-	public List<Purchase_Folder> fetchPurchase_FolderBySupplierName(String nameUniversidad);
+	public List<Purchase_Folder> fetchPurchase_FolderBySupplierName(String nameSupplier);
 
 	
 }
