@@ -55,69 +55,65 @@
 
 			</div>
 
+
 			<li class="header" style="font-size: 100%;"><i
-				class="zmdi zmdi-account-add"></i> Usuarios</li>
+				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargado de
-					Contabilidad </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
+			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
+			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
 
-			<li><a href="#"> Supervisor </a></li>
-
-			<li class="header" style="font-size: 100%;">Otro Menu</li>
-			<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
-					Proveedor
-			</a></li>
-			<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
-					Productos
-			</a></li>
-			<li><a href="#"> <i class="fa fa-info-circle"
-					aria-hidden="true"></i> Tipo de Pedido
-			</a></li>
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Product</a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Purchase Folder </a></li>
+			<li><a th:href="@{/Typeorders/list}"> Order Type </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/Supervisor/list}"> Request </a></li>
 		</ul>
 	</div>
 
 	<div class="content-container">
 
-			<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+		<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
 
-			<form th:action="@{/accountings/find}" method="post"
-				th:object="${accounting}">
-				<div class="form-group">
+		<form th:action="@{/accountings/find}" method="post"
+			th:object="${accounting}">
+			<div class="form-group">
 
-					<label for=cat>Buscar:</label>
-					<div class="col-sm-12">
-						<input type="text" class="form-control" th:field="*{DNI}" id="cat"
-							placeholder="Ingrese el dni de persona"></input>
-						<div align="right">
-							<button type="submit" class="btn btn-danger">Buscar</button>
-							<a href="/accountings/listFind" class="btn btn-dark">Cancelar</a>
-						</div>
+				<label for=cat>Buscar:</label>
+				<div class="col-sm-12">
+					<input type="text" class="form-control" th:field="*{DNI}" id="cat"
+						placeholder="Ingrese el dni de persona"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-danger">Buscar</button>
+						<a href="/accountings/listFind" class="btn btn-dark">Cancelar</a>
 					</div>
-
 				</div>
 
-			</form>
+			</div>
 
-			<hr class="sidebar-divider">
+		</form>
 
-			<table class="table table-striped">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">DNI</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="per: ${listAccounting}">
-						<td th:text="${per.AccountingOfficerID}"></td>
-						<td th:text="${per.Namex}"></td>
-						<td th:text="${per.DNI}"></td>
+		<hr class="sidebar-divider">
 
-					</tr>
-				</tbody>
-			</table>
-			<p th:text="${mensaje}" class="form-text text-dark"></p>
-		</div>
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">DNI</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="per: ${listAccounting}">
+					<td th:text="${per.AccountingOfficerID}"></td>
+					<td th:text="${per.Namex}"></td>
+					<td th:text="${per.DNI}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+		<p th:text="${mensaje}" class="form-text text-dark"></p>
+	</div>
 </body>
 </html>

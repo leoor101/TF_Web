@@ -58,7 +58,7 @@
 
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
-			<li><a th:href="#"> Usuario </a></li>
+			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
 			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
 			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
@@ -105,15 +105,11 @@
 							<td th:text="${produ.phoneNumber}"></td>
 							<td th:text="${produ.address}"></td>
 
-<<<<<<< HEAD
-=======
-							<td><a
-								th:href="@{/supplier/delete?id=}+${produ.supplierID}"
+							<td><a th:href="@{/supplier/delete?id=}+${produ.supplierID}"
 								class="btn btn-dark">Eliminar</a></td>
 							<td align="center"><a
 								th:href="@{'/supplier/detail/' + ${produ.supplierID}}"
 								class="btn btn-dark">Actualizar</a></td>
->>>>>>> a81ee376aa04e7a3a7355e70598f8647f0e80908
 						</tr>
 					</tbody>
 				</table>
