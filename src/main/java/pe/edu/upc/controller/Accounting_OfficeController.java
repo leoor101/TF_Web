@@ -72,7 +72,7 @@ public class Accounting_OfficeController
 	}
 
 	@RequestMapping("/delete")
-	public String delete(Map<String, Object> model, @RequestParam(value = "AccountingOfficerID") Integer id) {
+	public String delete(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
 				aService.delete(id);
