@@ -58,7 +58,8 @@
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> Usuarios</li>
 			<li><a href="#"> Usuario </a></li>
-			<li><a href="#"> Encargado de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargado de
+					Contabilidad </a></li>
 
 			<li><a href="#"> Supervisor </a></li>
 
@@ -76,48 +77,39 @@
 	</div>
 
 	<!--Container-->
-	<div class="content-container" style="margin-top: 6.4%;">
+	<div class="content-container">
 
 		<div class="container-fluid">
 
 			<!-- Main component for a primary marketing message or call to action -->
-			<div class="jumbotron">
+			<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+			<a class="btn btn-lg btn-primary" role="button"
+				th:href="@{/accountings/new}">Nuevo </a>
 
-				<h1 class="h3 mb-4 text-gray-800">List Purchase Folder</h1>
+			<hr class="sidebar-divider">
 
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">DNI</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="ao: ${listAccounting}">
+						<td th:text="${ao.AccountingOfficerID}"></td>
+						<td th:text="${ao.Namex}"></td>
+						<td th:text="${ao.DNI}"></td>
+					</tr>
+				</tbody>
+			</table>
 
-				<a th:href="@{/purchasefolder/new/}"
-					class="btn btn-secondary btn-xs">Nuevo</a>
+			<p th:text="${mensaje}"></p>
 
-				<hr class="sidebar-divider">
-
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">FolderName</th>
-							<th scope="col">SupplierName</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr align="center" th:each="produ: ${listpurchasefolder}">
-							<td><a class="btn btn-danger btn-xs"
-								th:href="@{/purchasefolder/view/} + ${produ.purchaseFolderID}"
-								th:text=${produ.purchaseFolderID}></a></td>
-
-							<td th:text="${produ.folderName}"></td>
-							<td th:text="${produ.supplier.name}"></td>
-
-
-						</tr>
-					</tbody>
-				</table>
-
-				<p th:text="${mensaje}"></p>
-
-			</div>
 		</div>
 	</div>
+
 
 
 

@@ -83,11 +83,10 @@
 			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">List Purchase Folder</h1>
+				<h1 class="h3 mb-4 text-gray-800">List Supervisor</h1>
 
 
-				<a th:href="@{/purchasefolder/new/}"
-					class="btn btn-secondary btn-xs">Nuevo</a>
+				<a th:href="@{/supervisor/new/}" class="btn btn-danger btn-xs">New</a>
 
 				<hr class="sidebar-divider">
 
@@ -95,20 +94,21 @@
 					<thead class="thead-dark">
 						<tr align="center">
 							<th scope="col">Id</th>
-							<th scope="col">FolderName</th>
-							<th scope="col">SupplierName</th>
+							<th scope="col">Name</th>
+							<th scope="col">yearsExperience</th>
+							<th scope="col">phoneNumber</th>
+							<th scope="col">Address</th>
+
 						</tr>
 					</thead>
 					<tbody>
-						<tr align="center" th:each="produ: ${listpurchasefolder}">
-							<td><a class="btn btn-danger btn-xs"
-								th:href="@{/purchasefolder/view/} + ${produ.purchaseFolderID}"
-								th:text=${produ.purchaseFolderID}></a></td>
-
-							<td th:text="${produ.folderName}"></td>
-							<td th:text="${produ.supplier.name}"></td>
-
-
+						<tr align="center" th:each="produ: ${listSupervisors}">
+							<td th:text="${produ.supervisorID}"></td>
+							<td th:text="${produ.name}"></td>
+							<td th:text="${produ.yearsExperience}"></td>
+							<td th:text="${produ.phoneNumber}"></td>
+							<td th:text="${produ.address}"></td>
+							
 						</tr>
 					</tbody>
 				</table>

@@ -42,7 +42,7 @@ public class Purchase_FolderController
 	@GetMapping("/new")
 	public String newPurchase_Folder(Model model) {
 		model.addAttribute("purchasefolder", new Purchase_Folder());
-	//	model.addAttribute("//listsupplier",suppService.list());
+		model.addAttribute("listSuppliers",suppService.list());
 		return "purchasefolder/purchasefolder";		
 	}
 
@@ -50,13 +50,13 @@ public class Purchase_FolderController
 	public String savePurchase_Folder(@Valid Purchase_Folder purchase, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
-			model.addAttribute("//////listsupplier", suppService.list());
+			model.addAttribute("listSuppliers", suppService.list());
 			return "purchasefolder/purchasefolder";
 		} else {
 			int rpta = pfService.insert(purchase);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
-				model.addAttribute("////////listsupplier", suppService.list());
+				model.addAttribute("listSuppliers", suppService.list());
 				return "/purchasefolder/purchasefolder";
 			} else {
 				model.addAttribute("mensaje", "Se guardo correctamente");
