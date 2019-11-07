@@ -55,23 +55,21 @@
 
 			</div>
 
+
 			<li class="header" style="font-size: 100%;"><i
-				class="zmdi zmdi-account-add"></i> Usuarios</li>
-			<li><a href="#"> Usuario </a></li>
-			<li><a href="#"> Encargado de Contabilidad </a></li>
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="#"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
+			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
+			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
 
-			<li><a href="#"> Supervisor </a></li>
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Product</a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Purchase Folder </a></li>
+			<li><a th:href="@{/Typeorders/list}"> Order Type </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/Supervisor/list}"> Request </a></li>
 
-			<li class="header" style="font-size: 100%;">Otro Menu</li>
-			<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
-					Proveedor
-			</a></li>
-			<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
-					Productos
-			</a></li>
-			<li><a href="#"> <i class="fa fa-info-circle"
-					aria-hidden="true"></i> Tipo de Pedido
-			</a></li>
 		</ul>
 	</div>
 
@@ -82,19 +80,21 @@
 			<div class="jumbotron">
 				<h1 class="h3 mb-4 text-gray-800">Registrar Product</h1>
 
-				<form th:action="@{/purchasefolder/save}" th:object="${purchasefolder}"
-					method="post">
+				<form th:action="@{/purchasefolder/save}"
+					th:object="${purchasefolder}" method="post">
 					<div class="form-group row">
-						<label for="folderName" class="col-sm-2 col-form-label">folderName </label>
+						<label for="folderName" class="col-sm-2 col-form-label">folderName
+						</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{folderName}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
 								class="form-text text-danger"
-								th:if="${#fields.hasErrors('folderName')}" th:errors="*{folderName}"></small>
+								th:if="${#fields.hasErrors('folderName')}"
+								th:errors="*{folderName}"></small>
 						</div>
 					</div>
 
-					
+
 
 
 

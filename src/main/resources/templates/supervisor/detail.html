@@ -55,20 +55,23 @@
 
 			</div>
 
-
 			<li class="header" style="font-size: 100%;"><i
-				class="zmdi zmdi-account-add"></i> menu1</li>
-			<li><a th:href="#"> Usuario </a></li>
-			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
-			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
-			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
+				class="zmdi zmdi-account-add"></i> Usuarios</li>
+			<li><a href="#"> Usuario </a></li>
+			<li><a href="#"> Encargado de Contabilidad </a></li>
 
-			<li class="header" style="font-size: 100%;">Menu2</li>
-			<li><a th:href="@{/product/list}">Product</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Purchase Folder </a></li>
-			<li><a th:href="@{/Typeorders/list}"> Order Type </a></li>
-			<li class="header" style="font-size: 100%;">Menu3</li>
-			<li><a th:href="@{/Supervisor/list}"> Request </a></li>
+			<li><a href="#"> Supervisor </a></li>
+
+			<li class="header" style="font-size: 100%;">Otro Menu</li>
+			<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
+					Proveedor
+			</a></li>
+			<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
+					Productos
+			</a></li>
+			<li><a href="#"> <i class="fa fa-info-circle"
+					aria-hidden="true"></i> Tipo de Pedido
+			</a></li>
 		</ul>
 	</div>
 
@@ -78,40 +81,51 @@
 		<div class="container-fluid">
 
 			<!-- Main component for a primary marketing message or call to action -->
-			<div class="jumbotron">
+			
+				<h1 class="h3 mb-4 text-gray-800"
+					th:text="'Supervisor : '+${supervisor.name}+'          - ID	 : '+${supervisor.supervisorID}"></h1>
 
-				<h1 class="h3 mb-4 text-gray-800">List Suppliers</h1>
+
+					<div class="container">
+
+						<div class="card">
+							<div class="card-header text-white bg-dark">Requests de :</div>
+							<div class="card-body">
+
+								<div class="table-responsive">
+									<div th:if="${#lists.isEmpty(customer.orders)}"
+										class="alert alert-info my-4"
+										th:text="'El cliente ' + ${customer.firstName} + ' ' + ${customer.lastName}  +' no tiene órdenes'"></div>
 
 
-				<a th:href="@{/supplier/new/}" class="btn btn-danger btn-xs">New</a>
+									<table th:if="${not #lists.isEmpty(customer.orders)}"
+										class="table table-striped">
+										<thead class="bg-light text-black">
+											<tr align="center">
+												<th>Órden</th>
+												<th>Fecha</th>
+												<th>Total</th>
+												<th>Ver</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr align="center" th:each="order :${customer.orders}">
+												<td th:text="${order.id}"></td>
+												<td th:text="${order.createAt}"></td>
+												<td th:text="${order.total}"></td>
+												<td><a class="btn btn-danger"
+													th:href="@{'/orders/detail/'+ ${order.id}}">Detalle</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<hr class="sidebar-divider">
 
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">Name</th>
-							<th scope="col">Ruc</th>
-							<th scope="col">PhoneNumber</th>
-							<th scope="col">Address</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr align="center" th:each="produ: ${listSuppliers}">
-							<td th:text="${produ.supplierID}"></td>
-							<td th:text="${produ.name}"></td>
-							<td th:text="${produ.ruc}"></td>
-							<td th:text="${produ.phoneNumber}"></td>
-							<td th:text="${produ.address}"></td>
 
-						</tr>
-					</tbody>
-				</table>
-
-				<p th:text="${mensaje}"></p>
-
-			</div>
+			
 		</div>
 	</div>
 

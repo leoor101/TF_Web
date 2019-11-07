@@ -3,6 +3,7 @@ package pe.edu.upc.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+
 
 import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.ISupervisorService;
@@ -100,4 +103,25 @@ public class SupervisorController {
 		model.put("listSupervisors", listSupervisors);
 		return "supervisor/find";
 	}
+	
+	
+	@GetMapping("/detail/{id}")
+	public String detailsSupervisor(@PathVariable(value = "id") Long id, Model model) {
+		try {
+			Optional<Supervisor> supervisor =sUService.findById(id);
+
+			if (!supervisor.isPresent()) {
+				model.addAttribute("info", "supervisor no existe");
+				return "redirect:/supervisor/list";
+			} else {
+				model.addAttribute("supervisor", supervisor.get());
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+
+		return "/supervisor/detail";
+	}
+	
 }
