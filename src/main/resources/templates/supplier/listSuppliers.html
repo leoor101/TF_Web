@@ -107,7 +107,13 @@
 							<td th:text="${produ.ruc}"></td>
 							<td th:text="${produ.phoneNumber}"></td>
 							<td th:text="${produ.address}"></td>
-							
+
+							<td><a
+								th:href="@{/suppliers/delete?id=}+${produ.supplierID}"
+								class="btn btn-dark">Eliminar</a></td>
+							<td align="center"><a
+								th:href="@{'/suppliers/detail/' + ${produ.supplierID}}"
+								class="btn btn-dark">Actualizar</a></td>
 						</tr>
 					</tbody>
 				</table>
