@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import pe.edu.upc.entity.Accounting_Officer;
+import pe.edu.upc.entity.Accounting;
 import pe.edu.upc.service.IAccounting_OfficerService;
 
 @Controller
@@ -31,18 +31,18 @@ public class Accounting_OfficeController
 	
 	@RequestMapping("/index")
 	public String goWelcome() {
-		return "welcome";
+		return "index";
 	}
 
 	@GetMapping("/new")
 	public String newAccounting(Model model) {
-		model.addAttribute("accounting", new Accounting_Officer());
+		model.addAttribute("accounting", new Accounting());
 		return "accounting/accounting";
 		
 	}
 
 	@PostMapping("/save")
-	public String saveAccounting(@Valid Accounting_Officer accounting, BindingResult result, Model model, SessionStatus status)
+	public String saveAccounting(@Valid Accounting accounting, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "accounting/accounting";
@@ -53,18 +53,17 @@ public class Accounting_OfficeController
 				return "/accounting/accounting";
 			} else {
 				model.addAttribute("mensaje", "It is saved succesfully");
+				model.addAttribute("listAccounting", aService.list());
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listAccounting", aService.list());
-
-		return "/accounting/accounting";
+		return "/accounting/listAccounting";
 	}
 
 	@GetMapping("/list")
 	public String listAccountings(Model model) {
 		try {
-			model.addAttribute("accounting", new Accounting_Officer());
+			model.addAttribute("accounting", new Accounting());
 			model.addAttribute("listAccounting", aService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -92,7 +91,7 @@ public class Accounting_OfficeController
 	@GetMapping("/detalle/{id}")
 	public String detailsAccounting(@PathVariable(value = "AccountingOfficerID") int id, Model model) {
 		try {
-			Optional<Accounting_Officer> accounting = aService.listarAccountingOfficerId(id);
+			Optional<Accounting> accounting = aService.listarAccountingOfficerId(id);
 			if (!accounting.isPresent()) {
 				model.addAttribute("info", "Accounting Officer doesn't exist");
 				return "redirect:/accountings/list";
@@ -110,7 +109,7 @@ public class Accounting_OfficeController
 	@GetMapping("/listFind")
 	public String listAccountingsFind(Model model) {
 		try {
-			model.addAttribute("accounting", new Accounting_Officer());
+			model.addAttribute("accounting", new Accounting());
 			model.addAttribute("listAccounting", aService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -118,11 +117,11 @@ public class Accounting_OfficeController
 		return "/accounting/find";
 	}
 	@RequestMapping("/find")
-	public String findByAccounting(Map<String, Object> model, @ModelAttribute Accounting_Officer accounting) throws ParseException {
+	public String findByAccounting(Map<String, Object> model, @ModelAttribute Accounting accounting) throws ParseException {
 
-		List<Accounting_Officer> listAccounting;
-		accounting.setName(accounting.getName());
-		listAccounting = aService.findByName(accounting.getName());
+		List<Accounting> listAccounting;
+		accounting.setNamex(accounting.getNamex());
+		listAccounting = aService.findByNamex(accounting.getNamex());
 
 		if (listAccounting.isEmpty()) {
 			model.put("mensaje", "It is not found");

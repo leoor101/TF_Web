@@ -7,21 +7,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Accounting_Officer")
-public class Accounting_Officer {
+@Table(name = "accounting")
+public class Accounting {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long AccountingOfficerID;
 
 	@NotEmpty(message = "Ingrese el nombre del encargado")
-	@Column(name = "Name", nullable = false, length = 50)
-	private String Name;
-
+	@Column(name = "Namex", nullable = false, length = 50)
+	private String Namex;
+	
+	@Size(min = 8, max = 8)
 	@NotEmpty(message = "Ingrese el DNI del encargado")
-	@Column(name = "DNI", nullable = false, length = 7)
+	@Column(name = "DNI", nullable = false, unique = true)
 	private String DNI;
 
 	public Long getAccountingOfficerID() {
@@ -32,12 +34,12 @@ public class Accounting_Officer {
 		AccountingOfficerID = accountingOfficerID;
 	}
 
-	public String getName() {
-		return Name;
+	public String getNamex() {
+		return Namex;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setNamex(String namex) {
+		Namex = namex;
 	}
 
 	public String getDNI() {
@@ -48,19 +50,19 @@ public class Accounting_Officer {
 		DNI = dNI;
 	}
 
-	public Accounting_Officer() {
+	public Accounting() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Accounting_Officer(Long accountingOfficerID,
-			@NotEmpty(message = "Ingrese el nombre del encargado") String name,
+	public Accounting(Long accountingOfficerID,
+			@NotEmpty(message = "Ingrese el nombre del encargado") String namex,
 			@NotEmpty(message = "Ingrese el DNI del encargado") String dNI) {
 
 		super();
 		AccountingOfficerID = accountingOfficerID;
-		Name = name;
+		Namex = namex;
 		DNI = dNI;
 	}
 
@@ -70,7 +72,7 @@ public class Accounting_Officer {
 		int result = 1;
 		result = prime * result + ((AccountingOfficerID == null) ? 0 : AccountingOfficerID.hashCode());
 		result = prime * result + ((DNI == null) ? 0 : DNI.hashCode());
-		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
+		result = prime * result + ((Namex == null) ? 0 : Namex.hashCode());
 		return result;
 	}
 
@@ -82,7 +84,7 @@ public class Accounting_Officer {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Accounting_Officer other = (Accounting_Officer) obj;
+		Accounting other = (Accounting) obj;
 		if (AccountingOfficerID == null) {
 			if (other.AccountingOfficerID != null)
 				return false;
@@ -93,10 +95,10 @@ public class Accounting_Officer {
 				return false;
 		} else if (!DNI.equals(other.DNI))
 			return false;
-		if (Name == null) {
-			if (other.Name != null)
+		if (Namex == null) {
+			if (other.Namex != null)
 				return false;
-		} else if (!Name.equals(other.Name))
+		} else if (!Namex.equals(other.Namex))
 			return false;
 		return true;
 	}

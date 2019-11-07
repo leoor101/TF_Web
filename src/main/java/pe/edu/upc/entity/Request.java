@@ -35,7 +35,7 @@ public class Request {
 
 	@ManyToOne
 	@JoinColumn(name = "AccountingOfficerID", nullable = false)
-	private Accounting_Officer RAccountingOfficer;
+	private Accounting RAccountingOfficer;
 
 	@ManyToOne
 	@JoinColumn(name = "PurchaseFolderID", nullable = false)
@@ -71,11 +71,11 @@ public class Request {
 
 	
 
-	public Accounting_Officer getRAccountingOfficer() {
+	public Accounting getRAccountingOfficer() {
 		return RAccountingOfficer;
 	}
 
-	public void setRAccountingOfficer(Accounting_Officer rAccountingOfficer) {
+	public void setRAccountingOfficer(Accounting rAccountingOfficer) {
 		RAccountingOfficer = rAccountingOfficer;
 	}
 
@@ -109,7 +109,7 @@ public class Request {
 	}
 
 	public Request(Long requestID, Supervisor rSupervisor, 
-			Accounting_Officer rAccountingOfficer, Purchase_Folder rPurchaseFolder,
+			Accounting rAccountingOfficer, Purchase_Folder rPurchaseFolder,
 			@NotNull(message = "Ingresar presupuesto de la solicitud") Double budget,
 			@NotNull(message = "La fecha es obligatoria") Date creationDate) {
 		super();
