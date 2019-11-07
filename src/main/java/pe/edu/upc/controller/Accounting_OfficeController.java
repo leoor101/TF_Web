@@ -88,8 +88,8 @@ public class Accounting_OfficeController
 
 	}
 
-	@GetMapping("/detalle/{id}")
-	public String detailsAccounting(@PathVariable(value = "AccountingOfficerID") int id, Model model) {
+	@GetMapping("/detail/{id}")
+	public String detailsAccounting(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<Accounting> accounting = aService.listarAccountingOfficerId(id);
 			if (!accounting.isPresent()) {
@@ -120,8 +120,8 @@ public class Accounting_OfficeController
 	public String findByAccounting(Map<String, Object> model, @ModelAttribute Accounting accounting) throws ParseException {
 
 		List<Accounting> listAccounting;
-		accounting.setNamex(accounting.getNamex());
-		listAccounting = aService.findByNamex(accounting.getNamex());
+		accounting.setDNI(accounting.getDNI());
+		listAccounting = aService.findByDNI(accounting.getDNI());
 
 		if (listAccounting.isEmpty()) {
 			model.put("mensaje", "It is not found");
@@ -129,5 +129,20 @@ public class Accounting_OfficeController
 		model.put("listAccounting", listAccounting);
 		return "accounting/find";
 
+	}
+	
+	@PostMapping("/savemodify")
+	public String saveCategory2(@Valid Accounting accounting, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "accounting/accounting";
+		} else {
+			aService.insertmodified(accounting);
+
+			model.addAttribute("mensaje", "It has been modified correctly");
+			model.addAttribute("listAccounting", aService.list());
+			status.setComplete();
+			return "/accounting/listAccounting";
+		}
 	}
 }

@@ -84,8 +84,9 @@
 			<!-- Main component for a primary marketing message or call to action -->
 			<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
 			<a class="btn btn-lg btn-primary" role="button"
-				th:href="@{/accountings/new}">Nuevo </a>
-
+				th:href="@{/accountings/new}">Nuevo </a> <a
+				class="btn btn-lg btn-primary" role="button"
+				th:href="@{/accountings/listFind}">Buscar </a>
 			<hr class="sidebar-divider">
 
 			<table class="table table-striped">
@@ -94,6 +95,8 @@
 						<th scope="col">ID</th>
 						<th scope="col">Nombre</th>
 						<th scope="col">DNI</th>
+						<th scope="col">Eliminar</th>
+						<th scope="col">Actualizar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -101,6 +104,14 @@
 						<td th:text="${ao.AccountingOfficerID}"></td>
 						<td th:text="${ao.Namex}"></td>
 						<td th:text="${ao.DNI}"></td>
+
+						<td><a
+							th:href="@{/accountings/delete?id=}+${ao.AccountingOfficerID}"
+							class="btn btn-dark">Eliminar</a></td>
+						<td align="center"><a
+							th:href="@{'/accountings/detail/' + ${ao.AccountingOfficerID}}"
+							class="btn btn-dark">Actualizar</a></td>
+
 					</tr>
 				</tbody>
 			</table>

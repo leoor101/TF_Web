@@ -15,5 +15,7 @@ public interface IAccounting_OfficerService
 
 	Optional<Accounting> listarAccountingOfficerId(long id);
 
-	List<Accounting> findByNamex(String Name);
+	List<Accounting> findByDNI(String DNI);
+	
+	public void insertmodified(Accounting accounting);
 }

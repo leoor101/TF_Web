@@ -15,8 +15,8 @@ public interface IAccounting_OfficerRepository extends JpaRepository<Accounting,
 	@Query("select count(a.DNI) from Accounting a where a.DNI =:DNI")
 	public int searchDNIAccounting(@Param("DNI") String DNI);
 
-	@Query("select a from Accounting a where a.Namex like %:Namex%")
-	List<Accounting> findByNamex(String Name);
+	@Query("select a from Accounting a where a.DNI like %:DNI%")
+	List<Accounting> findByDNI(String DNI);
 	
 	@Query("select a from Accounting a")
 	List<Accounting> findByListHello();

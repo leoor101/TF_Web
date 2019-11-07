@@ -49,8 +49,14 @@ public class Accounting_OfficerServiceImpl implements IAccounting_OfficerService
 	}
 
 	@Override
-	public List<Accounting> findByNamex(String Name) {
-		return aR.findByNamex(Name);
+	public List<Accounting> findByDNI(String DNI) {
+		return aR.findByDNI(DNI);
+	}
+
+	@Override
+	public void insertmodified(Accounting accounting) {
+		aR.save(accounting);
+		
 	}
 
 }
