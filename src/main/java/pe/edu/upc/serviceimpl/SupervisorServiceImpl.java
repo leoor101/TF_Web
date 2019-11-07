@@ -52,6 +52,12 @@ public class SupervisorServiceImpl implements ISupervisorService{
 		return sR.findByName(name);
 	}
 
+	@Override
+	public Optional<Supervisor> findById(Long idSupervisor) {
+		// TODO Auto-generated method stub
+		return sR.findById(idSupervisor);
+	}
+
 	
 
 }

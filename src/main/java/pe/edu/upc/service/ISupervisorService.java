@@ -16,6 +16,9 @@ public interface ISupervisorService {
 	Optional<Supervisor> listarSupervisorID(long supervisorID);
 
 	List<Supervisor> findByName(String name);
+	
+	Optional<Supervisor> findById(Long idSupervisor);
+
 
 	
 }

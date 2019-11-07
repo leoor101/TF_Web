@@ -17,15 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import pe.edu.upc.entity.Customer;
-import pe.edu.upc.entity.Order;
-import pe.edu.upc.entity.OrderDetail;
-import pe.edu.upc.entity.Product;
-import pe.edu.upc.entity.Users;
+import pe.edu.upc.entity.Product_Requirement;
+import pe.edu.upc.entity.Request;
+import pe.edu.upc.entity.Requirement_Detail;
+import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.IAccounting_OfficerService;
-import pe.edu.upc.service.ICustomerService;
-import pe.edu.upc.service.IOrderService;
-import pe.edu.upc.service.IProductService;
 import pe.edu.upc.service.IProduct_RequirementService;
 import pe.edu.upc.service.IPurchase_FolderService;
 import pe.edu.upc.service.IRequestService;
@@ -54,57 +50,56 @@ public class RequestController
 	private IAccounting_OfficerService accServ;
 	
 	
-	
-	//falta todo primero hacer user
+
 	
 	@GetMapping("/form/{id}")
 	public String formRequest(@PathVariable(value = "id") Long id, Model model) {
 		try {
-			Optional<Users> customer = userServ.find(id);
-			if (!customer.isPresent()) {
+			Optional<Supervisor> sup = superServ.findById(id);
+			if (!sup.isPresent()) {
 				model.addAttribute("info", "Cliente no existe");
-				return "redirect:/customers/list";
+				return "redirect:/supervisor/list";
 			} else {
-				Order a = new Order();
-				a.setCustomerId(customer.get());
-				model.addAttribute("order", a);
+				Request a = new Request();
+				a.setSupervisor(sup.get());
+				model.addAttribute("request", a);
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "order/form";
+		return "request/form";
 	}
 
 	
 	
 	
 	@PostMapping("/save")
-	public String saveOrder(Order order, Model model, @RequestParam(name = "item_id[]", required = false) Long[] itemId,
+	public String saveOrder(Request request, Model model, @RequestParam(name = "item_id[]", required = false) Long[] itemId,
 			@RequestParam(name = "quantity[]", required = false) Integer[] quantity, SessionStatus status) {
 		try {
 
 			if (itemId == null || itemId.length == 0) {
 				model.addAttribute("info", "Orden no tiene productos");
-				return "order/form";
+				return "request/form";
 			}
 
 			for (int i = 0; i < itemId.length; i++) {
-				Optional<Product> product = pS.findById(itemId[i]);
+				Optional<Product_Requirement> product = proServ.listProduct_RequirementId(itemId[i]);
 				if (product.isPresent()) {
-					OrderDetail line = new OrderDetail();
+					Requirement_Detail line = new Requirement_Detail();
 					line.setQuantity(quantity[i]);
-					line.setProductId(product.get());
-					order.addDetailOrder(line);
+					line.setProduct(product.get());
+					request.addrequiDetails(line);
 				}
 			}
-			oS.insert(order);
+			requestServ.insert(request);
 			status.setComplete();
-			model.addAttribute("success", "Orden Generada");
+			model.addAttribute("success", "Request Generada");
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "redirect:/customers/detail/" + order.getCustomerId().getId();
+		return "redirect:/supervisor/detail/" + request.getSupervisor().getSupervisorID();
 	}
 
 	
@@ -112,22 +107,22 @@ public class RequestController
 	
 	
 	@GetMapping("/detail/{id}")
-	public String detailOrder(@PathVariable(value = "id") Long id, Model model) {
+	public String detailRequest(@PathVariable(value = "id") Long id, Model model) {
 
 		try {
-			Optional<Order> order = oS.fetchByOrderIdWithCustomerWhithOrderDetailWithProduct(id);
+			Optional<Request> request = requestServ.fetchByRequestIdWithUserWhithRequiDetailsWithProduct(id);
 
-			if (!order.isPresent()) {
-				model.addAttribute("error", "Orden no existe");
-				return "redirect:/customers/list";
+			if (!request.isPresent()) {
+				model.addAttribute("error", "request no existe");
+				return "redirect:/supervisor/list";
 			}
 
-			model.addAttribute("order", order.get());
+			model.addAttribute("request", request.get());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "order/detail";
+		return "request/detail";
 	}
 
 	
@@ -135,14 +130,14 @@ public class RequestController
 	
 	
 	@GetMapping("/listFind")
-	public String listOrders(Model model) {
+	public String listRequest(Model model) {
 		try {
-			model.addAttribute("order", new Order());
-			model.addAttribute("listOrders", oS.list());
+			model.addAttribute("request", new Request());
+			model.addAttribute("listrequest", requestServ.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/order/find";
+		return "/request/find";
 	}
 
 	
@@ -150,17 +145,17 @@ public class RequestController
 	
 	
 	@RequestMapping("/find")
-	public String findOrder(Map<String, Object> model, @ModelAttribute Order order) throws ParseException {
+	public String findRequest(Map<String, Object> model, @ModelAttribute Request request) throws ParseException {
 
-		List<Order> listOrders;
-		order.setCreateAt(order.getCreateAt());
-		listOrders = oS.buscarFecha(order.getCreateAt());
+		List<Request> listrequest;
+		request.setCreateAt(request.getCreateAt());
+		listrequest = requestServ.findDate(request.getCreateAt());
 
-		if (listOrders.isEmpty()) {
+		if (listrequest.isEmpty()) {
 			model.put("mensaje", "No se encontró");
 		}
-		model.put("listOrders", listOrders);
-		return "order/find";
+		model.put("listrequest", listrequest);
+		return "request/find";
 
 	}
 
