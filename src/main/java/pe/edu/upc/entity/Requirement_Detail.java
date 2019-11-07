@@ -1,6 +1,7 @@
 package pe.edu.upc.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,87 +15,50 @@ public class Requirement_Detail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long RequirementDetailID;
+	private Long requirementDetailID;
 
-	@ManyToOne
-	@JoinColumn(name = "ProductRequirementID", nullable = false)
-	private Product_Requirement RDProductRequirement;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
+	private Product_Requirement product;
 
-	@ManyToOne
-	@JoinColumn(name = "RequestID", nullable = false)
-	private Request RDRequest;
+	
+	
+	private int quantity;
+
 
 	public Long getRequirementDetailID() {
-		return RequirementDetailID;
+		return requirementDetailID;
 	}
+
 
 	public void setRequirementDetailID(Long requirementDetailID) {
-		RequirementDetailID = requirementDetailID;
+		this.requirementDetailID = requirementDetailID;
 	}
 
-	public Product_Requirement getRDProductRequirement() {
-		return RDProductRequirement;
+
+	public Product_Requirement getProduct() {
+		return product;
 	}
 
-	public void setRDProductRequirement(Product_Requirement rDProductRequirement) {
-		RDProductRequirement = rDProductRequirement;
+
+	public void setProduct(Product_Requirement product) {
+		this.product = product;
 	}
 
-	public Request getRDRequest() {
-		return RDRequest;
+
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setRDRequest(Request rDRequest) {
-		RDRequest = rDRequest;
-	}
 
-	public Requirement_Detail() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-
-	public Requirement_Detail(Long requirementDetailID, Product_Requirement rDProductRequirement, Request rDRequest) {
-		super();
-		RequirementDetailID = requirementDetailID;
-		RDProductRequirement = rDProductRequirement;
-		RDRequest = rDRequest;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((RDProductRequirement == null) ? 0 : RDProductRequirement.hashCode());
-		result = prime * result + ((RDRequest == null) ? 0 : RDRequest.hashCode());
-		result = prime * result + ((RequirementDetailID == null) ? 0 : RequirementDetailID.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Requirement_Detail other = (Requirement_Detail) obj;
-		if (RDProductRequirement == null) {
-			if (other.RDProductRequirement != null)
-				return false;
-		} else if (!RDProductRequirement.equals(other.RDProductRequirement))
-			return false;
-		if (RDRequest == null) {
-			if (other.RDRequest != null)
-				return false;
-		} else if (!RDRequest.equals(other.RDRequest))
-			return false;
-		if (RequirementDetailID == null) {
-			if (other.RequirementDetailID != null)
-				return false;
-		} else if (!RequirementDetailID.equals(other.RequirementDetailID))
-			return false;
-		return true;
+	
+	
+	public Double calculateAmount()
+	{
+		return quantity*product.getPrice();
 	}
 
 }
