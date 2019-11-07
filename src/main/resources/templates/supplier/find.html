@@ -103,7 +103,7 @@
             <div class="jumbotron">
                 <h1 class="h3 mb-4 text-gray-800">Proveedor</h1>
 
-			<form th:action="@{/suppliers/find}" method="post"
+			<form th:action="@{/supplier/find}" method="post"
 				th:object="${supplier}">
 				<div class="form-group">
 
@@ -113,7 +113,7 @@
 							placeholder="Ingrese el nombre del proveedor"></input>
 						<div align="right">
 							<button type="submit" class="btn btn-danger">Buscar</button>
-							<a href="/suppliers/listFind" class="btn btn-dark">Cancelar</a>
+							<a href="/supplier/listFind" class="btn btn-dark">Cancelar</a>
 						</div>
 					</div>
 
@@ -134,7 +134,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="sup: ${listAccounting}">
+					<tr th:each="sup: ${listSuppliers}">
 						<td th:text="${sup.supplierID}"></td>
 						<td th:text="${sup.name}"></td>
 						<td th:text="${sup.ruc}"></td>

@@ -109,10 +109,10 @@
 							<td th:text="${produ.address}"></td>
 
 							<td><a
-								th:href="@{/suppliers/delete?id=}+${produ.supplierID}"
+								th:href="@{/supplier/delete?id=}+${produ.supplierID}"
 								class="btn btn-dark">Eliminar</a></td>
 							<td align="center"><a
-								th:href="@{'/suppliers/detail/' + ${produ.supplierID}}"
+								th:href="@{'/supplier/detail/' + ${produ.supplierID}}"
 								class="btn btn-dark">Actualizar</a></td>
 						</tr>
 					</tbody>
