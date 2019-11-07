@@ -56,7 +56,7 @@ public class SupplierController {
 		}
 	}
 	@RequestMapping("/delete")
-	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "SupplierID") Long id) {
+	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "id") Long id) {
 		try {
 			if (id != null && id > 0) {
 				suService.delete(id);
@@ -67,7 +67,7 @@ public class SupplierController {
 			model.put("mensaje", "No se puede eliminar un proveedor");
 		}
 		model.put("listSuppliers", suService.list());
-		return "";
+		return "/supplier/listSuppliers";
 	}
 
 	@GetMapping("/list")

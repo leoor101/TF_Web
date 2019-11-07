@@ -101,11 +101,50 @@
 
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
-                <h1 style="text-align: center;"> Buscar por nombre:</h1>
-                <p>aca iria lo de registrar</p>
-                <p>
-                    <a class="btn btn-lg btn-primary" href="#" role="button">Registrar </a>
-                </p>
+                <h1 class="h3 mb-4 text-gray-800">Proveedor</h1>
+
+			<form th:action="@{/supplier/find}" method="post"
+				th:object="${supplier}">
+				<div class="form-group">
+
+					<label for=cat>Buscar:</label>
+					<div class="col-sm-12">
+						<input type="text" class="form-control" th:field="*{name}" id="cat"
+							placeholder="Ingrese el nombre del proveedor"></input>
+						<div align="right">
+							<button type="submit" class="btn btn-danger">Buscar</button>
+							<a href="/supplier/listFind" class="btn btn-dark">Cancelar</a>
+						</div>
+					</div>
+
+				</div>
+
+			</form>
+
+			<hr class="sidebar-divider">
+
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">RUC</th>
+						<th scope="col">Tel&eacute;fono</th>
+						<th scope="col">Direcci&oacute;n</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sup: ${listSuppliers}">
+						<td th:text="${sup.supplierID}"></td>
+						<td th:text="${sup.name}"></td>
+						<td th:text="${sup.ruc}"></td>
+						<td th:text="${sup.phoneNumber}"></td>
+						<td th:text="${sup.address}"></td>
+
+					</tr>
+				</tbody>
+			</table>
+			<p th:text="${mensaje}" class="form-text text-dark"></p>
             </div>
         </div>
     </div>

@@ -105,6 +105,15 @@
 							<td th:text="${produ.phoneNumber}"></td>
 							<td th:text="${produ.address}"></td>
 
+<<<<<<< HEAD
+=======
+							<td><a
+								th:href="@{/supplier/delete?id=}+${produ.supplierID}"
+								class="btn btn-dark">Eliminar</a></td>
+							<td align="center"><a
+								th:href="@{'/supplier/detail/' + ${produ.supplierID}}"
+								class="btn btn-dark">Actualizar</a></td>
+>>>>>>> a81ee376aa04e7a3a7355e70598f8647f0e80908
 						</tr>
 					</tbody>
 				</table>
