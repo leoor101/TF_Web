@@ -41,7 +41,7 @@ public class Accounting_OfficeController
 		return "accounting/accounting";
 		
 	}
-
+	@Secured("ROLE_USER")
 	@PostMapping("/save")
 	public String saveAccounting(@Valid Accounting accounting, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -60,7 +60,7 @@ public class Accounting_OfficeController
 		}
 		return "/accounting/listAccounting";
 	}
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listAccountings(Model model) {
 		try {
@@ -71,7 +71,7 @@ public class Accounting_OfficeController
 		}
 		return "/accounting/listAccounting";
 	}
-
+	@Secured("ROLE_USER")
 	@RequestMapping("/delete")
 	public String delete(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
@@ -88,7 +88,7 @@ public class Accounting_OfficeController
 		return "/accounting/listAccounting";
 
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/detail/{id}")
 	public String detailsAccounting(@PathVariable(value = "id") int id, Model model) {
 		try {
@@ -106,7 +106,7 @@ public class Accounting_OfficeController
 		return "/accounting/update";
 	}
 
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listAccountingsFind(Model model) {
 		try {
@@ -117,6 +117,7 @@ public class Accounting_OfficeController
 		}
 		return "/accounting/find";
 	}
+	@Secured("ROLE_USER")
 	@RequestMapping("/find")
 	public String findByAccounting(Map<String, Object> model, @ModelAttribute Accounting accounting) throws ParseException {
 
@@ -131,7 +132,7 @@ public class Accounting_OfficeController
 		return "accounting/find";
 
 	}
-	
+	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
 	public String saveCategory2(@Valid Accounting accounting, BindingResult result, Model model, SessionStatus status)
 			throws Exception {

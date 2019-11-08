@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
+import pe.edu.upc.entity.Accounting;
 import pe.edu.upc.entity.Type_Order;
 import pe.edu.upc.service.ITypeorderService;
 
 @Controller
-@RequestMapping("/Typeorders")
+@RequestMapping("/ordertype")
 public class TypeorderController {
 
 	@Autowired
@@ -31,30 +33,30 @@ public class TypeorderController {
 		return "welcome";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/new")
-	public String newTypeorder(Model model) {
-		model.addAttribute("typeorder", new Type_Order());
-		return "typeorder/typeorder";
+	public String newordertype(Model model) {
+		model.addAttribute("ordertype", new Type_Order());
+		return "ordertype/ordertype";
 	}
-	
+	@Secured("ROLE_USER")
 	@PostMapping("/save")
-	public String saveTypeorder(@Valid Type_Order type_order, BindingResult result, Model model, SessionStatus status)
+	public String saveordertype(@Valid Type_Order type_order, BindingResult result, Model model, SessionStatus status)
 	throws Exception{
 		if(result.hasErrors()) {
-			return "typeorder/typeorder";
+			return "ordertype/ordertype";
 		}else {
 			int rpta= caService.insert(type_order);
 			if(rpta>0) {
 				model.addAttribute("mensaje", "Ya existe");
-				return "/typeorder/typeorder";
+				return "/ordertype/ordertype";
 			}else {
 				model.addAttribute("mensaje","Se guardó correctamente");
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listTypeOrder", caService.list());
-		return "/typeorder/typeorder";
+		model.addAttribute("listordertype", caService.list());
+		return "/ordertype/ordertype";
 	}
 	
 	@GetMapping("/list")
@@ -65,7 +67,7 @@ public class TypeorderController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/typeorder/listTypesOrders";
+		return "/ordertype/listTypesOrders";
 	}
 	
 
@@ -84,37 +86,52 @@ public class TypeorderController {
 		model.put("listTypesOrders", caService.list());
 
 
-		return "/typeorder/listTypesOrders";
+		return "/ordertype/listordertype";
 	}
+	@Secured("ROLE_USER")
 	@GetMapping("/detalle/{id}")
-	public String detailsTypeOrder(@PathVariable(value = "id") int id, Model model) {
+	public String detailsordertype(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<Type_Order> type_order = caService.listId(id);
 			if (!type_order.isPresent()) {
 				model.addAttribute("info", "Tipo de pedido no existe");
-				return "redirect:/Typeorders/list";
+				return "redirect:/ordertype/list";
 			} else {
-				model.addAttribute("type_order", type_order.get());
+				model.addAttribute("ordertype", type_order.get());
 			}
 
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/typeorder/update";
+		return "/ordertype/update";
 	}
 	
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listTypeOrderFind(Model model) {
 		try {
-			model.addAttribute("type_order", new Type_Order());
-			model.addAttribute("listTypesOrders", caService.list());
+			model.addAttribute("ordertype", new Type_Order());
+			model.addAttribute("listordertype", caService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/typeorder/find";
+		return "/ordertype/find";
 	}
-	
+	@Secured("ROLE_USER")
+	@PostMapping("/savemodify")
+	public String saveCategory2(@Valid Type_Order tipoo, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "ordertype/ordertype";
+		} else {
+			caService.insertmodified(tipoo);
+
+			model.addAttribute("ordertype", "It has been modified correctly");
+			model.addAttribute("listordertype", caService.list());
+			status.setComplete();
+			return "/ordertype/listordertype";
+		}
+	}
 	
 }

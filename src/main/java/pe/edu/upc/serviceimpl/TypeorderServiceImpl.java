@@ -63,6 +63,12 @@ public class TypeorderServiceImpl implements ITypeorderService {
 		return caR.findByName(name);
 	}
 
+	@Override
+	public void insertmodified(Type_Order tipo) {
+		// TODO Auto-generated method stub
+		caR.save(tipo);
+	}
+
 	
 
 }

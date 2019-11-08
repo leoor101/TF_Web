@@ -23,6 +23,9 @@ public class Type_Order {
 	@Column(name="description",nullable = false,length = 50)
 	private String description;
 	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}

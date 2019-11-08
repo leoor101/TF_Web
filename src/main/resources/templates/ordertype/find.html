@@ -18,8 +18,7 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
-<script src="https://kit.fontawesome.com/3a97606171.js"
-	crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -61,73 +60,60 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de
-					Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
-			</a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
 			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
-	<!--Container-->
 	<div class="content-container">
 
-		<div class="container-fluid">
+		<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
 
-			<!-- Main component for a primary marketing message or call to action -->
-			<div class="jumbotron">
+		<form th:action="@{/accountings/find}" method="post"
+			th:object="${accounting}">
+			<div class="form-group">
 
-				<h1 class="h3 mb-4 text-gray-800">Listar Proveedores</h1>
-
-
-				<a th:href="@{/supplier/new/}" class="btn btn-danger btn-xs">Nuevo</a>
-				<a th:href="@{/supplier/listFind/}" class="btn btn-danger btn-xs">Buscar</a>
-				<hr class="sidebar-divider">
-				<hr class="sidebar-divider">
-
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">RUC</th>
-							<th scope="col">Tel&eacute;fono</th>
-							<th scope="col">Direcci&oacute;n</th>
-							<th scope="col">Eliminar</th>
-							<th scope="col">Actualizar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr align="center" th:each="produ: ${listSuppliers}">
-							<td th:text="${produ.supplierID}"></td>
-							<td th:text="${produ.name}"></td>
-							<td th:text="${produ.ruc}"></td>
-							<td th:text="${produ.phoneNumber}"></td>
-							<td th:text="${produ.address}"></td>
-
-							<td><a th:href="@{/supplier/delete?id=}+${produ.supplierID}"
-								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
-							<td align="center"><a
-								th:href="@{'/supplier/detail/' + ${produ.supplierID}}"
-								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<p th:text="${mensaje}"></p>
+				<label for=cat>Buscar:</label>
+				<div class="col-sm-12">
+					<input type="text" class="form-control" th:field="*{DNI}" id="cat"
+						placeholder="Ingrese el dni de persona"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-danger">Buscar</button>
+						<a href="/accountings/listFind" class="btn btn-dark">Cancelar</a>
+					</div>
+				</div>
 
 			</div>
-		</div>
+
+		</form>
+
+		<hr class="sidebar-divider">
+
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">DNI</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="per: ${listAccounting}">
+					<td th:text="${per.AccountingOfficerID}"></td>
+					<td th:text="${per.Namex}"></td>
+					<td th:text="${per.DNI}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+		<p th:text="${mensaje}" class="form-text text-dark"></p>
 	</div>
-
-
-
-
 </body>
 </html>

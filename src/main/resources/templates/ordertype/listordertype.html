@@ -69,7 +69,7 @@
 			<li><a th:href="@{/product/list}">Productos</a></li>
 			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
 			</a></li>
-			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 		</ul>
@@ -79,43 +79,37 @@
 	<div class="content-container">
 
 		<div class="container-fluid">
-
-			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
-
-				<h1 class="h3 mb-4 text-gray-800">Listar Proveedores</h1>
-
-
-				<a th:href="@{/supplier/new/}" class="btn btn-danger btn-xs">Nuevo</a>
-				<a th:href="@{/supplier/listFind/}" class="btn btn-danger btn-xs">Buscar</a>
-				<hr class="sidebar-divider">
+				<!-- Main component for a primary marketing message or call to action -->
+				<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+				<a class="btn btn-danger btn-xs" th:href="@{/ordertype/new}">Nuevo
+				</a> <a class="btn btn-danger btn-xs" th:href="@{/ordertype/listFind}">Buscar
+				</a>
 				<hr class="sidebar-divider">
 
 				<table class="table table-striped">
 					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
+						<tr>
+							<th scope="col">ID</th>
 							<th scope="col">Nombre</th>
-							<th scope="col">RUC</th>
-							<th scope="col">Tel&eacute;fono</th>
-							<th scope="col">Direcci&oacute;n</th>
+							<th scope="col">Descripcion</th>
 							<th scope="col">Eliminar</th>
 							<th scope="col">Actualizar</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr align="center" th:each="produ: ${listSuppliers}">
-							<td th:text="${produ.supplierID}"></td>
-							<td th:text="${produ.name}"></td>
-							<td th:text="${produ.ruc}"></td>
-							<td th:text="${produ.phoneNumber}"></td>
-							<td th:text="${produ.address}"></td>
+						<tr th:each="ao: ${listordertype}">
+							<td th:text="${ao.id}"></td>
+							<td th:text="${ao.name}"></td>
+							<td th:text="${ao.description}"></td>
 
-							<td><a th:href="@{/supplier/delete?id=}+${produ.supplierID}"
+							<td><a
+								th:href="@{/ordertype/delete?id=}+${ao.id}"
 								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
 							<td align="center"><a
-								th:href="@{'/supplier/detail/' + ${produ.supplierID}}"
+								th:href="@{'/ordertype/detail/' + ${ao.id}}"
 								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -125,6 +119,7 @@
 			</div>
 		</div>
 	</div>
+
 
 
 

@@ -3,6 +3,7 @@ package pe.edu.upc.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +24,7 @@ public class UsersController {
 	private UsersServiceImpl uS;
 	//@Autowired
 	//private private BCryptPasswordEncoder passwordEncoder;
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newUsers(Model model)
 	{

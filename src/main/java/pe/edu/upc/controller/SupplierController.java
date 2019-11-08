@@ -40,6 +40,7 @@ public class SupplierController {
 		model.addAttribute("supplier", new Supplier());
 		return "supplier/supplier";
 	}
+	@Secured("ROLE_USER")
 	@PostMapping("/save")
 	public String saveSupplier(@Valid Supplier supplier, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -58,6 +59,7 @@ public class SupplierController {
 			return "/supplier/listSuppliers";
 		}
 	}
+	@Secured("ROLE_USER")
 	@RequestMapping("/delete")
 	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "id") Long id) {
 		try {
@@ -72,7 +74,7 @@ public class SupplierController {
 		model.put("listSuppliers", suService.list());
 		return "/supplier/listSuppliers";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listSuppliers(Model model) {
 		try {
@@ -83,7 +85,7 @@ public class SupplierController {
 		}
 		return "/supplier/listSuppliers";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listSuppliersFind(Model model) {
 		try {
@@ -94,7 +96,7 @@ public class SupplierController {
 		}
 		return "supplier/find";
 	}
-
+	@Secured("ROLE_USER")
 	@RequestMapping("/find")
 	public String findBySupplier(Map<String, Object> model, @ModelAttribute Supplier supplier) throws ParseException {
 		List<Supplier> listSuppliers;
@@ -107,7 +109,7 @@ public class SupplierController {
 		model.put("listSuppliers", listSuppliers);
 		return "supplier/find";
 	}
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/detail/{id}")
 	public String detailsSupplier(@PathVariable(value = "id") long id, Model model) {
 		try {
@@ -124,7 +126,7 @@ public class SupplierController {
 		}
 		return "/supplier/update";
 	}
-	
+	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
 	public String saveSupplier2(@Valid Supplier sup, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
