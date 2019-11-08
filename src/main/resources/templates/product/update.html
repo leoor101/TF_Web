@@ -77,7 +77,25 @@
 	<div class="content-container" style="margin-top: 6.4%;">
 
 		<div class="container-fluid">
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
 			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
 
@@ -131,8 +149,7 @@
 							<input type="text" th:field="*{price}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
 								class="form-text text-danger"
-								th:if="${#fields.hasErrors('price')}"
-								th:errors="*{price}"></small>
+								th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></small>
 						</div>
 					</div>
 

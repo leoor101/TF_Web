@@ -58,12 +58,14 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>
 			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
@@ -74,6 +76,25 @@
 	<div class="content-container" style="margin-top: 6.4%;">
 
 		<div class="container-fluid">
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
 
 			<h1 class="h3 mb-4 text-gray-800">Tipo de Orden</h1>
 
@@ -85,22 +106,20 @@
 				</ul>
 			</div>
 
-			<form th:action="@{/ordertype/savemodify}"
-				th:object="${ordertype}" method="post">
+			<form th:action="@{/ordertype/savemodify}" th:object="${ordertype}"
+				method="post">
 				<div class="form-group row">
 					<label for="id" class="col-sm-2 col-form-label">Id</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{id}"
-							class="form-control" readonly
+						<input type="text" th:field="*{id}" class="form-control" readonly
 							th:errorclass="'form-control alert-success'" /> <small
-							class="form-text text-success"
-							th:if="${#fields.hasErrors('id')}"
+							class="form-text text-success" th:if="${#fields.hasErrors('id')}"
 							th:errors="*{id}"></small>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="name" class="col-sm-2 col-form-label">Nombre
-						de la tipo de orden</label>
+					<label for="name" class="col-sm-2 col-form-label">Nombre de
+						la tipo de orden</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{name}" class="form-control"
 							th:errorclass="'form-control alert-danger'" /> <small
@@ -114,7 +133,8 @@
 					<div class="col-sm-6">
 						<input type="text" th:field="*{description}" class="form-control"
 							th:errorclass="'form-control alert-danger'" /> <small
-							class="form-text text-danger" th:if="${#fields.hasErrors('description')}"
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('description')}"
 							th:errors="*{description}"></small>
 					</div>
 				</div>

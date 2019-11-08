@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
-
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -91,28 +92,14 @@
 					<i class="fa fa-bars"></i>
 				</button>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown no-arrow"><a
-						class="nav-link dropdown-toggle" href="#" id="userDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> <span
-							class="mr-2 d-none d-lg-inline text-gray-600 small"><img
-								th:src="@{/img/logout.png}" width="30" height="30" alt="logo"
-								align="middle"></img></span>
-
-					</a> <!-- Dropdown - User Information -->
-						<div
-							class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-							aria-labelledby="userDropdown">
-							<a class="dropdown-item" href="#"> <i
-								class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Perfil
-							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#" data-toggle="modal"
-								data-target="#logoutModal"> <i
-								class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-								Cerrar sesión
-							</a>
-						</div></li>
+					<li class="nav-item dropdown no-arrow">
+						
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
 				</ul>
 			</nav>
 
@@ -158,7 +145,10 @@
 					<p th:text="${mensaje}" class="form-text text-danger"></p>
 				</form>
 			</div>
+
 		</div>
 	</div>
+
+
 </body>
 </html>

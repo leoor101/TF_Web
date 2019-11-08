@@ -62,12 +62,14 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>
 			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
@@ -79,6 +81,25 @@
 
 		<div class="container-fluid">
 
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
 			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
 
@@ -86,9 +107,8 @@
 
 
 				<a th:href="@{/supervisor/new/}" class="btn btn-danger btn-xs">New</a>
-				<a
-				class="btn btn-lg btn-primary" class="btn btn-danger btn-xs"
-				th:href="@{/supervisor/listFind}">Buscar </a>
+				<a class="btn btn-lg btn-primary" class="btn btn-danger btn-xs"
+					th:href="@{/supervisor/listFind}">Buscar </a>
 
 				<hr class="sidebar-divider">
 
@@ -101,7 +121,7 @@
 							<th scope="col">Tel&eacute;fono</th>
 							<th scope="col">Direcci&oacute;n</th>
 							<th scope="col">Eliminar</th>
-						     <th scope="col">Actualizar</th>
+							<th scope="col">Actualizar</th>
 
 						</tr>
 					</thead>
@@ -113,12 +133,12 @@
 							<td th:text="${produ.phoneNumber}"></td>
 							<td th:text="${produ.address}"></td>
 
-                             <td><a
-							th:href="@{/supervisor/delete?id=}+${produ.supervisorID}"
-							class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
-						<td align="center"><a
-							th:href="@{'/supervisor/detail1/' + ${produ.supervisorID}}"
-							class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
+							<td><a
+								th:href="@{/supervisor/delete?id=}+${produ.supervisorID}"
+								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
+							<td align="center"><a
+								th:href="@{'/supervisor/detail1/' + ${produ.supervisorID}}"
+								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
 
 						</tr>
 					</tbody>

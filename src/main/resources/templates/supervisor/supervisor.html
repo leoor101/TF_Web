@@ -60,12 +60,14 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>
 			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
@@ -76,6 +78,25 @@
 	<div class="content-container" style="margin-top: 6.4%;">
 		<div class="container-fluid">
 			<!-- Main component for a primary marketing message or call to action -->
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
 			<div class="jumbotron">
 				<h1 class="h3 mb-4 text-gray-800">Registrar Supervisor</h1>
 
@@ -101,7 +122,8 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="yearsExperience" class="col-sm-2 col-form-label">Años de experiencia</label>
+						<label for="yearsExperience" class="col-sm-2 col-form-label">Años
+							de experiencia</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{yearsExperience}"
 								class="form-control" th:errorclass="'form-control alert-danger'" />
