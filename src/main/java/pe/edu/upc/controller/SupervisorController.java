@@ -36,7 +36,7 @@ public class SupervisorController {
 		return "supervisor/supervisor";
 	}
 
-	
+	@Secured("ROLE_USER")
 	@PostMapping("/save")
 	public String saveSupervisor(@Valid Supervisor Supervisor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -72,7 +72,7 @@ public class SupervisorController {
 		return "/supervisor/listSupervisors";
 	}
 
-
+	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listSupervisors(Model model) {
 		try {
@@ -84,7 +84,7 @@ public class SupervisorController {
 		return "/supervisor/listSupervisors";
 	}
 
-
+	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listSupervisorsFind(Model model) {
 		try {
@@ -96,7 +96,7 @@ public class SupervisorController {
 		return "supervisor/find";
 	}
 
-
+	@Secured("ROLE_USER")
 	@RequestMapping("/find")
 	public String findBySupervisor(Map<String, Object> model, @ModelAttribute Supervisor supervisor)
 			throws ParseException {
@@ -111,7 +111,7 @@ public class SupervisorController {
 		return "supervisor/find";
 	}
 
-
+	@Secured("ROLE_USER")
 	@GetMapping("/detail1/{id}")
 	public String detailsSupervisor(@PathVariable(value = "id") Long id, Model model) {
 		try {

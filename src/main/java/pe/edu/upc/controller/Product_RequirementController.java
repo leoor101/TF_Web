@@ -111,6 +111,7 @@ public class Product_RequirementController
 			model.put("mensaje", "No se encontró");
 		}
 		model.put("listproduct", listproduct);
+		model.put("product", new Product_Requirement());
 		return "product/find";
 
 	}
