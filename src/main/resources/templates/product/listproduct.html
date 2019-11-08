@@ -59,12 +59,14 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>
 			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
@@ -83,7 +85,7 @@
 
 
 				<a th:href="@{/product/new/}" class="btn btn-danger btn-xs">Nuevo</a>
-
+				<a th:href="@{/product/listFind/}" class="btn btn-danger btn-xs">Buscar</a>
 				<hr class="sidebar-divider">
 
 				<table class="table table-striped">
@@ -93,7 +95,8 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Descripci&oacute;n</th>
 							<th scope="col">Precio</th>
-
+							<th scope="col">Eliminar</th>
+							<th scope="col">Actualizar</th>
 
 						</tr>
 					</thead>
@@ -103,7 +106,12 @@
 							<td th:text="${produ.name}"></td>
 							<td th:text="${produ.description}"></td>
 							<td th:text="${produ.price}"></td>
-
+							<td><a
+								th:href="@{/product/delete?id=}+${produ.productRequirementID}"
+								class="btn btn-dark">Eliminar</a></td>
+							<td align="center"><a
+								th:href="@{'/product/detail/' + ${produ.productRequirementID}}"
+								class="btn btn-dark">Actualizar</a></td>
 						</tr>
 					</tbody>
 				</table>

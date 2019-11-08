@@ -2,6 +2,7 @@ package pe.edu.upc.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import pe.edu.upc.entity.Product_Requirement;;
 
 public interface IProduct_RequirementService {
@@ -15,5 +16,6 @@ public interface IProduct_RequirementService {
 
 	List<Product_Requirement> findByName(String name);
 
-	
+	public void insertmodified(Product_Requirement product);
+
 }
