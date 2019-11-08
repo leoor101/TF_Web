@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,7 +60,7 @@ public class Product_RequirementController
 
 		return "/product/listproduct";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listproduct(Model model) {
 		try {
@@ -87,7 +88,7 @@ public class Product_RequirementController
 		return "/product/listproduct";
 
 	}
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listProduct_RequirementFind(Model model) {
 		try {
@@ -98,6 +99,7 @@ public class Product_RequirementController
 		}
 		return "/product/find";
 	}
+	@Secured("ROLE_USER")
 	@RequestMapping("/find")
 	public String findByProduct_Requirement(Map<String, Object> model, @ModelAttribute Product_Requirement product) throws ParseException {
 

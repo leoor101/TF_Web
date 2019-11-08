@@ -32,7 +32,7 @@ public class Users implements Serializable {
 	private String name;
 
 	@NotEmpty(message = "Ingrese la contraseña del usuario")
-	@Column(name = "password", nullable = false, length = 100)
+	@Column(name = "password", nullable = false, length = 200)
 	private String password;
 
 	private boolean enabled;
