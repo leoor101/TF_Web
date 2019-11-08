@@ -55,7 +55,7 @@ public class SupervisorController {
 			}
 	}
 	@RequestMapping("/delete")
-	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "SupervisorID") Long id) {
+	public String deleteSupervisor(Map<String, Object> model, @RequestParam(value = "id") Long id) {
 		try {
 			if (id != null && id > 0) {
 				sUService.delete(id);
@@ -63,10 +63,10 @@ public class SupervisorController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede eliminar un proveedor");
+			model.put("mensaje", "No se puede eliminar un supervisor");
 		}
 		model.put("listSupervisors", sUService.list());
-		return "";
+		return "/supervisor/listSupervisors";
 	}
 
 	@GetMapping("/list")
@@ -111,7 +111,7 @@ public class SupervisorController {
 			Optional<Supervisor> supervisor =sUService.findById(id);
 
 			if (!supervisor.isPresent()) {
-				model.addAttribute("info", "supervisor no existe");
+				model.addAttribute("info", "El supervisor no existe");
 				return "redirect:/supervisor/list";
 			} else {
 				model.addAttribute("supervisor", supervisor.get());
