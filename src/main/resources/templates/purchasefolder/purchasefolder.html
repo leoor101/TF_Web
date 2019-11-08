@@ -59,16 +59,16 @@
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
-			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
-			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
-			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
-			<li><a th:href="@{/product/list}">Product</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Purchase Folder </a></li>
-			<li><a th:href="@{/Typeorders/list}"> Order Type </a></li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
+			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
-			<li><a th:href="@{/Supervisor/list}"> Request </a></li>
+			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 
 		</ul>
 	</div>
@@ -78,12 +78,12 @@
 		<div class="container-fluid">
 			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
-				<h1 class="h3 mb-4 text-gray-800">Registrar Product</h1>
+				<h1 class="h3 mb-4 text-gray-800">Registrar Carpeta de Compra</h1>
 
 				<form th:action="@{/purchasefolder/save}"
 					th:object="${purchasefolder}" method="post">
 					<div class="form-group row">
-						<label for="folderName" class="col-sm-2 col-form-label">folderName
+						<label for="folderName" class="col-sm-2 col-form-label">Nombre de carpeta
 						</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{folderName}" class="form-control"
@@ -99,7 +99,7 @@
 
 
 					<div class="form-group row">
-						<label for="color" class="col-sm-2 col-form-label">Suppliers</label>
+						<label for="color" class="col-sm-2 col-form-label">Proveedor</label>
 						<div class="col-sm-6">
 							<select class="custom-select custom-select-sm"
 								th:field="*{supplier}">
