@@ -58,7 +58,7 @@ public class TypeorderController {
 		model.addAttribute("listordertype", caService.list());
 		return "/ordertype/ordertype";
 	}
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listTypesOrders(Model model) {
 		try {
