@@ -77,11 +77,11 @@ public class Product_RequirementController
 		try {
 			if (id != null && id > 0) {
 				proService.delete(id);
-				model.put("mensaje", "It has been deleted succesfully");
+				model.put("mensaje", "Se eliminó correctamente");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "It could not be saved");
+			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listproduct", proService.list());
 
@@ -108,9 +108,10 @@ public class Product_RequirementController
 		listproduct = proService.findByName(product.getName());
 
 		if (listproduct.isEmpty()) {
-			model.put("mensaje", "It is not found");
+			model.put("mensaje", "No se encontró");
 		}
 		model.put("listproduct", listproduct);
+		model.put("product", new Product_Requirement());
 		return "product/find";
 
 	}
@@ -121,7 +122,7 @@ public class Product_RequirementController
 		try {
 			Optional<Product_Requirement> product = proService.listProduct_RequirementId(id);
 			if (!product.isPresent()) {
-				model.addAttribute("info", "Accounting Officer doesn't exist");
+				model.addAttribute("info", "El producto no existe");
 				return "redirect:/product/list";
 			} else {
 				model.addAttribute("product", product.get());
@@ -140,7 +141,7 @@ public class Product_RequirementController
 		} else {
 			proService.insertmodified(prod);
 
-			model.addAttribute("mensaje", "It has been modified correctly");
+			model.addAttribute("mensaje", "Se modificó correctamente");
 			model.addAttribute("listproduct", proService.list());
 			status.setComplete();
 			return "/product/listproduct";

@@ -69,7 +69,7 @@ public class SupplierController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede eliminar un proveedor");
+			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listSuppliers", suService.list());
 		return "/supplier/listSuppliers";

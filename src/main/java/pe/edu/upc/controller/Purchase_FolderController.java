@@ -60,7 +60,7 @@ public class Purchase_FolderController
 				model.addAttribute("listSuppliers", suppService.list());
 				return "/purchasefolder/purchasefolder";
 			} else {
-				model.addAttribute("mensaje", "Se guardo correctamente");
+				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
 			}
 		}
@@ -85,11 +85,11 @@ public class Purchase_FolderController
 		try {
 			if (id != null && id > 0) {
 				pfService.delete(id);
-				model.put("mensaje", "It has been deleted succesfully");
+				model.put("mensaje", "Se eliminó correctamente");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "It could not be saved");
+			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listpurchasefolder", pfService.list());
 
@@ -102,7 +102,7 @@ public class Purchase_FolderController
 
 		Optional<Purchase_Folder> purchase = pfService.listPurchase_FolderId(id);
 		if (purchase == null) {
-			flash.addFlashAttribute("error", "no esta registrado en la base de datos");
+			flash.addFlashAttribute("error", "La carpeta no existe");
 			return "redirect:/purchasefolder/list";
 		}
 
@@ -137,7 +137,7 @@ public class Purchase_FolderController
 			listpurchase = pfService.fetchPurchase_FolderBySupplierName(purchase.getFolderName());
 		}
 		if (listpurchase.isEmpty()) {
-			model.put("mensaje", "No se encontrÃ³ al estudiante ");
+			model.put("mensaje", "No se pudo encontrar");
 		}
 		model.put("listpurchasefolder", listpurchase);
 		return "purchasefolder/find";
