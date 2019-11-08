@@ -20,23 +20,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-
 import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.ISupervisorService;
-
 
 @Controller
 @RequestMapping("/supervisor")
 public class SupervisorController {
 	@Autowired
 	private ISupervisorService sUService;
+
 	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newSupervisor(Model model) {
 		model.addAttribute("supervisor", new Supervisor());
 		return "supervisor/supervisor";
 	}
-	@Secured("ROLE_USER")
+
+	
 	@PostMapping("/save")
 	public String saveSupervisor(@Valid Supervisor Supervisor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -53,8 +53,9 @@ public class SupervisorController {
 			}
 			model.addAttribute("listSupervisors", sUService.list());
 			return "/supervisor/listSupervisors";
-			}
+		}
 	}
+
 	@Secured("ROLE_USER")
 	@RequestMapping("/delete")
 	public String deleteSupervisor(Map<String, Object> model, @RequestParam(value = "id") Long id) {
@@ -70,7 +71,8 @@ public class SupervisorController {
 		model.put("listSupervisors", sUService.list());
 		return "/supervisor/listSupervisors";
 	}
-	@Secured("ROLE_USER")
+
+
 	@GetMapping("/list")
 	public String listSupervisors(Model model) {
 		try {
@@ -81,7 +83,8 @@ public class SupervisorController {
 		}
 		return "/supervisor/listSupervisors";
 	}
-	@Secured("ROLE_USER")
+
+
 	@GetMapping("/listFind")
 	public String listSupervisorsFind(Model model) {
 		try {
@@ -92,25 +95,27 @@ public class SupervisorController {
 		}
 		return "supervisor/find";
 	}
-	@Secured("ROLE_USER")
+
+
 	@RequestMapping("/find")
-	public String findBySupervisor(Map<String, Object> model, @ModelAttribute Supervisor supervisor) throws ParseException {
+	public String findBySupervisor(Map<String, Object> model, @ModelAttribute Supervisor supervisor)
+			throws ParseException {
 		List<Supervisor> listSupervisors;
 		supervisor.setName(supervisor.getName());
 		listSupervisors = sUService.findByName(supervisor.getName());
-		
+
 		if (listSupervisors.isEmpty()) {
 			model.put("mensaje", "No se encontró");
 		}
 		model.put("listSupervisors", listSupervisors);
 		return "supervisor/find";
 	}
-	
-	@Secured("ROLE_USER")
+
+
 	@GetMapping("/detail1/{id}")
 	public String detailsSupervisor(@PathVariable(value = "id") Long id, Model model) {
 		try {
-			Optional<Supervisor> supervisor =sUService.findById(id);
+			Optional<Supervisor> supervisor = sUService.findById(id);
 
 			if (!supervisor.isPresent()) {
 				model.addAttribute("info", "El supervisor no existe");
@@ -125,5 +130,5 @@ public class SupervisorController {
 
 		return "/supervisor/detail";
 	}
-	
+
 }
