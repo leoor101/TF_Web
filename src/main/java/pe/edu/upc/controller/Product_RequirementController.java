@@ -3,6 +3,7 @@ package pe.edu.upc.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +41,7 @@ public class Product_RequirementController
 	}
 
 	@PostMapping("/save")
-	public String saveCategory(@Valid Product_Requirement product, BindingResult result, Model model, SessionStatus status)
+	public String saveProduct_Requirement(@Valid Product_Requirement product, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "product/product";
@@ -99,15 +101,47 @@ public class Product_RequirementController
 	@RequestMapping("/find")
 	public String findByProduct_Requirement(Map<String, Object> model, @ModelAttribute Product_Requirement product) throws ParseException {
 
-		List<Product_Requirement> listproducts;
+		List<Product_Requirement> listproduct;
 		product.setName(product.getName());
-		listproducts = proService.findByName(product.getName());
+		listproduct = proService.findByName(product.getName());
 
-		if (listproducts.isEmpty()) {
+		if (listproduct.isEmpty()) {
 			model.put("mensaje", "It is not found");
 		}
-		model.put("listproduct", listproducts);
+		model.put("listproduct", listproduct);
 		return "product/find";
 
+	}
+	
+	
+	@GetMapping("/detail/{id}")
+	public String detailsProduct(@PathVariable(value = "id") int id, Model model) {
+		try {
+			Optional<Product_Requirement> product = proService.listProduct_RequirementId(id);
+			if (!product.isPresent()) {
+				model.addAttribute("info", "Accounting Officer doesn't exist");
+				return "redirect:/product/list";
+			} else {
+				model.addAttribute("product", product.get());
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		return "/product/update";
+	}
+	@PostMapping("/savemodify")
+	public String saveProduct2(@Valid Product_Requirement prod, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "product/product";
+		} else {
+			proService.insertmodified(prod);
+
+			model.addAttribute("mensaje", "It has been modified correctly");
+			model.addAttribute("listproduct", proService.list());
+			status.setComplete();
+			return "/product/listproduct";
+		}
 	}
 }

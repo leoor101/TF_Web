@@ -51,4 +51,9 @@ public class SupplierServiceImpl implements ISupplierService {
 	public void delete(long supplierID) {
 		suR.deleteById(supplierID);
 	}
+
+	@Override
+	public void insertmodified(Supplier supplier) {
+		suR.save(supplier);
+	}
 }

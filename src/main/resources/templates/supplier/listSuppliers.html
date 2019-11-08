@@ -59,16 +59,18 @@
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
-			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
-			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
-			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
-			<li><a th:href="@{/product/list}">Product</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Purchase Folder </a></li>
-			<li><a th:href="@{/Typeorders/list}"> Order Type </a></li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>
+			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
-			<li><a th:href="@{/Supervisor/list}"> Request </a></li>
+			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
@@ -80,21 +82,24 @@
 			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">List Suppliers</h1>
+				<h1 class="h3 mb-4 text-gray-800">Listar Proveedores</h1>
 
 
-				<a th:href="@{/supplier/new/}" class="btn btn-danger btn-xs">New</a>
-
+				<a th:href="@{/supplier/new/}" class="btn btn-danger btn-xs">Nuevo</a>
+				<a th:href="@{/supplier/listFind/}" class="btn btn-danger btn-xs">Buscar</a>
+				<hr class="sidebar-divider">
 				<hr class="sidebar-divider">
 
 				<table class="table table-striped">
 					<thead class="thead-dark">
 						<tr align="center">
 							<th scope="col">Id</th>
-							<th scope="col">Name</th>
-							<th scope="col">Ruc</th>
-							<th scope="col">PhoneNumber</th>
-							<th scope="col">Address</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">RUC</th>
+							<th scope="col">Tel&eacute;fono</th>
+							<th scope="col">Direcci&oacute;n</th>
+							<th scope="col">Eliminar</th>
+							<th scope="col">Actualizar</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -69,6 +69,23 @@ public class Product_Requirement {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+
+	public Product_Requirement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Product_Requirement(Long productRequirementID,
+			@NotEmpty(message = "Ingrese el nombre del requerimiento de producto") String name,
+			@NotEmpty(message = "Ingrese la descripción del producto") String description, @Min(0) double price) {
+		super();
+		this.productRequirementID = productRequirementID;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+	}
 	
 	
 

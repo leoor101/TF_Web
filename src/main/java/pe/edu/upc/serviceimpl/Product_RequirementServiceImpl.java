@@ -54,6 +54,12 @@ public class Product_RequirementServiceImpl implements IProduct_RequirementServi
 		return productR.findByName(name);
 	}
 
+	@Override
+	public void insertmodified(Product_Requirement product) {
+		productR.save(product);
+		
+	}
+
 	
 
 }
