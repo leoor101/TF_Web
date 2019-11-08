@@ -85,6 +85,9 @@
 
 
 				<a th:href="@{/supervisor/new/}" class="btn btn-danger btn-xs">New</a>
+				<a
+				class="btn btn-lg btn-primary" role="button"
+				th:href="@{/supervisor/listFind}">Buscar </a>
 
 				<hr class="sidebar-divider">
 
@@ -96,6 +99,8 @@
 							<th scope="col">yearsExperience</th>
 							<th scope="col">phoneNumber</th>
 							<th scope="col">Address</th>
+							<th scope="col">Eliminar</th>
+						     <th scope="col">Actualizar</th>
 
 						</tr>
 					</thead>
@@ -106,6 +111,13 @@
 							<td th:text="${produ.yearsExperience}"></td>
 							<td th:text="${produ.phoneNumber}"></td>
 							<td th:text="${produ.address}"></td>
+
+                             <td><a
+							th:href="@{/supervisor/delete?id=}+${produ.supervisorID}"
+							class="btn btn-dark">Eliminar</a></td>
+						<td align="center"><a
+							th:href="@{'/supervisor/detail1/' + ${produ.supervisorID}}"
+							class="btn btn-dark">Actualizar</a></td>
 
 						</tr>
 					</tbody>

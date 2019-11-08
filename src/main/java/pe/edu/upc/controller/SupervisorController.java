@@ -54,7 +54,7 @@ public class SupervisorController {
 			return "/supervisor/listSupervisors";
 			}
 	}
-
+	@RequestMapping("/delete")
 	public String deleteSupplier(Map<String, Object> model, @RequestParam(value = "SupervisorID") Long id) {
 		try {
 			if (id != null && id > 0) {
@@ -105,7 +105,7 @@ public class SupervisorController {
 	}
 	
 	
-	@GetMapping("/detail/{id}")
+	@GetMapping("/detail1/{id}")
 	public String detailsSupervisor(@PathVariable(value = "id") Long id, Model model) {
 		try {
 			Optional<Supervisor> supervisor =sUService.findById(id);
