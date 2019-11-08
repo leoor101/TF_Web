@@ -122,7 +122,7 @@ public class SupervisorController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/supervisor/detail";
+		return "/supervisor/update";
 	}
 	
 }
