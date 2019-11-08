@@ -79,7 +79,7 @@ public class RequestController
 		try {
 
 			if (itemId == null || itemId.length == 0) {
-				model.addAttribute("info", "Orden no tiene productos");
+				model.addAttribute("info", "La orden no tiene productos");
 				return "request/form";
 			}
 
@@ -94,7 +94,7 @@ public class RequestController
 			}
 			requestServ.insert(request);
 			status.setComplete();
-			model.addAttribute("success", "Request Generada");
+			model.addAttribute("success", "Solicitud generada");
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
@@ -113,7 +113,7 @@ public class RequestController
 			Optional<Request> request = requestServ.fetchByRequestIdWithUserWhithRequiDetailsWithProduct(id);
 
 			if (!request.isPresent()) {
-				model.addAttribute("error", "request no existe");
+				model.addAttribute("error", "La solicitud no existe");
 				return "redirect:/supervisor/list";
 			}
 

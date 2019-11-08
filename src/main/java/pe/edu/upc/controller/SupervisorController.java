@@ -66,7 +66,7 @@ public class SupervisorController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede eliminar un supervisor");
+			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listSupervisors", sUService.list());
 		return "/supervisor/listSupervisors";

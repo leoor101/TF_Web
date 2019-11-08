@@ -50,10 +50,10 @@ public class Accounting_OfficeController
 		} else {
 			int rpta = aService.insert(accounting);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "It alredy exists");
+				model.addAttribute("mensaje", "Ya existe");
 				return "/accounting/accounting";
 			} else {
-				model.addAttribute("mensaje", "It is saved succesfully");
+				model.addAttribute("mensaje", "Se guardó correctamente");
 				model.addAttribute("listAccounting", aService.list());
 				status.setComplete();
 			}
@@ -77,11 +77,11 @@ public class Accounting_OfficeController
 		try {
 			if (id != null && id > 0) {
 				aService.delete(id);
-				model.put("mensaje", "It has been deleted succesfully");
+				model.put("mensaje", "Se eliminó correctamente");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "It could not be saved");
+			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listAccounting", aService.list());
 
@@ -94,7 +94,7 @@ public class Accounting_OfficeController
 		try {
 			Optional<Accounting> accounting = aService.listarAccountingOfficerId(id);
 			if (!accounting.isPresent()) {
-				model.addAttribute("info", "Accounting Officer doesn't exist");
+				model.addAttribute("info", "El encargado no existe");
 				return "redirect:/accountings/list";
 			} else {
 				model.addAttribute("accounting", accounting.get());
@@ -126,7 +126,7 @@ public class Accounting_OfficeController
 		listAccounting = aService.findByDNI(accounting.getDNI());
 
 		if (listAccounting.isEmpty()) {
-			model.put("mensaje", "It is not found");
+			model.put("mensaje", "No se pudo encontrar");
 		}
 		model.put("listAccounting", listAccounting);
 		return "accounting/find";
@@ -134,14 +134,14 @@ public class Accounting_OfficeController
 	}
 	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
-	public String saveCategory2(@Valid Accounting accounting, BindingResult result, Model model, SessionStatus status)
+	public String saveAccounting2(@Valid Accounting accounting, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "accounting/accounting";
 		} else {
 			aService.insertmodified(accounting);
 
-			model.addAttribute("mensaje", "It has been modified correctly");
+			model.addAttribute("mensaje", "Se modificó correctamente");
 			model.addAttribute("listAccounting", aService.list());
 			status.setComplete();
 			return "/accounting/listAccounting";

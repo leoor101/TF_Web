@@ -81,7 +81,7 @@ public class TypeorderController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede eliminar una categoria");
+			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listTypesOrders", caService.list());
 
@@ -94,7 +94,7 @@ public class TypeorderController {
 		try {
 			Optional<Type_Order> type_order = caService.listId(id);
 			if (!type_order.isPresent()) {
-				model.addAttribute("info", "Tipo de pedido no existe");
+				model.addAttribute("info", "El tipo de pedido no existe");
 				return "redirect:/ordertype/list";
 			} else {
 				model.addAttribute("ordertype", type_order.get());
@@ -127,7 +127,7 @@ public class TypeorderController {
 		} else {
 			caService.insertmodified(tipoo);
 
-			model.addAttribute("ordertype", "It has been modified correctly");
+			model.addAttribute("ordertype", "Se modificó correctamente");
 			model.addAttribute("listordertype", caService.list());
 			status.setComplete();
 			return "/ordertype/listordertype";
