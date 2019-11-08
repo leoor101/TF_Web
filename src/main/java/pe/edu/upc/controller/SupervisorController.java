@@ -36,7 +36,7 @@ public class SupervisorController {
 		model.addAttribute("supervisor", new Supervisor());
 		return "supervisor/supervisor";
 	}
-
+	@Secured("ROLE_USER")
 	@PostMapping("/save")
 	public String saveSupervisor(@Valid Supervisor Supervisor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -55,6 +55,7 @@ public class SupervisorController {
 			return "/supervisor/listSupervisors";
 			}
 	}
+	@Secured("ROLE_USER")
 	@RequestMapping("/delete")
 	public String deleteSupervisor(Map<String, Object> model, @RequestParam(value = "id") Long id) {
 		try {
@@ -69,7 +70,7 @@ public class SupervisorController {
 		model.put("listSupervisors", sUService.list());
 		return "/supervisor/listSupervisors";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listSupervisors(Model model) {
 		try {
@@ -80,7 +81,7 @@ public class SupervisorController {
 		}
 		return "/supervisor/listSupervisors";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listSupervisorsFind(Model model) {
 		try {
@@ -91,7 +92,7 @@ public class SupervisorController {
 		}
 		return "supervisor/find";
 	}
-
+	@Secured("ROLE_USER")
 	@RequestMapping("/find")
 	public String findBySupervisor(Map<String, Object> model, @ModelAttribute Supervisor supervisor) throws ParseException {
 		List<Supervisor> listSupervisors;
@@ -105,7 +106,7 @@ public class SupervisorController {
 		return "supervisor/find";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/detail1/{id}")
 	public String detailsSupervisor(@PathVariable(value = "id") Long id, Model model) {
 		try {
