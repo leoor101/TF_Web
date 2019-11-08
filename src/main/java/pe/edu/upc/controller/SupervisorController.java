@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +30,7 @@ import pe.edu.upc.service.ISupervisorService;
 public class SupervisorController {
 	@Autowired
 	private ISupervisorService sUService;
-
+	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newSupervisor(Model model) {
 		model.addAttribute("supervisor", new Supervisor());

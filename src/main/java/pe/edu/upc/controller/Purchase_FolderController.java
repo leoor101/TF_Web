@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,7 @@ public class Purchase_FolderController
 	public String goWelcome() {
 		return "welcome";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newPurchase_Folder(Model model) {
 		model.addAttribute("purchasefolder", new Purchase_Folder());

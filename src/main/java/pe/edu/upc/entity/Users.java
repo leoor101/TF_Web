@@ -32,7 +32,7 @@ public class Users implements Serializable {
 	private String name;
 
 	@NotEmpty(message = "Ingrese la contraseña del usuario")
-	@Column(name = "password", nullable = false, length = 20)
+	@Column(name = "password", nullable = false, length = 100)
 	private String password;
 
 	private boolean enabled;
@@ -46,7 +46,7 @@ public class Users implements Serializable {
 	private String EmailAddress;
 
 	@NotEmpty(message = "Ingrese el teléfono del usuario")
-	@Column(name = "PhoneNumber", nullable = false, length = 7)
+	@Column(name = "PhoneNumber", nullable = false, length = 9)
 	private String PhoneNumber;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

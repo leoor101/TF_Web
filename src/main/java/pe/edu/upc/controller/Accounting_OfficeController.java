@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,7 +34,7 @@ public class Accounting_OfficeController
 	public String goWelcome() {
 		return "index";
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newAccounting(Model model) {
 		model.addAttribute("accounting", new Accounting());
@@ -59,7 +60,7 @@ public class Accounting_OfficeController
 		}
 		return "/accounting/listAccounting";
 	}
-
+	
 	@GetMapping("/list")
 	public String listAccountings(Model model) {
 		try {
