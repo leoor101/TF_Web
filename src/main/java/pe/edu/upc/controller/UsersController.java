@@ -29,7 +29,7 @@ public class UsersController {
 	public String newUsers(Model model)
 	{
 		model.addAttribute("users",new Users());
-		return "users/users";
+		return "user/user";
 	}
 	@PostMapping("/save")
 	public String saveCustomer(@Valid Users user_, BindingResult result, Model model, SessionStatus status)
