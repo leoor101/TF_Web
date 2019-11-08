@@ -16,4 +16,5 @@ public interface ISupplierService {
 
 	List<Supplier> findByName(String name);
 
+	public void insertmodified(Supplier supplier);
 	}

@@ -58,12 +58,14 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>
 			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
@@ -87,9 +89,19 @@
 					</ul>
 				</div>
 
-				<form th:action="@{/supplier/save}" th:object="${supplier}"
+				<form th:action="@{/supplier/savemodify}" th:object="${supplier}"
 					method="post">
-
+					<div class="form-group row">
+						<label for="supplierID" class="col-sm-2 col-form-label">Id</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{supplierID}"
+								class="form-control" readonly
+								th:errorclass="'form-control alert-success'" /> <small
+								class="form-text text-success"
+								th:if="${#fields.hasErrors('supplierID')}"
+								th:errors="*{supplierID}"></small>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="name" class="col-sm-2 col-form-label">Nombre</label>
 						<div class="col-sm-6">

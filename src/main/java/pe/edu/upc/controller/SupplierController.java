@@ -3,6 +3,7 @@ package pe.edu.upc.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,5 +105,37 @@ public class SupplierController {
 		}
 		model.put("listSuppliers", listSuppliers);
 		return "supplier/find";
+	}
+	
+	@GetMapping("/detail/{id}")
+	public String detailsSupplier(@PathVariable(value = "id") long id, Model model) {
+		try {
+			Optional<Supplier> supplier = suService.listarId(id);
+			if (!supplier.isPresent()) {
+				model.addAttribute("info", "El proveedor no existe");
+				return "redirect:/supplier/list";
+			} else {
+				model.addAttribute("supplier", supplier.get());
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		return "/supplier/update";
+	}
+	
+	@PostMapping("/savemodify")
+	public String saveSupplier2(@Valid Supplier sup, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "supplier/supplier";
+		} else {
+			suService.insertmodified(sup);
+
+			model.addAttribute("mensaje", "Se modificó correctamente");
+			model.addAttribute("listSuppliers", suService.list());
+			status.setComplete();
+			return "/supplier/listSuppliers";
+		}
 	}
 }
