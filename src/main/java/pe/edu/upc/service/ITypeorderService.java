@@ -16,5 +16,8 @@ public interface ITypeorderService {
 	
 	List<Type_Order> findByName (String name);
 	
+	public void insertmodified(Type_Order tipo);
+	
+	
 	
 }
