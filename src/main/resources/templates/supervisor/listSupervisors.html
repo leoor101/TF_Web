@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
-
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -114,10 +115,10 @@
 
                              <td><a
 							th:href="@{/supervisor/delete?id=}+${produ.supervisorID}"
-							class="btn btn-dark">Eliminar</a></td>
+							class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
 						<td align="center"><a
 							th:href="@{'/supervisor/detail1/' + ${produ.supervisorID}}"
-							class="btn btn-dark">Actualizar</a></td>
+							class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
 
 						</tr>
 					</tbody>

@@ -19,6 +19,10 @@
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
 
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
+
+
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -108,10 +112,10 @@
 							<td th:text="${produ.price}"></td>
 							<td><a
 								th:href="@{/product/delete?id=}+${produ.productRequirementID}"
-								class="btn btn-dark">Eliminar</a></td>
+								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
 							<td align="center"><a
 								th:href="@{'/product/detail/' + ${produ.productRequirementID}}"
-								class="btn btn-dark">Actualizar</a></td>
+								class="btn btn-dark"><i class="fas fa-pen"></i> </a></td>
 						</tr>
 					</tbody>
 				</table>
