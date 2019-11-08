@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>Divemotor</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" th:href="@{/css/estilo.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<link rel="stylesheet"
+	href="path/to/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" href="@{/css/style.css}">
+
+</head>
+<body>
+	<div class="header-area " style="background-color: rgb(0, 0, 0);">
+		<div id="sticky-header" class="main-header-area ">
+			<div class="container-fluid p-0"
+				style="background-color: rgb(0, 0, 0);">
+				<div
+					class="row align-items-center justify-content-between no-gutters">
+					<div class="col-xl-2 col-lg-2">
+						<!--  aca va el logo   -->
+						<li><a href="index.html"> <img class="divemotor"
+								src="https://www.divemotor.com/img/logo.png"
+								style="width: 125%; margin: 11% 0% 16% 0%;">
+
+						</a></li>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SideBar-->
+	<div class="sidebar-container">
+		<ul class="sidebar-navigation">
+
+
+			<div style="text-align: center;">
+				<div style="font-size: 450%;">
+					<i class="zmdi zmdi-account-circle"></i>
+				</div>
+				<div style="font-size: 150%;">
+					<p>Nombre Usuario</p>
+				</div>
+
+			</div>
+
+			<li class="header" style="font-size: 100%;"><i
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a href="#"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
+
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<!--<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
+			</a></li>
+			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
+		</ul>
+	</div>
+
+	<div class="content-container">
+		<nav
+			class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+			<!-- Sidebar Toggle (Topbar) -->
+			<button id="sidebarToggleTop"
+				class="btn btn-link d-md-none rounded-circle mr-3">
+				<i class="fa fa-bars"></i>
+			</button>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item dropdown no-arrow">
+
+					<form id="logoutForm" th:action="@{/logout}" method="post">
+						<button class="btn btn-danger"
+							onclick="document.getElementById('logoutForm').submit();"
+							type="submit">Cerrar sesion</button>
+					</form>
+				</li>
+			</ul>
+		</nav>
+		<h1 class="h3 mb-4 text-gray-800">Product</h1>
+
+
+
+		<form th:action="@{/products/find}" method="post"
+			th:object="${product}">
+			<div class="form-group">
+
+				<label for=cat>Buscar:</label>
+				<div class="col-sm-12">
+					<input type="text" class="form-control" th:field="*{name}" id="cat"
+						placeholder="Ingrese nombre del producto"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-danger">Buscar</button>
+						<a href="/products/listFind" class="btn btn-dark">Cancelar</a>
+					</div>
+				</div>
+
+			</div>
+
+		</form>
+
+		<hr class="sidebar-divider">
+
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr align="center">
+					<th scope="col">Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Descripcion</th>
+					<th scope="col">Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr align="center" th:each="cate: ${listproduct}">
+					<td th:text="${cate.productRequirementID}"></td>
+					<td th:text="${cate.name}"></td>
+					<td th:text="${cate.description}"></td>
+					<td th:text="${cate.price}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+		<p th:text="${mensaje}" class="form-text text-dark"></p>
+
+
+
+	</div>
+</body>
+</html>
