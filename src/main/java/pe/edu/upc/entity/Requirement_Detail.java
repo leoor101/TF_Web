@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Requirement_Detail")
@@ -22,7 +24,7 @@ public class Requirement_Detail {
 	private Product_Requirement product;
 
 	
-	
+	@Min(0)
 	private int quantity;
 
 

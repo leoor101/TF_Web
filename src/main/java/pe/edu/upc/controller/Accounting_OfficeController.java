@@ -30,9 +30,9 @@ public class Accounting_OfficeController
 	@Autowired
 	private IAccounting_OfficerService aService;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String goWelcome() {
-		return "index";
+		return "main";
 	}
 	@Secured("ROLE_USER")
 	@GetMapping("/new")
