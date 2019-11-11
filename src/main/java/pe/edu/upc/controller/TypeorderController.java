@@ -1,5 +1,7 @@
 package pe.edu.upc.controller;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,18 +59,18 @@ public class TypeorderController {
 			}
 		}
 		model.addAttribute("listordertype", caService.list());
-		return "/ordertype/ordertype";
+		return "/ordertype/listordertype";
 	}
 	
 	@GetMapping("/list")
-	public String listTypesOrders(Model model) {
+	public String listordertype(Model model) {
 		try {
 			model.addAttribute("type_order", new Type_Order());
-			model.addAttribute("listTypesOrders", caService.list());
+			model.addAttribute("listordertype", caService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/ordertype/listTypesOrders";
+		return "/ordertype/listordertype";
 	}
 	
 
@@ -83,13 +86,13 @@ public class TypeorderController {
 			System.out.println(e.getMessage());
 			model.put("mensaje", "No se pudo eliminar");
 		}
-		model.put("listTypesOrders", caService.list());
+		model.put("listordertype", caService.list());
 
 
 		return "/ordertype/listordertype";
 	}
 	@Secured("ROLE_USER")
-	@GetMapping("/detalle/{id}")
+	@GetMapping("/detail/{id}")
 	public String detailsordertype(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<Type_Order> type_order = caService.listId(id);
@@ -109,7 +112,7 @@ public class TypeorderController {
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
-	public String listTypeOrderFind(Model model) {
+	public String listordertypeFind(Model model) {
 		try {
 			model.addAttribute("ordertype", new Type_Order());
 			model.addAttribute("listordertype", caService.list());
@@ -120,18 +123,36 @@ public class TypeorderController {
 	}
 	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
-	public String saveCategory2(@Valid Type_Order tipoo, BindingResult result, Model model, SessionStatus status)
+	public String saveOrderType2(@Valid Type_Order tipoo, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "ordertype/ordertype";
 		} else {
 			caService.insertmodified(tipoo);
-
 			model.addAttribute("ordertype", "Se modificó correctamente");
 			model.addAttribute("listordertype", caService.list());
 			status.setComplete();
 			return "/ordertype/listordertype";
 		}
 	}
+	
+	@Secured("ROLE_USER")
+	@RequestMapping("/find")
+	public String findordertype(Map<String, Object> model, @ModelAttribute Type_Order ordertype) throws ParseException {
+
+		List<Type_Order> listordertype;
+		ordertype.setName(ordertype.getName());
+		listordertype = caService.findByName(ordertype.getName());
+
+		if (listordertype.isEmpty()) {
+			model.put("mensaje", "No se pudo encontrar");
+		}
+		model.put("listordertype", listordertype);
+		return "ordertype/find";
+
+	}
+	
+	
+	
 	
 }

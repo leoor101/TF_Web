@@ -44,7 +44,6 @@
 	<div class="sidebar-container">
 		<ul class="sidebar-navigation">
 
-
 			<div style="text-align: center;">
 				<div style="font-size: 450%;">
 					<i class="zmdi zmdi-account-circle"></i>
@@ -66,13 +65,12 @@
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-<<<<<<< HEAD
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
-			</a></li>
-=======
-		<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
->>>>>>> 5327a794c45782c456f360ee949edacedf8a6241
-			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
+
+
+
+			<!--  	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
+
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 		</ul>
@@ -98,47 +96,49 @@
 				</li>
 			</ul>
 		</nav>
+		
+		<div class="jumbotron">
+			<h1 class="h3 mb-4 text-gray-800">Tipo de orden</h1>
 
-		<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+			<form th:action="@{/ordertype/find}" method="post"
+				th:object="${ordertype}">
+				<div class="form-group">
 
-		<form th:action="@{/accountings/find}" method="post"
-			th:object="${accounting}">
-			<div class="form-group">
-
-				<label for=cat>Buscar:</label>
-				<div class="col-sm-12">
-					<input type="text" class="form-control" th:field="*{DNI}" id="cat"
-						placeholder="Ingrese el dni de persona"></input>
-					<div align="right">
-						<button type="submit" class="btn btn-danger">Buscar</button>
-						<a href="/accountings/listFind" class="btn btn-dark">Cancelar</a>
+					<label for=cat>Buscar:</label>
+					<div class="col-sm-12">
+						<input type="text" class="form-control" th:field="*{name}" id="cat"
+							placeholder="Ingrese el nombre de persona"></input>
+						<div align="right">
+							<button type="submit" class="btn btn-danger">Buscar</button>
+							<a href="/ordertype/listFind" class="btn btn-dark">Cancelar</a>
+						</div>
 					</div>
+
 				</div>
 
-			</div>
+			</form>
 
-		</form>
+			<hr class="sidebar-divider">
 
-		<hr class="sidebar-divider">
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Descripcion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="per: ${listordertype}">
+						<td th:text="${per.id}"></td>
+						<td th:text="${per.name}"></td>
+						<td th:text="${per.description}"></td>
 
-		<table class="table table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">DNI</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="per: ${listAccounting}">
-					<td th:text="${per.AccountingOfficerID}"></td>
-					<td th:text="${per.Namex}"></td>
-					<td th:text="${per.DNI}"></td>
-
-				</tr>
-			</tbody>
-		</table>
-		<p th:text="${mensaje}" class="form-text text-dark"></p>
+					</tr>
+				</tbody>
+			</table>
+			<p th:text="${mensaje}" class="form-text text-dark"></p>
+		</div>
 	</div>
 </body>
 </html>

@@ -43,26 +43,6 @@
 	<!--SideBar-->
 	<div class="sidebar-container">
 		<ul class="sidebar-navigation">
-			<nav
-				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-				<!-- Sidebar Toggle (Topbar) -->
-				<button id="sidebarToggleTop"
-					class="btn btn-link d-md-none rounded-circle mr-3">
-					<i class="fa fa-bars"></i>
-				</button>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown no-arrow">
-
-						<form id="logoutForm" th:action="@{/logout}" method="post">
-							<button class="btn btn-danger"
-								onclick="document.getElementById('logoutForm').submit();"
-								type="submit">Cerrar sesion</button>
-						</form>
-					</li>
-				</ul>
-			</nav>
-
 
 			<div style="text-align: center;">
 				<div style="font-size: 450%;">
@@ -86,59 +66,78 @@
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
 
-			<!--  <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
-			</a></li>-->
 
-		<!--  	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
 
-			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
+			<!--  	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
+
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
 	<div class="content-container">
+		<nav
+			class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-		<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+			<!-- Sidebar Toggle (Topbar) -->
+			<button id="sidebarToggleTop"
+				class="btn btn-link d-md-none rounded-circle mr-3">
+				<i class="fa fa-bars"></i>
+			</button>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item dropdown no-arrow">
 
-		<form th:action="@{/accountings/find}" method="post"
-			th:object="${accounting}">
-			<div class="form-group">
+					<form id="logoutForm" th:action="@{/logout}" method="post">
+						<button class="btn btn-danger"
+							onclick="document.getElementById('logoutForm').submit();"
+							type="submit">Cerrar sesion</button>
+					</form>
+				</li>
+			</ul>
+		</nav>
+		<div class="jumbotron">
+			<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
 
-				<label for=cat>Buscar:</label>
-				<div class="col-sm-12">
-					<input type="text" class="form-control" th:field="*{DNI}" id="cat"
-						placeholder="Ingrese el dni de persona"></input>
-					<div align="right">
-						<button type="submit" class="btn btn-danger">Buscar</button>
-						<a href="/accountings/listFind" class="btn btn-dark">Cancelar</a>
+			<form th:action="@{/accountings/find}" method="post"
+				th:object="${accounting}">
+				<div class="form-group">
+
+					<label for=cat>Buscar:</label>
+					<div class="col-sm-12">
+						<input type="text" class="form-control" th:field="*{DNI}" id="cat"
+							placeholder="Ingrese el dni de persona"></input>
+						<div align="right">
+							<button type="submit" class="btn btn-danger">Buscar</button>
+							<a href="/accountings/listFind" class="btn btn-dark">Cancelar</a>
+						</div>
 					</div>
+
 				</div>
 
-			</div>
+			</form>
 
-		</form>
+			<hr class="sidebar-divider">
 
-		<hr class="sidebar-divider">
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">DNI</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="per: ${listAccounting}">
+						<td th:text="${per.AccountingOfficerID}"></td>
+						<td th:text="${per.Namex}"></td>
+						<td th:text="${per.DNI}"></td>
 
-		<table class="table table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">DNI</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="per: ${listAccounting}">
-					<td th:text="${per.AccountingOfficerID}"></td>
-					<td th:text="${per.Namex}"></td>
-					<td th:text="${per.DNI}"></td>
-
-				</tr>
-			</tbody>
-		</table>
-		<p th:text="${mensaje}" class="form-text text-dark"></p>
+					</tr>
+				</tbody>
+			</table>
+			<p th:text="${mensaje}" class="form-text text-dark"></p>
+		</div>
 	</div>
 </body>
 </html>

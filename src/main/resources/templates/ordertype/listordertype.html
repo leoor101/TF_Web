@@ -100,7 +100,7 @@
 			</nav>
 			<div class="jumbotron">
 				<!-- Main component for a primary marketing message or call to action -->
-				<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+				<h1 class="h3 mb-4 text-gray-800">Tipo de Orden</h1>
 				<a class="btn btn-danger btn-xs" th:href="@{/ordertype/new}">Nuevo
 				</a> <a class="btn btn-danger btn-xs" th:href="@{/ordertype/listFind}">Buscar
 				</a>
@@ -124,10 +124,11 @@
 
 							<td><a th:href="@{/ordertype/delete?id=}+${ao.id}"
 								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
-							<td align="center"><a
+							<td><a
 								th:href="@{'/ordertype/detail/' + ${ao.id}}"
 								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
 
+			
 						</tr>
 					</tbody>
 				</table>

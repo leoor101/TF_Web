@@ -18,8 +18,11 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
+
 <script src="https://kit.fontawesome.com/3a97606171.js"
 	crossorigin="anonymous"></script>
+
+
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -56,8 +59,6 @@
 
 			</div>
 
-
-
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a href="#"> Usuario </a></li>
@@ -68,13 +69,9 @@
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-<<<<<<< HEAD
-			<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+		<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
 			</a></li>
-=======
-			<!-- <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
->>>>>>> 5327a794c45782c456f360ee949edacedf8a6241
-			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
 		</ul>
@@ -84,7 +81,6 @@
 	<div class="content-container">
 
 		<div class="container-fluid">
-
 			<nav
 				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -104,16 +100,14 @@
 					</li>
 				</ul>
 			</nav>
-			<!-- Main component for a primary marketing message or call to action -->
+
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">List Supervisor</h1>
+				<h1 class="h3 mb-4 text-gray-800">Listar Supervisores</h1>
 
 
-				<a th:href="@{/supervisor/new/}" class="btn btn-danger btn-xs">New</a>
-				<a class="btn btn-lg btn-primary" class="btn btn-danger btn-xs"
-					th:href="@{/supervisor/listFind}">Buscar </a>
-
+				<a th:href="@{/supervisor/new/}" class="btn btn-danger btn-xs">Nuevo</a>
+				<a th:href="@{/supervisor/listFind/}" class="btn btn-danger btn-xs">Buscar</a>
 				<hr class="sidebar-divider">
 
 				<table class="table table-striped">
@@ -121,9 +115,9 @@
 						<tr align="center">
 							<th scope="col">Id</th>
 							<th scope="col">Nombre</th>
-							<th scope="col">Años Experiencia</th>
-							<th scope="col">Tel&eacute;fono</th>
-							<th scope="col">Direcci&oacute;n</th>
+							<th scope="col">Años de experiencia</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Direccion</th>
 							<th scope="col">Eliminar</th>
 							<th scope="col">Actualizar</th>
 
@@ -136,14 +130,13 @@
 							<td th:text="${produ.yearsExperience}"></td>
 							<td th:text="${produ.phoneNumber}"></td>
 							<td th:text="${produ.address}"></td>
-
+							
 							<td><a
 								th:href="@{/supervisor/delete?id=}+${produ.supervisorID}"
 								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
 							<td align="center"><a
 								th:href="@{'/supervisor/detail1/' + ${produ.supervisorID}}"
-								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
-
+								class="btn btn-dark"><i class="fas fa-pen"></i> </a></td>
 						</tr>
 					</tbody>
 				</table>
