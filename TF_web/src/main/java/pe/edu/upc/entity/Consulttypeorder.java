@@ -1,10 +1,8 @@
 package pe.edu.upc.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,10 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Consulttypeorder")
@@ -27,22 +21,37 @@ public class Consulttypeorder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long consulttypeorderID;
 
-	@Column(name = "Consulttypeorder")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date createAt;
-
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	private Users userId;
+	@JoinColumn(name = "consult_id", nullable = false)
+	private Users consultId;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "details_id")
-	private List<Requirement_Detail> requiDetails;
-			/////-------------------------------------------
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "supervisorID", nullable = false)
-	private Supervisor supervisor;
+	@JoinColumn(name = "name_id")
+	private List<Type_Order> consultName;
 
+	public Long getConsulttypeorderID() {
+		return consulttypeorderID;
+	}
+
+	public void setConsulttypeorderID(Long consulttypeorderID) {
+		this.consulttypeorderID = consulttypeorderID;
+	}
+
+	public Users getConsultId() {
+		return consultId;
+	}
+
+	public void setConsultId(Users consultId) {
+		this.consultId = consultId;
+	}
+
+	public List<Type_Order> getConsultName() {
+		return consultName;
+	}
+
+	public void setConsultName(List<Type_Order> consultName) {
+		this.consultName = consultName;
+	}
+	
 
 }
