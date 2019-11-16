@@ -18,4 +18,6 @@ public interface IRequestRepository extends JpaRepository<Request, Long> {
 
 	List<Request> findByCreateAt(Date fecha);
 	
+	@Query(value="SELECT s.name, count(r.supplierid)from request r join supplier s on s.supplierid = r.supplierid group by s.name",nativeQuery = true)
+	List<String[]>requestedSuppliers();
 }

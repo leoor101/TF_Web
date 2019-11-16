@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entity.Type_Order;
+import pe.edu.upc.entity.Order_Type;
 import pe.edu.upc.repository.ITypeorderRepository;
 import pe.edu.upc.service.ITypeorderService;
 
@@ -20,7 +20,7 @@ public class TypeorderServiceImpl implements ITypeorderService {
 
 	@Override
 	@Transactional
-	public Integer insert(Type_Order type_order) {
+	public Integer insert(Order_Type type_order) {
 		int rpta= caR.findNameTypeOrder(type_order.getName());
 		if(rpta ==0) {
 			caR.save(type_order);
@@ -37,34 +37,34 @@ public class TypeorderServiceImpl implements ITypeorderService {
 
 	@Override
 	@Transactional
-	public void modify(Type_Order type_order) {
+	public void modify(Order_Type type_order) {
 		caR.save(type_order);
 
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Type_Order> list() {
+	public List<Order_Type> list() {
 		// TODO Auto-generated method stub
 		return caR.findAll(Sort.by(Sort.Direction.ASC,"name"));
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public Optional<Type_Order> listId(long idTypeorder) {
+	public Optional<Order_Type> listId(long idTypeorder) {
 		// TODO Auto-generated method stub
 		return caR.findById(idTypeorder);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Type_Order> findByName(String name) {
+	public List<Order_Type> findByName(String name) {
 		// TODO Auto-generated method stub
 		return caR.findByName(name);
 	}
 
 	@Override
-	public void insertmodified(Type_Order tipo) {
+	public void insertmodified(Order_Type tipo) {
 		// TODO Auto-generated method stub
 		caR.save(tipo);
 	}
