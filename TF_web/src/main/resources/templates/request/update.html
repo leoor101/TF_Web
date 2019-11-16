@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>Divemotor</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" th:href="@{/css/estilo.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<link rel="stylesheet"
+	href="path/to/material-design-iconic-font/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="@{/css/style.css}">
+
+</head>
+<body>
+	<div class="header-area " style="background-color: rgb(0, 0, 0);">
+        <div id="sticky-header" class="main-header-area ">
+            <div class="container-fluid p-0" style="background-color: rgb(0, 0, 0);">
+                <div class="row align-items-center justify-content-between no-gutters">
+                    <div class="col-xl-2 col-lg-2">
+                        <!--  aca va el logo   -->
+                        <li>
+                            <a href="index.html">
+                                <img class="divemotor" src="https://www.divemotor.com/img/logo.png" style=" width: 125%;
+                                margin: 11% 0% 16% 0%;">
+
+                            </a>
+
+                        </li>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--SideBar-->
+    <div class="sidebar-container">
+        <ul class="sidebar-navigation">
+
+
+            <div style="text-align: center; ">
+                <div style="font-size: 450%;">
+                    <i class="zmdi zmdi-account-circle"></i>
+                </div>
+                <div style="font-size: 150%;">
+                    <p>Nombre Usuario</p>
+                </div>
+
+            </div>
+
+            <li class="header" style="font-size: 100%;"><i
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
+
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<!--  <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
+			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
+        </ul>
+    </div>
+
+    <!--Container-->
+    <div class="content-container" style="margin-top: 6.4%;">
+
+        <div class="container-fluid">
+
+            <!-- Main component for a primary marketing message or call to action -->
+            <div class="jumbotron">
+                <h1 style="text-align: center;">Update</h1>
+                <p>aca iria lo de registrar</p>
+                <p>
+                    <a class="btn btn-lg btn-primary" href="#" role="button">Registrar </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
