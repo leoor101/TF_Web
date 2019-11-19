@@ -23,7 +23,6 @@ import pe.edu.upc.entity.Requirement_Detail;
 import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.IAccounting_OfficerService;
 import pe.edu.upc.service.IProduct_RequirementService;
-import pe.edu.upc.service.IPurchase_FolderService;
 import pe.edu.upc.service.IRequestService;
 import pe.edu.upc.service.ISupervisorService;
 import pe.edu.upc.service.ITypeorderService;
@@ -40,8 +39,6 @@ public class RequestController
 	private IUsersService userServ;
 	@Autowired
 	private IProduct_RequirementService proServ;
-	@Autowired
-	private IPurchase_FolderService purchaseServ;
 	@Autowired
 	private ISupervisorService superServ;
 	@Autowired
@@ -159,7 +156,17 @@ public class RequestController
 
 	}
 
+	@GetMapping("/requestedSuppliers")
+	public String listAllRequestedSuppliers(Map<String, Object> model) {
+		model.put("requestedSuppliers", requestServ.listRequestedSuppliers());
+		return "/request/requestedSuppliers";
+	}
 	
+	@GetMapping("/requestedSupervisors")
+	public String listAllRequestedSupervisors(Map<String, Object> model) {
+		model.put("requestedSupervisors", requestServ.listRequestedSupervisors());
+		return "/request/requestedSupervisors";
+	}
 	
 	
 }

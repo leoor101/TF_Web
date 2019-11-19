@@ -3,20 +3,20 @@ package pe.edu.upc.service;
 import java.util.List;
 import java.util.Optional;
 
-import pe.edu.upc.entity.Type_Order;
+import pe.edu.upc.entity.Order_Type;
 
 public interface ITypeorderService {
 
-	public Integer insert(Type_Order type_order);
+	public Integer insert(Order_Type type_order);
 	public void delete (long idTypeOrder);
-	public void modify(Type_Order type_order);
+	public void modify(Order_Type type_order);
 	
-	List<Type_Order> list();
-	Optional <Type_Order> listId(long idTypeOrder);
+	List<Order_Type> list();
+	Optional <Order_Type> listId(long idTypeOrder);
 	
-	List<Type_Order> findByName (String name);
+	List<Order_Type> findByName (String name);
 	
-	public void insertmodified(Type_Order tipo);
+	public void insertmodified(Order_Type tipo);
 	
 	
 	

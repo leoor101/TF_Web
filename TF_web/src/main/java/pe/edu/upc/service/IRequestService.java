@@ -20,6 +20,7 @@ public interface IRequestService {
 
 	List<Request> findDate(Date fecha);
 
+	List<String[]>listRequestedSuppliers();
 	
-	
+	List<String[]>listRequestedSupervisors();
 }

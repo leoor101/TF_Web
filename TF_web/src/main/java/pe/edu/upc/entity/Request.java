@@ -50,16 +50,15 @@ public class Request {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "type_OrderID", nullable = false)
-	private Type_Order type_OrderID;
+	private Order_Type type_OrderID;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accountingID", nullable = false)
 	private Accounting accountingID;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "purchaseID", nullable = false)
-	private Purchase_Folder purchaseID;
-
+	@JoinColumn(name = "supplierID", nullable = false)
+	private Supervisor supplierID;
 	
 	public Long getRequestID() {
 		return requestID;
@@ -101,11 +100,11 @@ public class Request {
 		this.supervisor = supervisor;
 	}
 
-	public Type_Order getType_OrderID() {
+	public Order_Type getType_OrderID() {
 		return type_OrderID;
 	}
 
-	public void setType_OrderID(Type_Order type_OrderID) {
+	public void setType_OrderID(Order_Type type_OrderID) {
 		this.type_OrderID = type_OrderID;
 	}
 
@@ -117,13 +116,6 @@ public class Request {
 		this.accountingID = accountingID;
 	}
 
-	public Purchase_Folder getPurchaseID() {
-		return purchaseID;
-	}
-
-	public void setPurchaseID(Purchase_Folder purchaseID) {
-		this.purchaseID = purchaseID;
-	}
 	
 	public Request()
 	{
