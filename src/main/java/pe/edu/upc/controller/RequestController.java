@@ -162,5 +162,11 @@ public class RequestController
 		return "/request/requestedSuppliers";
 	}
 	
+	@GetMapping("/requestedSupervisors")
+	public String listAllRequestedSupervisors(Map<String, Object> model) {
+		model.put("requestedSupervisors", requestServ.listRequestedSupervisors());
+		return "/request/requestedSupervisors";
+	}
+	
 	
 }

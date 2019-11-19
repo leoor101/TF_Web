@@ -20,4 +20,9 @@ public interface IRequestRepository extends JpaRepository<Request, Long> {
 	
 	@Query(value="SELECT s.name, count(r.supplierid)from request r join supplier s on s.supplierid = r.supplierid group by s.name",nativeQuery = true)
 	List<String[]>requestedSuppliers();
+	
+	@Query(value="SELECT s.name, count(r.supervisorID)from request r join supervisor s on s.supervisorID= r.supervisorID group by s.name order by count(r.supervisorID) desc limit 1",nativeQuery = true)
+	List<String[]>requestedSupervisors();
+
+	
 }

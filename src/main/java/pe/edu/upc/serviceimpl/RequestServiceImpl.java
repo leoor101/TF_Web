@@ -62,6 +62,11 @@ public class RequestServiceImpl implements IRequestService {
 		return reqR.requestedSuppliers();
 
 	}
+	@Override
+	public List<String[]> listRequestedSupervisors() {
+		// TODO Auto-generated method stub
+		return reqR.requestedSupervisors();
+	}
 	
 
 }
