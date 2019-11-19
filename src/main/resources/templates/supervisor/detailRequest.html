@@ -132,14 +132,14 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr align="center" th:each="request :${supervisor.requests">
+										<tr align="center" th:each="request :${supervisor.requests}">
 											<td th:text="${request.requestID}"></td>
 											<td th:text="${request.createAt}"></td>
 											
 											<td th:text="${request.total}"></td>
 											
 											<td><a class="btn btn-danger"
-												th:href="@{'/requests/detail/'+ ${request.id}}">Detalle</a></td>
+												th:href="@{'/requests/detail/'+ ${request.requestID}}">Detalle</a></td>
 										</tr>
 									</tbody>
 								</table>

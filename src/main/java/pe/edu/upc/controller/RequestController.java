@@ -107,7 +107,6 @@ public class RequestController {
 				model.addAttribute("error", "La solicitud no existe");
 				return "redirect:/supervisor/list";
 			}
-
 			model.addAttribute("request", request.get());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
