@@ -7,15 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.upc.entity.Type_Order;
+import pe.edu.upc.entity.Order_Type;
 
 @Repository
-public interface ITypeorderRepository extends JpaRepository<Type_Order, Long> {
+public interface ITypeorderRepository extends JpaRepository<Order_Type, Long> {
 
-	@Query("select count(c.name) from Type_Order c where c.name =:name")
+	@Query("select count(c.name) from Order_Type c where c.name =:name")
 	public int findNameTypeOrder(@Param("name") String nameTypeOrder);
 
-	@Query("select c from Type_Order c where c.name like %:name%")
-	List<Type_Order> findByName(String name);
+	@Query("select c from Order_Type c where c.name like %:name%")
+	List<Order_Type> findByName(String name);
 
 }
