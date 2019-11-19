@@ -50,28 +50,28 @@
 					<i class="zmdi zmdi-account-circle"></i>
 				</div>
 				<div style="font-size: 150%;">
-					<p>Nombre Usuario</p>
+					<p>Usuario</p>
 				</div>
 
 			</div>
 
+
 			<li class="header" style="font-size: 100%;"><i
-				class="zmdi zmdi-account-add"></i> Usuarios</li>
-			<li><a href="#"> Usuario </a></li>
-			<li><a href="#"> Encargado de Contabilidad </a></li>
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
-			<li><a href="#"> Supervisor </a></li>
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
 
-			<li class="header" style="font-size: 100%;">Otro Menu</li>
-			<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
-					Proveedor
-			</a></li>
-			<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
-					Productos
-			</a></li>
-			<li><a href="#"> <i class="fa fa-info-circle"
-					aria-hidden="true"></i> Tipo de Pedido
-			</a></li>
+			<!--  <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
+
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
@@ -79,6 +79,25 @@
 	<div class="content-container" style="margin-top: 6.4%;">
 		<div class="container-fluid">
 			<!-- Main component for a primary marketing message or call to action -->
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
 			<div class="jumbotron">
 				<h1 class="h3 mb-4 text-gray-800">Registrar Supervisor</h1>
 
@@ -104,8 +123,8 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="yearsExperience" class="col-sm-2 col-form-label">Years
-							Experience</label>
+						<label for="yearsExperience" class="col-sm-2 col-form-label">Años
+							de experiencia</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{yearsExperience}"
 								class="form-control" th:errorclass="'form-control alert-danger'" />
@@ -117,7 +136,7 @@
 
 					<div class="form-group row">
 						<label for="phoneNumber" class="col-sm-2 col-form-label">
-							Phone Number</label>
+							Tel&eacute;fono</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{phoneNumber}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
@@ -129,13 +148,12 @@
 
 					<div class="form-group row">
 						<label for="address" class="col-sm-2 col-form-label">
-							Address</label>
+							Direcci&oacute;n</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{address}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
 								class="form-text text-danger"
-								th:if="${#fields.hasErrors('address')}"
-								th:errors="*{address}"></small>
+								th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></small>
 						</div>
 					</div>
 

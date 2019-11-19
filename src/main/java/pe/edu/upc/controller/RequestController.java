@@ -22,6 +22,7 @@ import pe.edu.upc.service.IAccounting_OfficerService;
 import pe.edu.upc.service.IProduct_RequirementService;
 import pe.edu.upc.service.IRequestService;
 import pe.edu.upc.service.ISupervisorService;
+import pe.edu.upc.service.ISupplierService;
 import pe.edu.upc.service.ITypeorderService;
 
 @Controller
@@ -38,6 +39,8 @@ public class RequestController {
 	private ITypeorderService typeServ;
 	@Autowired
 	private IAccounting_OfficerService accServ;
+	@Autowired
+	private ISupplierService supplierServ;
 
 	// registro de request por supervisor
 	@GetMapping("/form/{id}")
@@ -46,11 +49,15 @@ public class RequestController {
 			Optional<Supervisor> sup = superServ.findById(id);
 			if (!sup.isPresent()) {
 				model.addAttribute("info", "Supervisor no existe");
-				return "redirect:/supervisor/list";//lista supervisor con request.
+				return "redirect:/supervisor/list";
 			} else {
 				Request a = new Request();
 				a.setSupervisor(sup.get());
 				model.addAttribute("request", a);
+				model.addAttribute("listSuppliers", supplierServ.list());
+				model.addAttribute("listordertype", typeServ.list());
+				model.addAttribute("listAccounting", accServ.list());
+				
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());

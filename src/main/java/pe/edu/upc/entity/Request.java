@@ -57,6 +57,14 @@ public class Request {
 
 		
 	
+	public Supervisor getSupplierID() {
+		return supplierID;
+	}
+
+	public void setSupplierID(Supervisor supplierID) {
+		this.supplierID = supplierID;
+	}
+
 	public Long getRequestID() {
 		return requestID;
 	}

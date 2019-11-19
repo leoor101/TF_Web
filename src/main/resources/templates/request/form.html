@@ -104,7 +104,7 @@
 
 			<div class="jumbotron">
 
-			<!-- Aca iria el contenido (cambiar)--> 
+				<!-- Aca iria el contenido (cambiar)-->
 				<!-- Page Heading -->
 				<h1 class="h3 mb-4 text-gray-800">Registro de Solicitud</h1>
 
@@ -115,11 +115,45 @@
 						<div class="card">
 							<div class="card-header text-white bg-dark">Solicitud</div>
 							<div class="card-body">
+								<!-- Nombre supervisor -->
 								<div class="form-group row">
 									<label for="nombre" class="col-sm-2 col-form-label">Supervisor</label>
 									<div class="col-sm-6">
 										<input type="text" readonly class="form-control-plaintext"
 											id="nombre" th:value="${request.supervisor.name}">
+									</div>
+								</div>
+								<!-- Tipo de orden -->
+								<div class="form-group row">
+									<label for="color" class="col-sm-2 col-form-label">Tipo de orden</label>
+									<div class="col-sm-6">
+										<select class="custom-select custom-select-sm"
+											th:field="*{type_OrderID}">
+											<option th:each="type_OrderID : ${listordertype}"
+												th:value="${type_OrderID.id}" th:utext="${type_OrderID.name}" />
+										</select>
+									</div>
+								</div>
+								<!-- Encargado contabilidad -->
+								<div class="form-group row">
+									<label for="color" class="col-sm-2 col-form-label">Encargado de contabilidad</label>
+									<div class="col-sm-6">
+										<select class="custom-select custom-select-sm"
+											th:field="*{accountingID}">
+											<option th:each="accountingID : ${listAccounting}"
+												th:value="${accountingID.AccountingOfficerID}" th:utext="${accountingID.Namex}" />
+										</select>
+									</div>
+								</div>
+								<!-- Supplier -->
+								<div class="form-group row">
+									<label for="color" class="col-sm-2 col-form-label">Proveedor</label>
+									<div class="col-sm-6">
+										<select class="custom-select custom-select-sm"
+											th:field="*{supplierID}">
+											<option th:each="supplierID : ${listSuppliers}"
+												th:value="${supplierID.supplierID}" th:utext="${supplierID.name}" />
+										</select>
 									</div>
 								</div>
 								<!-- Añadir los demas para registrar -->
@@ -156,11 +190,12 @@
 										</tbody>
 									</table>
 								</div>
-
-								<table th:replace="order/template-orderdetail::orderDetail"></table>
+								<!-- 
+								<table th:replace="order/template-orderdetail::orderDetail"></table> -->
 							</div>
 						</div>
 
+						<!-- 
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<h5 id="total">
@@ -168,10 +203,15 @@
 								</h5>
 							</div>
 						</div>
+ 						-->
+						<br>
 
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<input type="submit" value="Registrar" class="btn btn-danger" />
+							</div>
+							<div class="col-sm-3">
+								<a th:href="@{/supervisor/listWith}" class="btn btn-dark">Regresar</a>
 							</div>
 						</div>
 
