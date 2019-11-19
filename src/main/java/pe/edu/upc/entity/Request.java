@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -36,29 +35,27 @@ public class Request {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	private Users userId;
-	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "details_id")
 	private List<Requirement_Detail> requiDetails;
-			/////-------------------------------------------
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "supervisorID", nullable = false)
-	private Supervisor supervisor;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "supervisor_ID", nullable = false)
+	private Supervisor supervisor;
+	///// -------------------------------------------
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "type_OrderID", nullable = false)
 	private Order_Type type_OrderID;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accountingID", nullable = false)
 	private Accounting accountingID;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplierID", nullable = false)
 	private Supervisor supplierID;
+
+		
 	
 	public Long getRequestID() {
 		return requestID;
@@ -74,14 +71,6 @@ public class Request {
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
-	}
-
-	public Users getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Users userId) {
-		this.userId = userId;
 	}
 
 	public List<Requirement_Detail> getRequiDetails() {
@@ -116,15 +105,15 @@ public class Request {
 		this.accountingID = accountingID;
 	}
 
-	
-	public Request()
-	{
-		this.requiDetails=new ArrayList<>();
+	public Request() {
+		this.requiDetails = new ArrayList<>();
 	}
+
 	@PrePersist
 	public void prePersist() {
 		createAt = new Date();
 	}
+
 	public void setrequiDetails(List<Requirement_Detail> requiDetails) {
 		this.requiDetails = requiDetails;
 	}
@@ -132,11 +121,10 @@ public class Request {
 	public void addrequiDetails(Requirement_Detail item) {
 		this.requiDetails.add(item);
 	}
-	
-	public double getTotal()
-	{
+
+	public double getTotal() {
 		return requiDetails.stream().collect(Collectors.summingDouble(Requirement_Detail::calculateAmount));
-		
+
 	}
 
 }

@@ -19,6 +19,10 @@
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
 
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
+
+
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -50,7 +54,7 @@
 					<i class="zmdi zmdi-account-circle"></i>
 				</div>
 				<div style="font-size: 150%;">
-					<p>Nombre Usuario</p>
+					<p>Usuario</p>
 				</div>
 
 			</div>
@@ -59,56 +63,91 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a th:href="@{/users/new}"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<!-- <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li> -->
+			<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
+			</a>
+			</li>
 			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
-			<li><a th:href="@{/request/list}"> Solicitudes </a></li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
 	<!--Container-->
-	<div class="content-container" style="margin-top: 6.4%;">
+	<div class="content-container">
 
 		<div class="container-fluid">
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-			<!-- Main component for a primary marketing message or call to action -->
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
+
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">Lista Solicitudes</h1>
+				<!-- Page Heading -->
+				<h1 class="h3 mb-4 text-gray-800"
+					th:text=" 'Supervisor : '+${supervisor.name}+' '+'  - Telefono : '+${supervisor.phoneNumber}"></h1>
+
+				<div class="container">
+
+					<div class="card">
+						<div class="card-header text-white bg-dark">Órdenes</div>
+						<div class="card-body">
+
+							<div class="table-responsive">
+							<!-- el lists.empty -->
+								<div th:if="${#lists.isEmpty(supervisor.requests)}"
+									class="alert alert-info my-4"
+									th:text="'El Supervisor ' + ${supervisor.name} + ' '+' no tiene solicitudes'"></div>
 
 
-				<a th:href="@{/request/new/}" class="btn btn-danger btn-xs">Nuevo</a>
+								<table th:if="${not #lists.isEmpty(supervisor.requests)}"
+									class="table table-striped">
+									<thead class="bg-light text-black">
+										<tr align="center">
+											<th>Órden</th>
+											<th>Fecha</th>
+											<th>Total</th>
+											<th>Ver</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr align="center" th:each="request :${supervisor.requests">
+											<td th:text="${request.requestID}"></td>
+											<td th:text="${request.createAt}"></td>
+											
+											<td th:text="${request.total}"></td>
+											
+											<td><a class="btn btn-danger"
+												th:href="@{'/requests/detail/'+ ${request.id}}">Detalle</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 
-				<hr class="sidebar-divider">
-
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Descripci&oacute;n</th>
-							<th scope="col">Precio</th>
-
-
-						</tr>
-					</thead>
-					<tbody>
-						<tr align="center" th:each="produ: ${listproduct}">
-							<td th:text="${produ.productRequirementID}"></td>
-							<td th:text="${produ.name}"></td>
-							<td th:text="${produ.description}"></td>
-							<td th:text="${produ.price}"></td>
-
-						</tr>
-					</tbody>
-				</table>
-
-				<p th:text="${mensaje}"></p>
 
 			</div>
 		</div>

@@ -48,7 +48,7 @@ public class RequestServiceImpl implements IRequestService {
 	@Override
 	public Optional<Request> fetchByRequestIdWithUserWhithRequiDetailsWithProduct(Long id) throws Exception {
 		// TODO Auto-generated method stub
-		return reqR.fetchByRequestIdWithUserWhithRequiDetailsWithProduct(id);
+		return reqR.fetchByRequestrequestIDWithSupervisorWhithRequirement_DetailWithProduct_Requirement(id);
 	}
 
 	@Override

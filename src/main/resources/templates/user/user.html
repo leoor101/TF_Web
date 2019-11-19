@@ -50,7 +50,7 @@
 					<i class="zmdi zmdi-account-circle"></i>
 				</div>
 				<div style="font-size: 150%;">
-					<p>Nombre Usuario</p>
+					<p>Usuario</p>
 				</div>
 
 			</div>
@@ -60,15 +60,16 @@
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a th:href="@{/users/new}"> Usuario </a></li>
 			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargados de Contabilidad </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
 			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-		<!-- 	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
+			<!-- 	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
 			<li><a th:href="@{/Typeorders/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
-			<li><a th:href="@{/Supervisor/list}"> Solicitudes </a></li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
@@ -86,7 +87,7 @@
 				</button>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown no-arrow">
-						
+
 						<form id="logoutForm" th:action="@{/logout}" method="post">
 							<button class="btn btn-danger"
 								onclick="document.getElementById('logoutForm').submit();"
@@ -106,8 +107,7 @@
 					</ul>
 				</div>
 
-				<form th:action="@{/users/save}" th:object="${user}"
-					method="post">
+				<form th:action="@{/users/save}" th:object="${user}" method="post">
 
 					<div class="form-group row">
 						<label for="name" class="col-sm-2 col-form-label">Nombre</label>
@@ -138,12 +138,14 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="EmailAddress" class="col-sm-2 col-form-label">Email Address</label>
+						<label for="EmailAddress" class="col-sm-2 col-form-label">Email
+							Address</label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{EmailAddress}" class="form-control"
-								th:errorclass="'form-control alert-danger'" /> <small
-								class="form-text text-danger"
-								th:if="${#fields.hasErrors('EmailAddress')}" th:errors="*{EmailAddress}"></small>
+							<input type="text" th:field="*{EmailAddress}"
+								class="form-control" th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('EmailAddress')}"
+								th:errors="*{EmailAddress}"></small>
 						</div>
 					</div>
 

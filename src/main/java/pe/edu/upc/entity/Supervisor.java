@@ -1,10 +1,16 @@
 package pe.edu.upc.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -32,6 +38,22 @@ public class Supervisor {
 	@NotEmpty(message = "Ingrese la dirección del supervisor")
 	@Column(name = "address", nullable = false, length = 50)
 	private String address;
+	@OneToMany(mappedBy = "supervisor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Request> requests;
+	
+	
+	public Supervisor()
+	{
+		requests=new ArrayList<>();
+	}
+	
+	public List<Request> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<Request> requests) {
+		this.requests = requests;
+	}
 
 	public Long getSupervisorID() {
 		return supervisorID;

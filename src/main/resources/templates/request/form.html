@@ -19,6 +19,10 @@
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
 
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
+
+
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -54,6 +58,7 @@
 				</div>
 
 			</div>
+
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a th:href="@{/users/new}"> Usuario </a></li>
@@ -64,10 +69,9 @@
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-
-	
-			<!--  <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra </a></li>-->
-
+			<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
+			</a>
+			</li>
 			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
@@ -75,7 +79,7 @@
 	</div>
 
 	<!--Container-->
-	<div class="content-container" style="margin-top: 6.4%;">
+	<div class="content-container">
 
 		<div class="container-fluid">
 			<nav
@@ -97,61 +101,89 @@
 					</li>
 				</ul>
 			</nav>
-			<h1 class="h3 mb-4 text-gray-800">Tipo de orden</h1>
 
-			<hr class="sidebar-divider">
-			<div th:object="${ordertype}" th:remove="tag">
-				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
-					role="alert">
-					<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-				</ul>
+			<div class="jumbotron">
+
+			<!-- Aca iria el contenido (cambiar)--> 
+				<!-- Page Heading -->
+				<h1 class="h3 mb-4 text-gray-800">Registro de Solicitud</h1>
+
+				<hr class="sidebar-divider">
+				<div class="container">
+					<form th:action="@{/requests/save}" th:object="${request}"
+						method="post">
+						<div class="card">
+							<div class="card-header text-white bg-dark">Solicitud</div>
+							<div class="card-body">
+								<div class="form-group row">
+									<label for="nombre" class="col-sm-2 col-form-label">Supervisor</label>
+									<div class="col-sm-6">
+										<input type="text" readonly class="form-control-plaintext"
+											id="nombre" th:value="${request.supervisor.name}">
+									</div>
+								</div>
+								<!-- Añadir los demas para registrar -->
+								<div class="form-group row">
+									<label for="productname" class="col-sm-2 col-form-label">Producto</label>
+									<div class="col-sm-6">
+										<input type="text" name="productname" class="form-control"
+											id="productname" placeholder="Producto a buscar">
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+
+
+
+						<div class="card">
+							<div class="card-header text-white bg-dark">Detalle</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="loadProducts" class="table table-striped">
+										<thead class="bg-light text-black">
+											<tr align="center">
+												<th>Nombre</th>
+												<th>Precio</th>
+												<th>Cantidad</th>
+												<th>Total</th>
+												<th>Eliminar</th>
+											</tr>
+										</thead>
+										<tbody align="center">
+										</tbody>
+									</table>
+								</div>
+
+								<table th:replace="order/template-orderdetail::orderDetail"></table>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<h5 id="total">
+									Total <span class="badge badge-danger" id="gran_total">0</span>
+								</h5>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input type="submit" value="Registrar" class="btn btn-danger" />
+							</div>
+						</div>
+
+					</form>
+
+
+				</div>
+				<!-- /.container-fluid -->
+
+
+
 			</div>
-
-			<form th:action="@{/ordertype/savemodify}"
-				th:object="${ordertype}" method="post">
-				<div class="form-group row">
-					<label for="id" class="col-sm-2 col-form-label">Id</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{id}"
-							class="form-control" readonly
-							th:errorclass="'form-control alert-success'" /> <small
-							class="form-text text-success"
-							th:if="${#fields.hasErrors('id')}"
-							th:errors="*{id}"></small>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="name" class="col-sm-2 col-form-label">Nombre
-						del tipo de orden</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{name}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
-							class="form-text text-danger"
-							th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label for="description" class="col-sm-2 col-form-label">Descripcion</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{description}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
-							class="form-text text-danger" th:if="${#fields.hasErrors('description')}"
-							th:errors="*{description}"></small>
-					</div>
-				</div>
-
-
-				<div class="form-group row">
-					<div class="col-sm-6">
-						<input type="submit" value="Guardar" class="btn btn-secondary"></input>
-						<a href="/ordertype/list" class="btn btn-danger">Cancelar</a>
-					</div>
-				</div>
-				<p th:text="${mensaje}" class="form-text text-danger"></p>
-
-			</form>
-
 		</div>
 	</div>
 
