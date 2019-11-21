@@ -17,6 +17,7 @@ public class Accounting {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long AccountingOfficerID;
 
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Ingrese el nombre del encargado")
 	@Column(name = "Namex", nullable = false, length = 50)
 	private String Namex;

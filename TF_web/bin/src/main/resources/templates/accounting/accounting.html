@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
-
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -50,34 +51,61 @@
 					<i class="zmdi zmdi-account-circle"></i>
 				</div>
 				<div style="font-size: 150%;">
-					<p>Nombre Usuario</p>
+					<p>Usuario</p>
 				</div>
 
 			</div>
 
+
 			<li class="header" style="font-size: 100%;"><i
-				class="zmdi zmdi-account-add"></i> Usuarios</li>
-			<li><a href="#"> Usuario </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargado de
+				class="zmdi zmdi-account-add"></i> Menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
 					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
-			<li><a href="#"> Supervisor </a></li>
-
-			<li class="header" style="font-size: 100%;">Otro Menu</li>
-			<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
-					Proveedor
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<!--  li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
 			</a></li>
-			<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
-					Productos
-			</a></li>
-			<li><a href="#"> <i class="fa fa-info-circle"
-					aria-hidden="true"></i> Tipo de Pedido
-			</a></li>
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
 		</ul>
 	</div>
+
+	<!-- Nav Item - User Information -->
+
+
+
 	<div class="content-container">
 
 		<div class="container-fluid">
+
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+						
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
+
+
+
+
 
 			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
@@ -90,9 +118,7 @@
 						<label for="Namex" class="col-sm-2 col-form-label">Nombre:
 						</label>
 						<div class="col-sm-6">
-							<input type="text"
-							 th:field="*{Namex}" 
-							 class="form-control"
+							<input type="text" th:field="*{Namex}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
 								class="form-text text-danger"
 								th:if="${#fields.hasErrors('Namex')}" th:errors="*{Namex}"></small>
@@ -119,11 +145,10 @@
 					<p th:text="${mensaje}" class="form-text text-danger"></p>
 				</form>
 			</div>
+
 		</div>
-		
-		
-		
 	</div>
+
 
 </body>
 </html>

@@ -25,25 +25,26 @@ import pe.edu.upc.service.IProduct_RequirementService;
 
 @Controller
 @RequestMapping("/product")
-public class Product_RequirementController 
-{
+public class Product_RequirementController {
 	@Autowired
 	private IProduct_RequirementService proService;
-	
+
 	@RequestMapping("/index")
 	public String goWelcome() {
 		return "welcome";
 	}
+
 	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newProduct_Requirement(Model model) {
 		model.addAttribute("product", new Product_Requirement());
-		return "product/product";		
+		return "product/product";
 	}
+
 	@Secured("ROLE_USER")
 	@PostMapping("/save")
-	public String saveProduct_Requirement(@Valid Product_Requirement product, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
+	public String saveProduct_Requirement(@Valid Product_Requirement product, BindingResult result, Model model,
+			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			return "product/product";
 		} else {
@@ -60,6 +61,7 @@ public class Product_RequirementController
 
 		return "/product/listproduct";
 	}
+
 	@Secured("ROLE_USER")
 	@GetMapping("/list")
 	public String listproduct(Model model) {
@@ -71,6 +73,7 @@ public class Product_RequirementController
 		}
 		return "/product/listproduct";
 	}
+
 	@Secured("ROLE_USER")
 	@RequestMapping("/delete")
 	public String delete(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
@@ -88,6 +91,7 @@ public class Product_RequirementController
 		return "/product/listproduct";
 
 	}
+
 	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listProduct_RequirementFind(Model model) {
@@ -99,9 +103,11 @@ public class Product_RequirementController
 		}
 		return "/product/find";
 	}
+
 	@Secured("ROLE_USER")
 	@RequestMapping("/find")
-	public String findByProduct_Requirement(Map<String, Object> model, @ModelAttribute Product_Requirement product) throws ParseException {
+	public String findByProduct_Requirement(Map<String, Object> model, @ModelAttribute Product_Requirement product)
+			throws ParseException {
 
 		List<Product_Requirement> listproduct;
 		product.setName(product.getName());
@@ -115,8 +121,7 @@ public class Product_RequirementController
 		return "product/find";
 
 	}
-	
-	
+
 	@GetMapping("/detail/{id}")
 	public String detailsProduct(@PathVariable(value = "id") int id, Model model) {
 		try {
@@ -133,6 +138,7 @@ public class Product_RequirementController
 		}
 		return "/product/update";
 	}
+
 	@PostMapping("/savemodify")
 	public String saveProduct2(@Valid Product_Requirement prod, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -147,4 +153,12 @@ public class Product_RequirementController
 			return "/product/listproduct";
 		}
 	}
+
+	/* 
+	 * @GetMapping(value = "/list/{name}", produces = { "application/json" })
+	 * public @ResponseBody List<Product> fetchProducts(@PathVariable String name,
+	 * Model model) { List<Product> products = null; try { products =
+	 * pService.fetchProductByName(name); } catch (Exception e) {
+	 * model.addAttribute("error", e.getMessage()); } return products; }
+	 */
 }

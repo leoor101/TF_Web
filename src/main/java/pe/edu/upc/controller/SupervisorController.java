@@ -37,7 +37,7 @@ public class SupervisorController {
 		return "supervisor/supervisor";
 	}
 
-	@Secured("ROLE_USER")
+	
 	@PostMapping("/save")
 	public String saveSupervisor(@Valid Supervisor Supervisor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {

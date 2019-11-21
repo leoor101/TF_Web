@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Supplier")
@@ -16,19 +17,22 @@ public class Supplier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long supplierID;
 
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Ingrese el nombre del proveedor")
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 	
-	
+	@Size(min=11,max=11)
 	@NotEmpty(message = "Ingrese el RUC del proveedor")
 	@Column(name = "ruc", nullable = false, length = 11)
 	private String ruc;
 
+	@Size(min=7,max=9)
 	@NotEmpty(message = "Ingrese el teléfono del proveedor")
-	@Column(name = "phoneNumber", nullable = false, length = 7)
+	@Column(name = "phoneNumber", nullable = false, length = 9)
 	private String phoneNumber;
 
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Ingrese la dirección del proveedor")
 	@Column(name = "address", nullable = false, length = 50)
 	private String address;
