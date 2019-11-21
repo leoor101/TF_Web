@@ -105,7 +105,12 @@
 			<div class="jumbotron">
 				<h3 class="title-content" th:text="${titulo}"></h3>
 				
-				<!-- aca los botones nuevo y regresar -->
+				
+				<a
+					th:href="@{'/requests/newproduct/' + ${request.requestID} }"
+					class="btnnew btn btn-primary">Nuevo</a> <a
+					th:href="@{/supervisor/listWith }" class="btnnew btn btn-danger">Regresar</a>
+			</div>
 				
 				<hr class="sidebar-divider">
 				<div class="container py-4">

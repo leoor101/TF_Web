@@ -18,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Request;
+import pe.edu.upc.entity.Requirement_Detail;
 import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.IAccounting_OfficerService;
 import pe.edu.upc.service.IProduct_RequirementService;
@@ -94,19 +95,46 @@ public class RequestController {
 		}
 		model.put("request", req);
 		model.put("titulo", "Detalle de Solicitud Id:" + req.getRequestID());
-		/*
-		 * try { Optional<Request> request =
-		 * requestServ.fetchByRequestIdWithUserWhithRequiDetailsWithProduct(id);
-		 * 
-		 * if (!request.isPresent()) { model.addAttribute("error",
-		 * "La solicitud no existe"); return "redirect:/supervisor/list"; }
-		 * model.addAttribute("request", request.get()); } catch (Exception e) {
-		 * model.addAttribute("error", e.getMessage()); }
-		 * return "request/detailsProduct";
-		 */
+		
 		return "request/detail/detailsList";
 		
 	}
+	
+	@RequestMapping("/newproduct/{id}")
+	public String reNewProduct(@PathVariable(value = "id") Long id, Map<String, Object> model) {
+
+		model.put("detail", new Requirement_Detail());
+		model.put("listproduct", proServ.list());
+
+		Request obj = requestServ.listarId(id);
+		model.put("request", obj);
+
+		return "request/detail/detailsForm";
+	}
+	
+	@PostMapping("/saveproduct{id}")
+	public String newProductRequest(@PathVariable(value = "id") long id, @Valid Requirement_Detail reqdetail,RedirectAttributes flash,
+			BindingResult result, Model model, SessionStatus status) {
+		Request request = requestServ.listarId(id);
+		if(result.hasErrors())
+		{
+			flash.addFlashAttribute("error","El valor debe ser positivo");
+			String cadena1 = "redirect:/requests/newproduct/" + id;
+			return cadena1;
+		}
+		try {
+			request.addrequiDetails(reqdetail);
+			requestServ.insert(request);
+			status.isComplete();
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			System.out.println(e.getMessage());
+		}
+		String cadena = "redirect:/requests/detailproduct/" + id;
+		return cadena;
+	}
+	
+	
 
 	/*
 	 * para buscar por fecha
@@ -128,6 +156,10 @@ public class RequestController {
 	 * 
 	 * }
 	 */
+	
+	
+	
+	
 
 	@GetMapping("/requestedSuppliers")
 	public String listAllRequestedSuppliers(Map<String, Object> model) {

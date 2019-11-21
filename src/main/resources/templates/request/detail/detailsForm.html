@@ -103,64 +103,41 @@
 			</nav>
 
 			<div class="jumbotron">
-			<h1 class="h3 mb-4 text-gray-800">Detalle de Solicitud</h1>
-
-					<hr class="sidebar-divider">
-
-
-					<div class="container py-4">
-
-
-						<div class="card">
-							<div class="card-header text-white bg-dark"
-								th:text="'Solicitud # ' + ${request.requestID}+'   -      Fecha : '+${#dates.format(request.createAt,'dd/MM/yyyy')}"></div>
-							<div class="card-body">
-
-								<div class="card-header text-black bg-light"
-									th:text="'Supervisor: '+${request.supervisor.name}+' '+'  -   '+'Codigo  #'+${request.supervisor.supervisorID}"></div>
+				<div class="d-flex">
+					<h3
+						th:text="'Nuevo producto para la Solicitud #'+ ${request.requestID}"
+						class="title-content"></h3>
+				</div>
+				<form
+					th:action="@{'/requests/saveproduct'+${request.requestID}}"
+					method="post" th:object="${detail}">
+					<div class="form-group">
 
 
-								<div class="table-responsive">
-									<div class="alert alert-danger my-4"
-										th:if="${#lists.isEmpty(request.requiDetails)}"
-										th:text="El voucher no tiene detalle"></div>
+						<label for="" class=" col-form-label">Producto: </label> <select
+							class="form-control" th:field="*{product.productRequirementID}">
+							<option th:each="p: ${listproduct}" th:value="${p.productRequirementID}"
+								th:text="${p.name}"
+								th:selected="(${p.productRequirementID} == *{product.productRequirementID})"></option>
+						</select> <label for="quantity">Cantidad:</label> <input type="number"
+							required th:errorclass="'form-control alert-danger'"
+							th:field="*{quantity}" class="form-control" id="quantity"></input>
 
-									<a th:href="@{'/supervisor/detailsup/' + ${request.supervisor.supervisorID}}"
-										class="btn btn-danger">Ver Solicitudes de supervisor</a>
+						<div class="alert alert-danger"
+							th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
 
-									<table th:if="${not #lists.isEmpty(request.requiDetails)}"
-										class="table table-striped">
-										<thead class="bg-dark text-white">
-											<tr align="center">
-												<th>Producto</th>
-												<th>Precio</th>
-												<th>Cantidad</th>
-												<th>Importe</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr align="center" th:each="line: ${request.requiDetails}">
-												<td th:text="${line.product.name}"></td>
-												<td th:text="${line.product.price}"></td>
-												<td th:text="${line.quantity}"></td>
-												<td th:text="${line.calculateAmount()}"></td>
-											</tr>
-										</tbody>
-
-									</table>
-
-									<h5 class="float-right">
-										Total <span th:text="${request.total}"
-											class="badge badge-danger"></span>
-									</h5>
-								</div>
-							</div>
+						<div th:if="${error}" class="alert alert-danger">
+							<p th:text="${error}"></p>
 						</div>
-
 					</div>
-			
-			
-			
+
+					<button type="submit" class="btnadd btn btn-primary">Agregar</button>
+					<a
+						th:href="@{'/requests/detailproduct/' + ${request.requestID}}"
+						class="btncancel btn btn-danger">Cancelar</a>
+
+				</form>
+
 			</div>
 		</div>
 	</div>
