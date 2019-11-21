@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class home {
 
-	@RequestMapping("/")
+	@RequestMapping("/mainn")
 	public String goWelcome() {
 		return "main";
 	}

@@ -30,10 +30,6 @@ public class Accounting_OfficeController
 	@Autowired
 	private IAccounting_OfficerService aService;
 	
-	@RequestMapping("/index")
-	public String goWelcome() {
-		return "main";
-	}
 	@Secured("ROLE_USER")
 	@GetMapping("/new")
 	public String newAccounting(Model model) {
