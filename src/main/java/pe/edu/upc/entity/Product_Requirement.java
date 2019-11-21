@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,6 +31,7 @@ public class Product_Requirement {
 	
 	
 	@Min(0)
+	@NotNull(message="Ingrese el precio del producto")
 	@Column(name = "price", nullable = false)
 	private double price;
 
