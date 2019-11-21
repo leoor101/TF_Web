@@ -159,7 +159,11 @@ public class RequestController {
 	
 	
 	
-	
+	@GetMapping("/reportes")
+	public String vistareportes(Map<String, Object> model) {
+		
+		return "request/reportes";
+	}
 
 	@GetMapping("/requestedSuppliers")
 	public String listAllRequestedSuppliers(Map<String, Object> model) {
