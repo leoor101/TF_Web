@@ -106,7 +106,7 @@
 				</ul>
 			</div>
 
-			<form th:action="@{/supervisor/save}" th:object="${supervisor}"
+			<form th:action="@{/supervisor/savemodify}" th:object="${supervisor}"
 				method="post">
 				<div class="form-group row">
 					<label for="supervisorID" class="col-sm-2 col-form-label">Id</label>
@@ -167,7 +167,7 @@
 				<div class="form-group row">
 					<div class="col-sm-6">
 						<input type="submit" value="Guardar" class="btn btn-secondary"></input>
-						<a href="/supervisor/list" class="btn btn-danger">Cancelar</a>
+						<a th:href="@{/supervisor/list}" class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
 				<p th:text="${mensaje}" class="form-text text-danger"></p>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import pe.edu.upc.entity.Supervisor;
+import pe.edu.upc.entity.Supplier;
 
 public interface ISupervisorService {
 	public Integer insert(Supervisor supervisor);
@@ -20,5 +21,6 @@ public interface ISupervisorService {
 
 	/////////////
 	Optional<Supervisor> fetchBySupervisorWithRequests(Long id);
+	public void insertmodified(Supervisor supervisor);
 
 }
