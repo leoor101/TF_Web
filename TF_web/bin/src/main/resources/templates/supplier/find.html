@@ -15,100 +15,134 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 <link rel="stylesheet"
 	href="path/to/material-design-iconic-font/css/material-design-iconic-font.min.css">
-  <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" href="@{/css/style.css}">
+<link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" href="@{/css/style.css}">
 
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
-        <div id="sticky-header" class="main-header-area ">
-            <div class="container-fluid p-0" style="background-color: rgb(0, 0, 0);">
-                <div class="row align-items-center justify-content-between no-gutters">
-                    <div class="col-xl-2 col-lg-2">
-                        <!--  aca va el logo   -->
-                        <li>
-                            <a href="index.html">
-                                <img class="divemotor" src="https://www.divemotor.com/img/logo.png" style=" width: 125%;
-                                margin: 11% 0% 16% 0%;">
+		<div id="sticky-header" class="main-header-area ">
+			<div class="container-fluid p-0"
+				style="background-color: rgb(0, 0, 0);">
+				<div
+					class="row align-items-center justify-content-between no-gutters">
+					<div class="col-xl-2 col-lg-2">
+						<!--  aca va el logo   -->
+						<li><a href="index.html"> <img class="divemotor"
+								src="https://www.divemotor.com/img/logo.png"
+								style="width: 125%; margin: 11% 0% 16% 0%;">
 
-                            </a>
+						</a></li>
 
-                        </li>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--SideBar-->
-    <div class="sidebar-container">
-        <ul class="sidebar-navigation">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SideBar-->
+	<div class="sidebar-container">
+		<ul class="sidebar-navigation">
 
 
-            <div style="text-align: center; ">
-                <div style="font-size: 450%;">
-                    <i class="zmdi zmdi-account-circle"></i>
-                </div>
-                <div style="font-size: 150%;">
-                    <p>Nombre Usuario</p>
-                </div>
+			<div style="text-align: center;">
+				<div style="font-size: 450%;">
+					<i class="zmdi zmdi-account-circle"></i>
+				</div>
+				<div style="font-size: 150%;">
+					<p>Usuario</p>
+				</div>
+			</div>
+			<li class="header" style="font-size: 100%;"><i
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
-            </div>
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<!-- <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li-->
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
+		</ul>
+	</div>
 
-            <li class="header" style="font-size: 100%;">
-                <i class="zmdi zmdi-account-add"></i> Usuarios </li>
-            <li>
-                <a href="#">
-                    Usuario
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                   Encargado de Contabilidad
-                </a>
-            </li>
+	<!--Container-->
+	<div class="content-container" style="margin-top: 6.4%;">
 
-            <li>
-                <a href="#">
-                   Supervisor
-                </a>
-            </li>
+		<div class="container-fluid">
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-            <li class="header" style="font-size: 100%;">Otro Menu</li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-users" aria-hidden="true"></i> Proveedor
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-cog" aria-hidden="true"></i> Productos
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i> Tipo de Pedido
-                </a>
-            </li>
-        </ul>
-    </div>
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
 
-    <!--Container-->
-    <div class="content-container" style="margin-top: 6.4%;">
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
+			<!-- Main component for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<h1 class="h3 mb-4 text-gray-800">Proveedor</h1>
 
-        <div class="container-fluid">
+				<form th:action="@{/supplier/find}" method="post"
+					th:object="${supplier}">
+					<div class="form-group">
 
-            <!-- Main component for a primary marketing message or call to action -->
-            <div class="jumbotron">
-                <h1 style="text-align: center;"> Buscar por nombre:</h1>
-                <p>aca iria lo de registrar</p>
-                <p>
-                    <a class="btn btn-lg btn-primary" href="#" role="button">Registrar </a>
-                </p>
-            </div>
-        </div>
-    </div>
+						<label for=cat>Buscar:</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control" th:field="*{name}"
+								id="cat" placeholder="Ingrese el nombre del proveedor"></input>
+							<div align="right">
+								<button type="submit" class="btn btn-danger">Buscar</button>
+								<a href="/supplier/listFind" class="btn btn-dark">Cancelar</a>
+							</div>
+						</div>
+
+					</div>
+
+				</form>
+
+				<hr class="sidebar-divider">
+
+				<table class="table table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">RUC</th>
+							<th scope="col">Tel&eacute;fono</th>
+							<th scope="col">Direcci&oacute;n</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="sup: ${listSuppliers}">
+							<td th:text="${sup.supplierID}"></td>
+							<td th:text="${sup.name}"></td>
+							<td th:text="${sup.ruc}"></td>
+							<td th:text="${sup.phoneNumber}"></td>
+							<td th:text="${sup.address}"></td>
+
+						</tr>
+					</tbody>
+				</table>
+				<p th:text="${mensaje}" class="form-text text-dark"></p>
+			</div>
+		</div>
+	</div>
 
 
 
