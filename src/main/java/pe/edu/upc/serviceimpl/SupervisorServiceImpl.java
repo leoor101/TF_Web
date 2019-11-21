@@ -63,4 +63,10 @@ public class SupervisorServiceImpl implements ISupervisorService {
 		return sR.fetchBySupervisorWithRequests(id);
 	}
 
+	@Override
+	public void insertmodified(Supervisor supervisor) {
+		sR.save(supervisor);
+		
+	}
+
 }

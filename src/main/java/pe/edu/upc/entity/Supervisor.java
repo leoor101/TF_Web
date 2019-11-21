@@ -23,10 +23,11 @@ public class Supervisor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long supervisorID;
 
-	@NotEmpty(message = "Ingrese el nombre del supervisor")
+	@NotEmpty(message = "Ingrese el nombre")
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
+	
 	@NotNull(message = "Ingrese los años de experiencia del supervisor")
 	@Column(name = "yearsExperience", nullable = false)
 	private int yearsExperience;
