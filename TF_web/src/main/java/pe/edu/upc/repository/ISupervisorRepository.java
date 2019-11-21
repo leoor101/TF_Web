@@ -1,6 +1,7 @@
 package pe.edu.upc.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,7 @@ public interface ISupervisorRepository  extends JpaRepository<Supervisor,Long>{
 	List<Supervisor> findByName(String name);
 
 
+	////////////////////
+	@Query("SELECT s FROM Supervisor s LEFT JOIN FETCH s.requests o where s.supervisorID=?1")
+	Optional<Supervisor> fetchBySupervisorWithRequests(Long id);
 }

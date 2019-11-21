@@ -83,7 +83,19 @@ public class SupervisorController {
 		}
 		return "/supervisor/listSupervisors";
 	}
-
+	@Secured("ROLE_USER")
+	@GetMapping("/listWith")
+	public String listSupervisorsWithRequest(Model model) {
+		try {
+			model.addAttribute("supervisor", new Supervisor());
+			model.addAttribute("listSupervisors", sUService.list());
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		return "/supervisor/WithRequest";
+	}
+	
+	
 	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
 	public String listSupervisorsFind(Model model) {
@@ -111,14 +123,29 @@ public class SupervisorController {
 		return "supervisor/find";
 	}
 
+	/*
+	 * @Secured("ROLE_USER")
+	 * 
+	 * @GetMapping("/detail1/{id}") public String
+	 * detailsSupervisor(@PathVariable(value = "id") Long id, Model model) { try {
+	 * Optional<Supervisor> supervisor = sUService.findById(id);
+	 * 
+	 * if (!supervisor.isPresent()) { model.addAttribute("info",
+	 * "El supervisor no existe"); return "redirect:/supervisor/list"; } else {
+	 * model.addAttribute("supervisor", supervisor.get()); }
+	 * 
+	 * } catch (Exception e) { model.addAttribute("error", e.getMessage()); }
+	 * 
+	 * return "/supervisor/update"; }
+	 */
 	@Secured("ROLE_USER")
-	@GetMapping("/detail1/{id}")
+	@GetMapping("/detailsup/{id}")
 	public String detailsSupervisor(@PathVariable(value = "id") Long id, Model model) {
 		try {
 			Optional<Supervisor> supervisor = sUService.findById(id);
 
 			if (!supervisor.isPresent()) {
-				model.addAttribute("info", "El supervisor no existe");
+				model.addAttribute("info", "Supervisor no existe");
 				return "redirect:/supervisor/list";
 			} else {
 				model.addAttribute("supervisor", supervisor.get());
@@ -128,7 +155,7 @@ public class SupervisorController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/supervisor/update";
+		return "/supervisor/detailRequest";
 	}
 
 }
