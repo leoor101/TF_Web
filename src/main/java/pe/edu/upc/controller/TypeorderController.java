@@ -52,14 +52,14 @@ public class TypeorderController {
 			int rpta= caService.insert(type_order);
 			if(rpta>0) {
 				model.addAttribute("mensaje", "Ya existe");
-				return "/ordertype/ordertype";
+				return "ordertype/ordertype";
 			}else {
 				model.addAttribute("mensaje","Se guardó correctamente");
 				status.setComplete();
 			}
 		}
 		model.addAttribute("listordertype", caService.list());
-		return "/ordertype/listordertype";
+		return "ordertype/listordertype";
 	}
 	
 	@GetMapping("/list")
@@ -70,7 +70,7 @@ public class TypeorderController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/ordertype/listordertype";
+		return "ordertype/listordertype";
 	}
 	
 
@@ -106,7 +106,7 @@ public class TypeorderController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/ordertype/update";
+		return "ordertype/update";
 	}
 	
 	
@@ -119,7 +119,7 @@ public class TypeorderController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/ordertype/find";
+		return "ordertype/find";
 	}
 	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
@@ -132,7 +132,7 @@ public class TypeorderController {
 			model.addAttribute("ordertype", "Se modificó correctamente");
 			model.addAttribute("listordertype", caService.list());
 			status.setComplete();
-			return "/ordertype/listordertype";
+			return "ordertype/listordertype";
 		}
 	}
 	

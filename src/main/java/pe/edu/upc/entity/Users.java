@@ -28,8 +28,8 @@ public class Users implements Serializable {
 	private Long UserID;
 
 	@NotEmpty(message = "Ingrese el nombre del usuario")
-	@Column(name = "name", nullable = false, length = 50)
-	private String name;
+	@Column(name = "username", unique = true)
+	private String username;
 
 	@NotEmpty(message = "Ingrese la contraseña del usuario")
 	@Column(name = "password", nullable = false, length = 200)
@@ -37,9 +37,10 @@ public class Users implements Serializable {
 
 	private boolean enabled;
 
+
 	@NotEmpty(message = "Ingrese el nombre del usuario")
-	@Column(name = "username", unique = true)
-	private String username;
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
 
 	@NotEmpty(message = "Ingrese el correo del usuario")
 	@Column(name = "EmailAddress", nullable = false, length = 30)
@@ -53,6 +54,11 @@ public class Users implements Serializable {
 	@JoinColumn(name = "user_id")
 	private List<Role> roles;
 
+	
+	public void addrol(Role rol)
+	{
+		roles.add(rol);
+	}
 	public Long getUserID() {
 		return UserID;
 	}

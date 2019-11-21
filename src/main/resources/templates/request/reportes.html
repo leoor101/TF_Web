@@ -18,11 +18,8 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
-
 <script src="https://kit.fontawesome.com/3a97606171.js"
 	crossorigin="anonymous"></script>
-
-
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -59,6 +56,7 @@
 
 			</div>
 
+
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a th:href="@{/users/new}"> Usuario </a></li>
@@ -69,9 +67,8 @@
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
-			</a>
-			</li>
+			<!--  <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li>-->
 			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
@@ -82,10 +79,11 @@
 	<div class="content-container">
 
 		<div class="container-fluid">
+
+			<!-- Main component for a primary marketing message or call to action -->
 			<nav
 				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-				<a th:href="@{/requests/reportes}">  <button class="btn btn-danger">Reportes</button></a>
 				<!-- Sidebar Toggle (Topbar) -->
 				<button id="sidebarToggleTop"
 					class="btn btn-link d-md-none rounded-circle mr-3">
@@ -102,43 +100,27 @@
 					</li>
 				</ul>
 			</nav>
-
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">Lista de solicitudes por
-					supervisores</h1>
+				<h1 class="h3 mb-4 text-gray-800">Reportes</h1>
 
 				<hr class="sidebar-divider">
+				<hr class="sidebar-divider">
+				<a>
+					<button>Reporte 1</button>
+				</a> <a>
+					<button>Reporte 2</button>
+				</a> <a>
+					<button>Reporte 3</button>
+				</a> <a>
+					<button>Reporte 4</button>
+				</a> <a>
+					<button>Reporte 5</button>
+				</a>
 
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Telefono</th>
-							<th scope="col">Generar</th>
-							<th scope="col">Ver Solicitudes</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr align="center" th:each="produ: ${listSupervisors}">
-							<td th:text="${produ.supervisorID}"></td>
-							<td th:text="${produ.name}"></td>
-							<td th:text="${produ.phoneNumber}"></td>
-							<td><a
-								th:href="@{'/requests/form/' + ${produ.supervisorID}}"
-								class="btn btn-danger"> Órden</a></td>
 
-							<td><a
-								th:href="@{'/supervisor/detailrequest/' + ${produ.supervisorID}}"
-								class="btn btn-danger">Órdenes</a></td>
-						</tr>
-					</tbody>
-				</table>
 
-				<div th:if="${mensaje}" class="alert alert-danger">
-					<p th:text="${mensaje}"></p>
-				</div>
+				<p th:text="${mensaje}"></p>
 
 			</div>
 		</div>

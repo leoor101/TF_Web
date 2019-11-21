@@ -159,23 +159,27 @@ public class RequestController {
 	
 	
 	
-	
+	@GetMapping("/reportes")
+	public String vistareportes(Map<String, Object> model) {
+		
+		return "request/reportes";
+	}
 
 	@GetMapping("/requestedSuppliers")
 	public String listAllRequestedSuppliers(Map<String, Object> model) {
 		model.put("requestedSuppliers", requestServ.listRequestedSuppliers());
-		return "/request/requestedSuppliers";
+		return "request/requestedSuppliers";
 	}
 
 	@GetMapping("/requestedSupervisors")
 	public String listAllRequestedSupervisors(Map<String, Object> model) {
 		model.put("requestedSupervisors", requestServ.listRequestedSupervisors());
-		return "/request/requestedSupervisors";
+		return "request/requestedSupervisors";
 	}
 
 	@GetMapping("/requestAccounters")
 	public String listAllRequestedAccounters(Map<String, Object> model) {
 		model.put("requestedAccounters", requestServ.listRequestedAccounter());
-		return "/request/requestedAccounters";
+		return "request/requestedAccounters";
 	}
 }

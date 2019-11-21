@@ -37,4 +37,17 @@ public class Role implements Serializable {
 		this.rol = rol;
 	}
 
+	public Role() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Role(Long id, String rol) {
+		super();
+		this.id = id;
+		this.rol = rol;
+	}
+	
+	
+
 }
