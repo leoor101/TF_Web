@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Product_Requirement")
@@ -17,10 +18,12 @@ public class Product_Requirement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productRequirementID;
 
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Ingrese el nombre del requerimiento de producto")
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
+	@Size(min=1,max=100)
 	@NotEmpty(message = "Ingrese la descripción del producto")
 	@Column(name = "description", nullable = false, length = 100)
 	private String description;
