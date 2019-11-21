@@ -72,7 +72,7 @@
 			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
-			<li><a th:href="@{/stock/list}"> Stock </a></li>
+				<li><a th:href="@{/stock/list}"> Stock </a></li>
 		</ul>
 	</div>
 
@@ -103,66 +103,25 @@
 			</nav>
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">Listar de Tipos de Productos Mas Frecuentes</h1>
+				<h1 class="h3 mb-4 text-gray-800">Listar Cantidad de Orden mas Frecuente por Producto</h1>
 
-
-				<a th:href="@{/stock/new/}" class="btn btn-danger btn-xs">Nuevo</a>
-				<a th:href="@{/stock/listFind/}" class="btn btn-danger btn-xs">Buscar</a>
 				<hr class="sidebar-divider">
 				<hr class="sidebar-divider">
 
 				<table class="table table-striped">
 					<thead class="thead-dark">
 						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Eliminar</th>
-							<th scope="col">Actualizar</th>
+							<th scope="col">Producto</th>
+							<th scope="col">Orden Mas Frecuente</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr align="center" th:each="produ: ${listStockss}">
-							<td th:text="${produ.stockID}"></td>
-							<td th:text="${produ.name}"></td>
-							
-
-							<td><a th:href="@{/stock/delete?id=}+${produ.stockID}"
-								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
-							<td align="center"><a
-								th:href="@{'/stock/detail/' + ${produ.stockID}}"
-								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
+						<tr align="center" th:each="rs: ${requestedStockss}">
+							<td th:text="${rs[0]}"></td>
+							<td th:text="${rs[1]}"></td>
 						</tr>
 					</tbody>
 				</table>
-				
-				
-				
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Prioridad de Orden</th>
-					
-						</tr>
-					</thead>
-					<tbody>
-						<tr align="center" th:each="produ: ${listStockss}">
-							<td th:text="${produ.stockID}"></td>
-							<td th:text="${produ.name}"></td>
-							
-							<td><a
-								th:href="@{'/requests/form/' + ${produ.stockID}}"
-								class="btn btn-danger"> Prioridad</a></td>
-
-							
-						</tr>
-					</tbody>
-				</table>
-				
-				
-				
-				
 
 				<p th:text="${mensaje}"></p>
 
