@@ -72,6 +72,11 @@ public class RequestServiceImpl implements IRequestService {
 		Optional<Request> op = reqR.findById(idrequest);
 		return op.isPresent() ? op.get() : new Request();
 	}
+	@Override
+	public List<String[]> listRequestedAccounter() {
+		// TODO Auto-generated method stub
+		return reqR.requestedAccounter();
+	}
 	
 
 }

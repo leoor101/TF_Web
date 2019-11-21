@@ -173,4 +173,9 @@ public class RequestController {
 		return "/request/requestedSupervisors";
 	}
 
+	@GetMapping("/requestAccounters")
+	public String listAllRequestedAccounters(Map<String, Object> model) {
+		model.put("requestedAccounters", requestServ.listRequestedAccounter());
+		return "/request/requestedAccounters";
+	}
 }
