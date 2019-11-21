@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name= "order_type")
@@ -15,10 +16,13 @@ public class Order_Type {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Debe ingresar el nombre del pedido")
 	@Column(name="name  ",nullable = false,length = 50)
 	private String name;
 	
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Debe ingresar la descripción del producto")
 	@Column(name="description",nullable = false,length = 50)
 	private String description;

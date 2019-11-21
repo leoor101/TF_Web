@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import pe.edu.upc.entity.Supervisor;
+import pe.edu.upc.entity.Supplier;
 import pe.edu.upc.service.ISupervisorService;
 
 @Controller
@@ -36,7 +37,7 @@ public class SupervisorController {
 		return "supervisor/supervisor";
 	}
 
-	@Secured("ROLE_USER")
+	
 	@PostMapping("/save")
 	public String saveSupervisor(@Valid Supervisor Supervisor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -142,6 +143,39 @@ public class SupervisorController {
 		}
 
 		return "/supervisor/detailRequest";
+	}
+	
+	@Secured("ROLE_USER")
+	@GetMapping("/detail/{id}")
+	public String detailsSupervisor(@PathVariable(value = "id") long id, Model model) {
+		try {
+			Optional<Supervisor> supervisor = sUService.listarSupervisorID(id);
+			if (!supervisor.isPresent()) {
+				model.addAttribute("info", "El proveedor no existe");
+				return "redirect:/supervisor/list";
+			} else {
+				model.addAttribute("supervisor", supervisor.get());
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		return "/supervisor/update";
+	}
+	@Secured("ROLE_USER")
+	@PostMapping("/savemodify")
+	public String saveSupplier2(@Valid Supervisor sup, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "supervisor/supervisor";
+		} else {
+			sUService.insertmodified(sup);
+
+			model.addAttribute("mensaje", "Se modificó correctamente");
+			model.addAttribute("listSupervisors", sUService.list());
+			status.setComplete();
+			return "/supervisor/listSupervisors";
+		}
 	}
 
 }

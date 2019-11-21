@@ -1,7 +1,5 @@
 package pe.edu.upc.controller;
 
-import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,18 +22,15 @@ import pe.edu.upc.service.IAccounting_OfficerService;
 import pe.edu.upc.service.IProduct_RequirementService;
 import pe.edu.upc.service.IRequestService;
 import pe.edu.upc.service.ISupervisorService;
+import pe.edu.upc.service.ISupplierService;
 import pe.edu.upc.service.ITypeorderService;
-import pe.edu.upc.service.IUsersService;
 
 @Controller
 @SessionAttributes("request")
 @RequestMapping("/requests")
-public class RequestController 
-{
+public class RequestController {
 	@Autowired
 	private IRequestService requestServ;
-	@Autowired
-	private IUsersService userServ;
 	@Autowired
 	private IProduct_RequirementService proServ;
 	@Autowired
@@ -45,21 +39,25 @@ public class RequestController
 	private ITypeorderService typeServ;
 	@Autowired
 	private IAccounting_OfficerService accServ;
-	
-	
+	@Autowired
+	private ISupplierService supplierServ;
 
-	
+	// registro de request por supervisor
 	@GetMapping("/form/{id}")
 	public String formRequest(@PathVariable(value = "id") Long id, Model model) {
 		try {
 			Optional<Supervisor> sup = superServ.findById(id);
 			if (!sup.isPresent()) {
-				model.addAttribute("info", "Cliente no existe");
+				model.addAttribute("info", "Supervisor no existe");
 				return "redirect:/supervisor/list";
 			} else {
 				Request a = new Request();
 				a.setSupervisor(sup.get());
 				model.addAttribute("request", a);
+				model.addAttribute("listSuppliers", supplierServ.list());
+				model.addAttribute("listordertype", typeServ.list());
+				model.addAttribute("listAccounting", accServ.list());
+				
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -67,11 +65,9 @@ public class RequestController
 		return "request/form";
 	}
 
-	
-	
-	
 	@PostMapping("/save")
-	public String saveOrder(Request request, Model model, @RequestParam(name = "item_id[]", required = false) Long[] itemId,
+	public String saveOrder(Request request, Model model,
+			@RequestParam(name = "item_id[]", required = false) Long[] itemId,
 			@RequestParam(name = "quantity[]", required = false) Integer[] quantity, SessionStatus status) {
 		try {
 
@@ -96,13 +92,11 @@ public class RequestController
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "redirect:/supervisor/detail/" + request.getSupervisor().getSupervisorID();
+		return "request/listrequest"; //deberia de regresar al supervisor Details
 	}
 
 	
-	
-	
-	
+	// un view de toda la orden/como se veria la orden;
 	@GetMapping("/detail/{id}")
 	public String detailRequest(@PathVariable(value = "id") Long id, Model model) {
 
@@ -113,60 +107,48 @@ public class RequestController
 				model.addAttribute("error", "La solicitud no existe");
 				return "redirect:/supervisor/list";
 			}
-
 			model.addAttribute("request", request.get());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "request/detail";
+		return "request/detailsProduct";
 	}
 
+	/*
+	 * para buscar por fecha
+	 * 
+	 * @GetMapping("/listFind") public String listRequest(Model model) { try {
+	 * model.addAttribute("request", new Request());
+	 * model.addAttribute("listrequest", requestServ.list()); } catch (Exception e)
+	 * { model.addAttribute("error", e.getMessage()); } return "/request/find"; }
+	 * 
+	 * 
+	 * @RequestMapping("/find") public String findRequest(Map<String, Object>
+	 * model, @ModelAttribute Request request) throws ParseException {
+	 * 
+	 * List<Request> listrequest; request.setCreateAt(request.getCreateAt());
+	 * listrequest = requestServ.findDate(request.getCreateAt());
+	 * 
+	 * if (listrequest.isEmpty()) { model.put("mensaje", "No se encontró"); }
+	 * model.put("listrequest", listrequest); return "request/find";
+	 * 
+	 * }
+	 */
 	
 	
 	
 	
-	@GetMapping("/listFind")
-	public String listRequest(Model model) {
-		try {
-			model.addAttribute("request", new Request());
-			model.addAttribute("listrequest", requestServ.list());
-		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
-		}
-		return "/request/find";
-	}
-
-	
-	
-	
-	
-	@RequestMapping("/find")
-	public String findRequest(Map<String, Object> model, @ModelAttribute Request request) throws ParseException {
-
-		List<Request> listrequest;
-		request.setCreateAt(request.getCreateAt());
-		listrequest = requestServ.findDate(request.getCreateAt());
-
-		if (listrequest.isEmpty()) {
-			model.put("mensaje", "No se encontró");
-		}
-		model.put("listrequest", listrequest);
-		return "request/find";
-
-	}
-
 	@GetMapping("/requestedSuppliers")
 	public String listAllRequestedSuppliers(Map<String, Object> model) {
 		model.put("requestedSuppliers", requestServ.listRequestedSuppliers());
 		return "/request/requestedSuppliers";
 	}
-	
+
 	@GetMapping("/requestedSupervisors")
 	public String listAllRequestedSupervisors(Map<String, Object> model) {
 		model.put("requestedSupervisors", requestServ.listRequestedSupervisors());
 		return "/request/requestedSupervisors";
 	}
-	
-	
+
 }

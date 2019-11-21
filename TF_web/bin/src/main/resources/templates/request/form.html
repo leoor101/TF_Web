@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>Divemotor</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" th:href="@{/css/estilo.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<link rel="stylesheet"
+	href="path/to/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" href="@{/css/style.css}">
+
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+	<div class="header-area " style="background-color: rgb(0, 0, 0);">
+		<div id="sticky-header" class="main-header-area ">
+			<div class="container-fluid p-0"
+				style="background-color: rgb(0, 0, 0);">
+				<div
+					class="row align-items-center justify-content-between no-gutters">
+					<div class="col-xl-2 col-lg-2">
+						<!--  aca va el logo   -->
+						<li><a href="index.html"> <img class="divemotor"
+								src="https://www.divemotor.com/img/logo.png"
+								style="width: 125%; margin: 11% 0% 16% 0%;">
+
+						</a></li>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SideBar-->
+	<div class="sidebar-container">
+		<ul class="sidebar-navigation">
+
+
+			<div style="text-align: center;">
+				<div style="font-size: 450%;">
+					<i class="zmdi zmdi-account-circle"></i>
+				</div>
+				<div style="font-size: 150%;">
+					<p>Usuario</p>
+				</div>
+
+			</div>
+
+			<li class="header" style="font-size: 100%;"><i
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
+					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
+
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
+			</a>
+			</li>
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
+		</ul>
+	</div>
+
+	<!--Container-->
+	<div class="content-container">
+
+		<div class="container-fluid">
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
+
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="jumbotron">
+
+			<!-- Aca iria el contenido (cambiar)--> 
+				<!-- Page Heading -->
+				<h1 class="h3 mb-4 text-gray-800">Registro de Solicitud</h1>
+
+				<hr class="sidebar-divider">
+				<div class="container">
+					<form th:action="@{/requests/save}" th:object="${request}"
+						method="post">
+						<div class="card">
+							<div class="card-header text-white bg-dark">Solicitud</div>
+							<div class="card-body">
+								<div class="form-group row">
+									<label for="nombre" class="col-sm-2 col-form-label">Supervisor</label>
+									<div class="col-sm-6">
+										<input type="text" readonly class="form-control-plaintext"
+											id="nombre" th:value="${request.supervisor.name}">
+									</div>
+								</div>
+								<!-- Añadir los demas para registrar -->
+								<div class="form-group row">
+									<label for="productname" class="col-sm-2 col-form-label">Producto</label>
+									<div class="col-sm-6">
+										<input type="text" name="productname" class="form-control"
+											id="productname" placeholder="Producto a buscar">
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+
+
+
+						<div class="card">
+							<div class="card-header text-white bg-dark">Detalle</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="loadProducts" class="table table-striped">
+										<thead class="bg-light text-black">
+											<tr align="center">
+												<th>Nombre</th>
+												<th>Precio</th>
+												<th>Cantidad</th>
+												<th>Total</th>
+												<th>Eliminar</th>
+											</tr>
+										</thead>
+										<tbody align="center">
+										</tbody>
+									</table>
+								</div>
+
+								<table th:replace="order/template-orderdetail::orderDetail"></table>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<h5 id="total">
+									Total <span class="badge badge-danger" id="gran_total">0</span>
+								</h5>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input type="submit" value="Registrar" class="btn btn-danger" />
+							</div>
+						</div>
+
+					</form>
+
+
+				</div>
+				<!-- /.container-fluid -->
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

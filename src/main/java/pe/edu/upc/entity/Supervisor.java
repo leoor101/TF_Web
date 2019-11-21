@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Supervisor")
@@ -23,18 +24,26 @@ public class Supervisor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long supervisorID;
 
+<<<<<<< HEAD
+	@NotEmpty(message = "Ingrese el nombre")
+=======
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Ingrese el nombre del supervisor")
+>>>>>>> a8eb04192995fc46d48a58030f72747d7a8533a7
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
+	
 	@NotNull(message = "Ingrese los años de experiencia del supervisor")
 	@Column(name = "yearsExperience", nullable = false)
 	private int yearsExperience;
 
+	@Size(min=7,max=9)
 	@NotEmpty(message = "Ingrese el teléfono del supervisor")
-	@Column(name = "phoneNumber", nullable = false, length = 7)
+	@Column(name = "phoneNumber", nullable = false, length = 9)
 	private String phoneNumber;
 
+	@Size(min=1,max=50)
 	@NotEmpty(message = "Ingrese la dirección del supervisor")
 	@Column(name = "address", nullable = false, length = 50)
 	private String address;

@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
-
+<script src="https://kit.fontawesome.com/3a97606171.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -50,29 +51,27 @@
 					<i class="zmdi zmdi-account-circle"></i>
 				</div>
 				<div style="font-size: 150%;">
-					<p>Nombre Usuario</p>
+					<p>Usuario</p>
 				</div>
 
 			</div>
 
+
 			<li class="header" style="font-size: 100%;"><i
-				class="zmdi zmdi-account-add"></i> Usuarios</li>
-			<li><a href="#"> Usuario </a></li>
-			<li><a th:href="@{/accountings/list}"> Encargado de
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisores </a></li>
+			<li><a th:href="@{/accountings/list}"> Encargados de
 					Contabilidad </a></li>
+			<li><a th:href="@{/supplier/list}"> Proveedores </a></li>
 
-			<li><a href="#"> Supervisor </a></li>
-
-			<li class="header" style="font-size: 100%;">Otro Menu</li>
-			<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
-					Proveedor
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Productos</a></li>
+			<!-- <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
 			</a></li>
-			<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
-					Productos
-			</a></li>
-			<li><a href="#"> <i class="fa fa-info-circle"
-					aria-hidden="true"></i> Tipo de Pedido
-			</a></li>
+			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
 		</ul>
 	</div>
 
@@ -80,33 +79,63 @@
 	<div class="content-container">
 
 		<div class="container-fluid">
+			<nav
+				class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-			<!-- Main component for a primary marketing message or call to action -->
-			<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
-			<a class="btn btn-lg btn-primary" role="button"
-				th:href="@{/accountings/new}">Nuevo </a>
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop"
+					class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown no-arrow">
 
-			<hr class="sidebar-divider">
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<button class="btn btn-danger"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesion</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
+			<div class="jumbotron">
+				<!-- Main component for a primary marketing message or call to action -->
+				<h1 class="h3 mb-4 text-gray-800">Encargado de Contabilidad</h1>
+				<a class="btn btn-danger btn-xs" th:href="@{/accountings/new}">Nuevo
+				</a> <a class="btn btn-danger btn-xs" th:href="@{/accountings/listFind}">Buscar
+				</a>
+				<hr class="sidebar-divider">
 
-			<table class="table table-striped">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">DNI</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="ao: ${listAccounting}">
-						<td th:text="${ao.AccountingOfficerID}"></td>
-						<td th:text="${ao.Namex}"></td>
-						<td th:text="${ao.DNI}"></td>
-					</tr>
-				</tbody>
-			</table>
+				<table class="table table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">DNI</th>
+							<th scope="col">Eliminar</th>
+							<th scope="col">Actualizar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ao: ${listAccounting}">
+							<td th:text="${ao.AccountingOfficerID}"></td>
+							<td th:text="${ao.Namex}"></td>
+							<td th:text="${ao.DNI}"></td>
 
-			<p th:text="${mensaje}"></p>
+							<td><a
+								th:href="@{/accountings/delete?id=}+${ao.AccountingOfficerID}"
+								class="btn btn-dark"><i class="fas fa-trash-alt"></i></a></td>
+							<td align="center"><a
+								th:href="@{'/accountings/detail/' + ${ao.AccountingOfficerID}}"
+								class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
 
+						</tr>
+					</tbody>
+				</table>
+
+				<p th:text="${mensaje}"></p>
+
+			</div>
 		</div>
 	</div>
 

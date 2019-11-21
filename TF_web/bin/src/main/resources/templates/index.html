@@ -15,100 +15,64 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 <link rel="stylesheet"
 	href="path/to/material-design-iconic-font/css/material-design-iconic-font.min.css">
-  <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" href="@{/css/style.css}">
+<link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" href="@{/css/style.css}">
 
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
-        <div id="sticky-header" class="main-header-area ">
-            <div class="container-fluid p-0" style="background-color: rgb(0, 0, 0);">
-                <div class="row align-items-center justify-content-between no-gutters">
-                    <div class="col-xl-2 col-lg-2">
-                        <!--  aca va el logo   -->
-                        <li>
-                            <a href="index.html">
-                                <img class="divemotor" src="https://www.divemotor.com/img/logo.png" style=" width: 125%;
-                                margin: 11% 0% 16% 0%;">
+		<div id="sticky-header" class="main-header-area ">
+			<div class="container-fluid p-0"
+				style="background-color: rgb(0, 0, 0);">
+				<div
+					class="row align-items-center justify-content-between no-gutters">
+					<div class="col-xl-2 col-lg-2">
+						<!--  aca va el logo   -->
+						<li><a href="index.html"> <img class="divemotor"
+								src="https://www.divemotor.com/img/logo.png"
+								style="width: 125%; margin: 11% 0% 16% 0%;">
 
-                            </a>
+						</a></li>
 
-                        </li>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--SideBar-->
-    <div class="sidebar-container">
-        <ul class="sidebar-navigation">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SideBar-->
+	<div class="sidebar-container">
+		<ul class="sidebar-navigation">
 
 
-            <div style="text-align: center; ">
-                <div style="font-size: 450%;">
-                    <i class="zmdi zmdi-account-circle"></i>
-                </div>
-                <div style="font-size: 150%;">
-                    <p>Nombre Usuario</p>
-                </div>
+			<div style="text-align: center;">
+				<div style="font-size: 450%;">
+					<i class="zmdi zmdi-account-circle"></i>
+				</div>
+				<div style="font-size: 150%;">
+					<p>Nombre Usuario</p>
+				</div>
 
-            </div>
+			</div>
 
-            <li class="header" style="font-size: 100%;">
-                <i class="zmdi zmdi-account-add"></i> Usuarios </li>
-            <li>
-                <a href="#">
-                    Usuario
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                   Encargado de Contabilidad
-                </a>
-            </li>
 
-            <li>
-                <a href="#">
-                   Supervisor
-                </a>
-            </li>
+			<li class="header" style="font-size: 100%;"><i
+				class="zmdi zmdi-account-add"></i> menu1</li>
+			<li><a th:href="@{/users/new}"> Usuario </a></li>
+			<li><a th:href="@{/supervisor/list}"> Supervisors </a></li>
+			<li><a th:href="@{/accountings/list}"> Accounting Officers </a></li>
+			<li><a th:href="@{/supplier/list}"> Suppliers </a></li>
 
-            <li class="header" style="font-size: 100%;">Otro Menu</li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-users" aria-hidden="true"></i> Proveedor
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-cog" aria-hidden="true"></i> Productos
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i> Tipo de Pedido
-                </a>
-            </li>
-        </ul>
-    </div>
+			<li class="header" style="font-size: 100%;">Menu2</li>
+			<li><a th:href="@{/product/list}">Product</a></li>
+			<li><a th:href="@{/purchasefolder/list}"> Purchase Folder </a></li>
+			<li><a th:href="@{/ordertype/list}"> Order Type </a></li>
+			<li class="header" style="font-size: 100%;">Menu3</li>
+			<li><a th:href="@{/Supervisor/list}"> Request </a></li>
 
-    <!--Container-->
-    <div class="content-container" style="margin-top: 6.4%;">
+		</ul>
+	</div>
 
-        <div class="container-fluid">
-
-            <!-- Main component for a primary marketing message or call to action -->
-            <div class="jumbotron">
-                <h1 style="text-align: center;"> Registrar Usuario</h1>
-                <p>aca iria lo de registrar</p>
-                <p>
-                    <a class="btn btn-lg btn-primary" href="#" role="button">Registrar </a>
-                </p>
-            </div>
-        </div>
-    </div>
 
 
 
