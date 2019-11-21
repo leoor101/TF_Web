@@ -23,4 +23,6 @@ public interface IRequestService {
 	List<String[]>listRequestedSuppliers();
 	
 	List<String[]>listRequestedSupervisors();
+	
+	List<String[]>listRequestedStockss();
 }

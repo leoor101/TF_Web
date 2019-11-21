@@ -54,6 +54,10 @@ public class Request {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplierID", nullable = false)
 	private Supervisor supplierID;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "stockID", nullable = false)
+	private Stock stockID;
 
 		
 	

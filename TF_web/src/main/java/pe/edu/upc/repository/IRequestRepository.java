@@ -26,6 +26,6 @@ public interface IRequestRepository extends JpaRepository<Request, Long> {
 	List<String[]> requestedSupervisors();
 
 	@Query(value = "select s.name,count(r.stockID) from request r join stock s on s.stockID = r.stockID group by s.name  ORDER BY COUNT(r.stockID) DESC limit 1", nativeQuery = true)
-	List<String[]> requestedStocks();
+	List<String[]> requestedStockss();
 	
 }

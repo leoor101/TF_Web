@@ -17,20 +17,21 @@ public class RequestServiceImpl implements IRequestService {
 
 	@Autowired
 	private IRequestRepository reqR;
-	
-	
+
 	@Transactional
 	@Override
 	public Request insert(Request request) {
 		// TODO Auto-generated method stub
 		return reqR.save(request);
 	}
+
 	@Transactional
 	@Override
 	public void delete(long idRequest) {
 		reqR.deleteById(idRequest);
-		
+
 	}
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Request> list() {
@@ -56,17 +57,24 @@ public class RequestServiceImpl implements IRequestService {
 		// TODO Auto-generated method stub
 		return reqR.findByCreateAt(fecha);
 	}
+
 	@Override
 	public List<String[]> listRequestedSuppliers() {
 		// TODO Auto-generated method stub
 		return reqR.requestedSuppliers();
 
 	}
+
 	@Override
 	public List<String[]> listRequestedSupervisors() {
 		// TODO Auto-generated method stub
 		return reqR.requestedSupervisors();
 	}
-	
+
+	@Override
+	public List<String[]> listRequestedStockss() {
+		// TODO Auto-generated method stub
+		return reqR.requestedStockss();
+	}
 
 }

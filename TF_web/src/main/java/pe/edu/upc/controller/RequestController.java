@@ -21,6 +21,7 @@ import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.IAccounting_OfficerService;
 import pe.edu.upc.service.IProduct_RequirementService;
 import pe.edu.upc.service.IRequestService;
+import pe.edu.upc.service.IStockService;
 import pe.edu.upc.service.ISupervisorService;
 import pe.edu.upc.service.ISupplierService;
 import pe.edu.upc.service.ITypeorderService;
@@ -41,6 +42,8 @@ public class RequestController {
 	private IAccounting_OfficerService accServ;
 	@Autowired
 	private ISupplierService supplierServ;
+	@Autowired
+	private IStockService stockServ;
 
 	// registro de request por supervisor
 	@GetMapping("/form/{id}")
@@ -55,9 +58,10 @@ public class RequestController {
 				a.setSupervisor(sup.get());
 				model.addAttribute("request", a);
 				model.addAttribute("listSuppliers", supplierServ.list());
+				model.addAttribute("listStockss", stockServ.list());
 				model.addAttribute("listordertype", typeServ.list());
 				model.addAttribute("listAccounting", accServ.list());
-				
+
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -92,10 +96,9 @@ public class RequestController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "request/listrequest"; //deberia de regresar al supervisor Details
+		return "request/listrequest"; // deberia de regresar al supervisor Details
 	}
 
-	
 	// un view de toda la orden/como se veria la orden;
 	@GetMapping("/detail/{id}")
 	public String detailRequest(@PathVariable(value = "id") Long id, Model model) {
@@ -135,10 +138,7 @@ public class RequestController {
 	 * 
 	 * }
 	 */
-	
-	
-	
-	
+
 	@GetMapping("/requestedSuppliers")
 	public String listAllRequestedSuppliers(Map<String, Object> model) {
 		model.put("requestedSuppliers", requestServ.listRequestedSuppliers());
@@ -149,6 +149,12 @@ public class RequestController {
 	public String listAllRequestedSupervisors(Map<String, Object> model) {
 		model.put("requestedSupervisors", requestServ.listRequestedSupervisors());
 		return "/request/requestedSupervisors";
+	}
+
+	@GetMapping("/requestedStockss")
+	public String listAllRequestedStockss(Map<String, Object> model) {
+		model.put("requestedStockss", requestServ.listRequestedStockss());
+		return "/stock/requestedStockss";
 	}
 
 }
