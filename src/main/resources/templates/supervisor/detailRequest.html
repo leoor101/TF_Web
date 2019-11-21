@@ -111,7 +111,7 @@
 				<div class="container">
 
 					<div class="card">
-						<div class="card-header text-white bg-dark">Órdenes</div>
+						<div class="card-header text-white bg-dark">Solicitudes</div>
 						<div class="card-body">
 
 							<div class="table-responsive">
@@ -125,7 +125,7 @@
 									class="table table-striped">
 									<thead class="bg-light text-black">
 										<tr align="center">
-											<th>Órden</th>
+											<th>ID</th>
 											<th>Fecha</th>
 											<th>Total</th>
 											<th>Ver</th>
@@ -139,7 +139,7 @@
 											<td th:text="${request.total}"></td>
 											
 											<td><a class="btn btn-danger"
-												th:href="@{'/requests/detail/'+ ${request.requestID}}">Detalle</a></td>
+												th:href="@{'/requests/detailproduct/'+ ${request.requestID}}">Detalle</a></td>
 										</tr>
 									</tbody>
 								</table>

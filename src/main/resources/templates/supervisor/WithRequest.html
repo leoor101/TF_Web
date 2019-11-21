@@ -104,7 +104,7 @@
 
 			<div class="jumbotron">
 
-				<h1 class="h3 mb-4 text-gray-800">Lista de los Supervisores con solicitudes</h1>
+				<h1 class="h3 mb-4 text-gray-800">Lista de solicitudes por supervisores</h1>
 
 				<hr class="sidebar-divider">
 
@@ -128,13 +128,15 @@
 								class="btn btn-danger"> Órden</a></td>
 
 							<td><a
-								th:href="@{'/supervisor/detailsup/' + ${produ.supervisorID}}"
+								th:href="@{'/supervisor/detailrequest/' + ${produ.supervisorID}}"
 								class="btn btn-danger">Órdenes</a></td>
 						</tr>
 					</tbody>
 				</table>
 
-				<p th:text="${mensaje}"></p>
+				<div th:if="${mensaje}" class="alert alert-danger">
+					<p th:text="${mensaje}"></p>
+				</div>
 
 			</div>
 		</div>

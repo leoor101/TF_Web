@@ -103,93 +103,58 @@
 			</nav>
 
 			<div class="jumbotron">
-
-				<!-- Aca iria el contenido (cambiar)-->
-				<!-- Page Heading -->
-				<h1 class="h3 mb-4 text-gray-800">Registro de Solicitud</h1>
-
+				<h3 class="title-content" th:text="${titulo}"></h3>
+				
+				<!-- aca los botones nuevo y regresar -->
+				
 				<hr class="sidebar-divider">
-				<div class="container">
-					<form th:action="@{/requests/save}" th:object="${request}"
-						method="post">
-						<div class="card">
-							<div class="card-body">
-								<!-- Nombre supervisor -->
-								<div class="form-group row">
-									<label for="nombre" class="col-sm-2 col-form-label">Supervisor</label>
-									<div class="col-sm-6">
-										<input type="text" readonly class="form-control-plaintext"
-											id="nombre" th:value="*{supervisor.name}">
-									</div>
-								</div>
+				<div class="container py-4">
+					<div class="card">
+						<div class="card-header text-white bg-dark"
+							th:text="'Solicitud # ' + ${request.requestID}"></div>
+						<div class="card-body">
 
+							<div class="card-header text-black bg-light"
+								th:text="'Supervisor: '+${request.supervisor.name}"></div>
 
-								<!-- Tipo de orden -->
-								<div class="form-group row">
-									<label for="color" class="col-sm-2 col-form-label">Tipo
-										de orden</label>
-									<div class="col-sm-6">
-										<select class="form-control" th:field="*{type_OrderID.id}">
-											<option th:each="t : ${listordertype}" th:value="${t.id}"
-												th:utext="${t.name}"
-												th:selected="(${t.id} == *{type_OrderID.id})" />
-										</select>
-									</div>
-								</div>
-								<!-- Encargado contabilidad -->
-								<div class="form-group row">
-									<label for="color" class="col-sm-2 col-form-label">Encargado
-										de contabilidad</label>
-									<div class="col-sm-6">
-										<select class="form-control"
-											th:field="*{accountingID.AccountingOfficerID}">
-											<option th:each="t : ${listAccounting}"
-												th:value="${t.AccountingOfficerID}" th:utext="${t.Namex}"
-												th:selected="(${t.AccountingOfficerID} == *{accountingID.AccountingOfficerID})" />
-										</select>
+							<div class="table-responsive">
+							
+							
+							
+								<table th:if="${not #lists.isEmpty(request.requiDetails)}"
+									class="table table-striped">
+									<thead class="bg-dark text-white">
+										<tr align="center">
+											<th>Producto</th>
+											<th>Precio</th>
+											<th>Cantidad</th>
+											<th>Importe</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr align="center" th:each="line: ${request.requiDetails}">
+											<td th:text="${line.product.name}"></td>
+											<td th:text="${line.product.price}"></td>
+											<td th:text="${line.quantity}"></td>
+											<td th:text="${line.calculateAmount()}"></td>
+												
+										</tr>
+									</tbody>
 
-									</div>
-								</div>
-								<!-- Supplier -->
-								<div class="form-group row">
-									<label for="color" class="col-sm-2 col-form-label">Proveedor</label>
-									<div class="col-sm-6">
-										<select class="form-control"
-											th:field="*{supplierID.supplierID}">
-											<option th:each="t : ${listSuppliers}"
-												th:value="${t.supplierID}" th:utext="${t.name}"
-												th:selected="(${t.supplierID} == *{supplierID.supplierID})" />
-										</select>
+								</table>
 
-									</div>
-								</div>
-
-
-
-
-
-
+								<h5 class="float-right">
+									Total <span th:text="${request.total}"
+										class="badge badge-danger"></span>
+								</h5>
+								
+								
+								
 							</div>
 						</div>
-
-						<br>
-
-						<div class="form-group row">
-							<div class="col-sm-6">
-								<input type="submit" value="Registrar" class="btn btn-danger" />
-							</div>
-							<div class="col-sm-3">
-								<a th:href="@{/supervisor/listWith}" class="btn btn-dark">Regresar</a>
-							</div>
-						</div>
-
-					</form>
-					<div th:if="${mensaje}" class="alert alert-danger">
-						<p th:text="${mensaje}"></p>
 					</div>
 
 				</div>
-				<!-- /.container-fluid -->
 
 
 

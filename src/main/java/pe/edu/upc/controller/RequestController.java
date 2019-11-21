@@ -3,20 +3,21 @@ package pe.edu.upc.controller;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entity.Product_Requirement;
 import pe.edu.upc.entity.Request;
-import pe.edu.upc.entity.Requirement_Detail;
 import pe.edu.upc.entity.Supervisor;
 import pe.edu.upc.service.IAccounting_OfficerService;
 import pe.edu.upc.service.IProduct_RequirementService;
@@ -57,7 +58,7 @@ public class RequestController {
 				model.addAttribute("listSuppliers", supplierServ.list());
 				model.addAttribute("listordertype", typeServ.list());
 				model.addAttribute("listAccounting", accServ.list());
-				
+
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -66,53 +67,45 @@ public class RequestController {
 	}
 
 	@PostMapping("/save")
-	public String saveOrder(Request request, Model model,
-			@RequestParam(name = "item_id[]", required = false) Long[] itemId,
-			@RequestParam(name = "quantity[]", required = false) Integer[] quantity, SessionStatus status) {
+	public String saveOrder(@Valid Request request, Model model, SessionStatus status, BindingResult binRes) {
+
 		try {
 
-			if (itemId == null || itemId.length == 0) {
-				model.addAttribute("info", "La orden no tiene productos");
-				return "request/form";
-			}
-
-			for (int i = 0; i < itemId.length; i++) {
-				Optional<Product_Requirement> product = proServ.listProduct_RequirementId(itemId[i]);
-				if (product.isPresent()) {
-					Requirement_Detail line = new Requirement_Detail();
-					line.setQuantity(quantity[i]);
-					line.setProduct(product.get());
-					request.addrequiDetails(line);
-				}
-			}
 			requestServ.insert(request);
 			status.setComplete();
-			model.addAttribute("success", "Solicitud generada");
+			model.addAttribute("mensaje", "Solicitud Generada");
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
+			return "redirect:/request/form";
 		}
 
-		return "request/listrequest"; //deberia de regresar al supervisor Details
+		return "redirect:/supervisor/listWith";
 	}
 
-	
 	// un view de toda la orden/como se veria la orden;
-	@GetMapping("/detail/{id}")
-	public String detailRequest(@PathVariable(value = "id") Long id, Model model) {
+	@GetMapping("/detailproduct/{id}")
+	public String detailRequest(@PathVariable(value = "id") Long id, Map<String, Object> model,
+			RedirectAttributes flash) {
 
-		try {
-			Optional<Request> request = requestServ.fetchByRequestIdWithUserWhithRequiDetailsWithProduct(id);
-
-			if (!request.isPresent()) {
-				model.addAttribute("error", "La solicitud no existe");
-				return "redirect:/supervisor/list";
-			}
-			model.addAttribute("request", request.get());
-		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
+		Request req = requestServ.listarId(id);
+		if (req == null) {
+			flash.addFlashAttribute("error", "El detalle no existe.");
+			return "redirect:/supervisor/listWith";
 		}
-
-		return "request/detailsProduct";
+		model.put("request", req);
+		model.put("titulo", "Detalle de Solicitud Id:" + req.getRequestID());
+		/*
+		 * try { Optional<Request> request =
+		 * requestServ.fetchByRequestIdWithUserWhithRequiDetailsWithProduct(id);
+		 * 
+		 * if (!request.isPresent()) { model.addAttribute("error",
+		 * "La solicitud no existe"); return "redirect:/supervisor/list"; }
+		 * model.addAttribute("request", request.get()); } catch (Exception e) {
+		 * model.addAttribute("error", e.getMessage()); }
+		 * return "request/detailsProduct";
+		 */
+		return "request/detail/detailsList";
+		
 	}
 
 	/*
@@ -135,10 +128,7 @@ public class RequestController {
 	 * 
 	 * }
 	 */
-	
-	
-	
-	
+
 	@GetMapping("/requestedSuppliers")
 	public String listAllRequestedSuppliers(Map<String, Object> model) {
 		model.put("requestedSuppliers", requestServ.listRequestedSuppliers());

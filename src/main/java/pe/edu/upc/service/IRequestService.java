@@ -13,6 +13,7 @@ public interface IRequestService {
 	public void delete(long idRequest);
 
 	List<Request> list();
+	Request listarId(Long idrequest);
 
 	public Optional<Request> findById(long id);
 

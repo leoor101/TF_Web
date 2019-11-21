@@ -36,7 +36,7 @@ public class Request {
 	private Date createAt;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "details_id")
+	@JoinColumn(name = "details_id",nullable=true)
 	private List<Requirement_Detail> requiDetails;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -53,15 +53,17 @@ public class Request {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplierID", nullable = false)
-	private Supervisor supplierID;
+	private Supplier supplierID;
 
 		
 	
-	public Supervisor getSupplierID() {
+	
+	
+	public Supplier getSupplierID() {
 		return supplierID;
 	}
 
-	public void setSupplierID(Supervisor supplierID) {
+	public void setSupplierID(Supplier supplierID) {
 		this.supplierID = supplierID;
 	}
 

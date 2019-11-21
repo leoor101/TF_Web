@@ -67,6 +67,11 @@ public class RequestServiceImpl implements IRequestService {
 		// TODO Auto-generated method stub
 		return reqR.requestedSupervisors();
 	}
+	@Override
+	public Request listarId(Long idrequest) {
+		Optional<Request> op = reqR.findById(idrequest);
+		return op.isPresent() ? op.get() : new Request();
+	}
 	
 
 }
