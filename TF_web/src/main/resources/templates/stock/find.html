@@ -19,10 +19,6 @@
 <link rel="stylesheet" href="@{/css/font-awesome.min.css}">
 <link rel="stylesheet" href="@{/css/style.css}">
 
-<script src="https://kit.fontawesome.com/3a97606171.js"
-	crossorigin="anonymous"></script>
-
-
 </head>
 <body>
 	<div class="header-area " style="background-color: rgb(0, 0, 0);">
@@ -56,9 +52,7 @@
 				<div style="font-size: 150%;">
 					<p>Usuario</p>
 				</div>
-
 			</div>
-
 			<li class="header" style="font-size: 100%;"><i
 				class="zmdi zmdi-account-add"></i> menu1</li>
 			<li><a th:href="@{/users/new}"> Usuario </a></li>
@@ -69,18 +63,18 @@
 
 			<li class="header" style="font-size: 100%;">Menu2</li>
 			<li><a th:href="@{/product/list}">Productos</a></li>
-			<!--	<li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra-->
-			</a>
-			</li>
+			<!-- <li><a th:href="@{/purchasefolder/list}"> Carpetas de Compra
+			</a></li-->
 			<li><a th:href="@{/ordertype/list}"> Tipos de Orden </a></li>
 			<li class="header" style="font-size: 100%;">Menu3</li>
 			<li><a th:href="@{/supervisor/listWith}"> Solicitudes </a></li>
+			<li><a th:href="@{/supervisor/list}"> Stock </a></li>
 				<li><a th:href="@{/stock/list}"> Stock </a></li>
 		</ul>
 	</div>
 
 	<!--Container-->
-	<div class="content-container">
+	<div class="content-container" style="margin-top: 6.4%;">
 
 		<div class="container-fluid">
 			<nav
@@ -102,41 +96,48 @@
 					</li>
 				</ul>
 			</nav>
-
+			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
+				<h1 class="h3 mb-4 text-gray-800">Tipo de orden</h1>
 
-				<h1 class="h3 mb-4 text-gray-800">Lista de los Supervisores con solicitudes</h1>
+				<form th:action="@{/stock/find}" method="post"
+					th:object="${stock}">
+					<div class="form-group">
+
+						<label for=cat>Buscar:</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control" th:field="*{name}"
+								id="cat" placeholder="Ingrese el nombre del tipo de orden"></input>
+							<div align="right">
+								<button type="submit" class="btn btn-danger">Buscar</button>
+								<a href="/stock/listFind" class="btn btn-dark">Cancelar</a>
+							</div>
+						</div>
+
+					</div>
+
+				</form>
 
 				<hr class="sidebar-divider">
 
 				<table class="table table-striped">
 					<thead class="thead-dark">
-						<tr align="center">
-							<th scope="col">Id</th>
+						<tr>
+							<th scope="col">ID</th>
 							<th scope="col">Nombre</th>
-							<th scope="col">Telefono</th>
-							<th scope="col">Generar</th>
-							<th scope="col">Ver Solicitudes</th>
+							
 						</tr>
 					</thead>
 					<tbody>
-						<tr align="center" th:each="produ: ${listSupervisors}">
-							<td th:text="${produ.supervisorID}"></td>
-							<td th:text="${produ.name}"></td>
-							<td th:text="${produ.phoneNumber}"></td>
-							<td><a
-								th:href="@{'/requests/form/' + ${produ.supervisorID}}"
-								class="btn btn-danger"> Órden</a></td>
+						<tr th:each="sup: ${listStockss}">
+							<td th:text="${sup.stockID}"></td>
+							<td th:text="${sup.name}"></td>
+							
 
-							<td><a
-								th:href="@{'/supervisor/detailsup/' + ${produ.supervisorID}}"
-								class="btn btn-danger">Órdenes</a></td>
 						</tr>
 					</tbody>
 				</table>
-
-				<p th:text="${mensaje}"></p>
-
+				<p th:text="${mensaje}" class="form-text text-dark"></p>
 			</div>
 		</div>
 	</div>

@@ -1,10 +1,10 @@
 package pe.edu.upc.serviceimpl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,64 +16,48 @@ import pe.edu.upc.service.IStockService;
 public class StockServiceImpl implements IStockService {
 
 	@Autowired
-	private IStockRepository stoC;
+	private IStockRepository stK;
 
-	@Transactional
 	@Override
-	public Stock insert(Stock stock) {
-		// TODO Auto-generated method stub
-		return stoC.save(stock);
+	@Transactional
+	public Integer insert(Stock stock) {
+		int rpta = stK.findStockName(stock.getName());
+		if (rpta == 0) {
+			stK.save(stock);
+		}
+		return rpta;
 	}
 
-	@Transactional
 	@Override
-	public void delete(long idStock) {
-		stoC.deleteById(idStock);
+	@Transactional
+	public void delete(long stockID) {
+		stK.deleteById(stockID);
 
 	}
 
+	@Override
 	@Transactional(readOnly = true)
-	@Override
 	public List<Stock> list() {
 		// TODO Auto-generated method stub
-		return stoC.findAll();
+		return stK.findAll(Sort.by(Sort.Direction.DESC, "name"));
 	}
 
 	@Override
-	public Optional<Stock> findById(long id) {
+	public Optional<Stock> listarId(long stockID) {
 		// TODO Auto-generated method stub
-		return stoC.findById(id);
-	}
-
-	@Transactional(readOnly = true)
-	@Override
-	public Optional<Stock> fetchByStockstockIDWithProduct_Requirement(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return stoC.fetchByStockstockIDWithProduct_Requirement(id);
+		return stK.findById(stockID);
 	}
 
 	@Override
-	public List<Stock> findDate(Date fecha) {
+	public List<Stock> findByName(String name) {
 		// TODO Auto-generated method stub
-		return stoC.findByCreateAt(fecha);
+		return stK.findByName(name);
 	}
 
 	@Override
-	public List<String[]> listStockedProducts() {
-		// TODO Auto-generated method stub
-		return stoC.stockedProducts();
-	}
+	public void insertmodified(Stock stock) {
+		stK.save(stock);
 
-	@Override
-	public List<String[]> listStockedProductss() {
-		// TODO Auto-generated method stub
-		return stoC.stockedProductss();
-	}
-
-	@Override
-	public List<String[]> listStockedProductsss() {
-		// TODO Auto-generated method stub
-		return stoC.stockedProductsss();
 	}
 
 }
