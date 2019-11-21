@@ -32,6 +32,9 @@ public class UsersController {
 		model.addAttribute("user",new Users());
 		return "user/user";
 	}
+	
+	
+	
 	@PostMapping("/save")
 	public String saveCustomer(@Valid Users user_, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
