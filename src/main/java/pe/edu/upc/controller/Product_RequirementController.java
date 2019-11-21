@@ -51,7 +51,7 @@ public class Product_RequirementController {
 			int rpta = proService.insert(product);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
-				return "/product/product";
+				return "product/product";
 			} else {
 				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
@@ -59,7 +59,7 @@ public class Product_RequirementController {
 		}
 		model.addAttribute("listproduct", proService.list());
 
-		return "/product/listproduct";
+		return "product/listproduct";
 	}
 
 	@Secured("ROLE_USER")
@@ -71,7 +71,7 @@ public class Product_RequirementController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/product/listproduct";
+		return "product/listproduct";
 	}
 
 	@Secured("ROLE_USER")
@@ -88,7 +88,7 @@ public class Product_RequirementController {
 		}
 		model.put("listproduct", proService.list());
 
-		return "/product/listproduct";
+		return "product/listproduct";
 
 	}
 
@@ -101,7 +101,7 @@ public class Product_RequirementController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/product/find";
+		return "product/find";
 	}
 
 	@Secured("ROLE_USER")
@@ -136,7 +136,7 @@ public class Product_RequirementController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/product/update";
+		return "product/update";
 	}
 
 	@PostMapping("/savemodify")
@@ -150,7 +150,7 @@ public class Product_RequirementController {
 			model.addAttribute("mensaje", "Se modificó correctamente");
 			model.addAttribute("listproduct", proService.list());
 			status.setComplete();
-			return "/product/listproduct";
+			return "product/listproduct";
 		}
 	}
 

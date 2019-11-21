@@ -56,7 +56,7 @@ public class SupplierController {
 				status.setComplete();
 			}
 			model.addAttribute("listSuppliers", suService.list());
-			return "/supplier/listSuppliers";
+			return "supplier/listSuppliers";
 		}
 	}
 	@Secured("ROLE_USER")
@@ -72,7 +72,7 @@ public class SupplierController {
 			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listSuppliers", suService.list());
-		return "/supplier/listSuppliers";
+		return "supplier/listSuppliers";
 	}
 	@Secured("ROLE_USER")
 	@GetMapping("/list")
@@ -83,7 +83,7 @@ public class SupplierController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/supplier/listSuppliers";
+		return "supplier/listSuppliers";
 	}
 	@Secured("ROLE_USER")
 	@GetMapping("/listFind")
@@ -124,7 +124,7 @@ public class SupplierController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/supplier/update";
+		return "supplier/update";
 	}
 	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
@@ -138,7 +138,7 @@ public class SupplierController {
 			model.addAttribute("mensaje", "Se modificó correctamente");
 			model.addAttribute("listSuppliers", suService.list());
 			status.setComplete();
-			return "/supplier/listSuppliers";
+			return "supplier/listSuppliers";
 		}
 	}
 }

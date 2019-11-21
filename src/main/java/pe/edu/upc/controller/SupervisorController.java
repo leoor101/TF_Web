@@ -53,7 +53,7 @@ public class SupervisorController {
 				status.setComplete();
 			}
 			model.addAttribute("listSupervisors", sUService.list());
-			return "/supervisor/listSupervisors";
+			return "supervisor/listSupervisors";
 		}
 	}
 
@@ -70,7 +70,7 @@ public class SupervisorController {
 			model.put("mensaje", "No se pudo eliminar");
 		}
 		model.put("listSupervisors", sUService.list());
-		return "/supervisor/listSupervisors";
+		return "supervisor/listSupervisors";
 	}
 
 	@Secured("ROLE_USER")
@@ -82,7 +82,7 @@ public class SupervisorController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/supervisor/listSupervisors";
+		return "supervisor/listSupervisors";
 	}
 	@Secured("ROLE_USER")
 	@GetMapping("/listWith")
@@ -93,7 +93,7 @@ public class SupervisorController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/supervisor/WithRequest";
+		return "supervisor/WithRequest";
 	}
 	
 	
@@ -142,7 +142,7 @@ public class SupervisorController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/supervisor/detailRequest";
+		return "supervisor/detailRequest";
 	}
 	
 	@Secured("ROLE_USER")
@@ -160,7 +160,7 @@ public class SupervisorController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/supervisor/update";
+		return "supervisor/update";
 	}
 	@Secured("ROLE_USER")
 	@PostMapping("/savemodify")
@@ -174,7 +174,7 @@ public class SupervisorController {
 			model.addAttribute("mensaje", "Se modificó correctamente");
 			model.addAttribute("listSupervisors", sUService.list());
 			status.setComplete();
-			return "/supervisor/listSupervisors";
+			return "supervisor/listSupervisors";
 		}
 	}
 

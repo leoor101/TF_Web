@@ -54,7 +54,7 @@ public class Accounting_OfficeController
 				status.setComplete();
 			}
 		}
-		return "/accounting/listAccounting";
+		return "accounting/listAccounting";
 	}
 	@Secured("ROLE_USER")
 	@GetMapping("/list")
@@ -65,7 +65,7 @@ public class Accounting_OfficeController
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/accounting/listAccounting";
+		return "accounting/listAccounting";
 	}
 	@Secured("ROLE_USER")
 	@RequestMapping("/delete")
@@ -81,7 +81,7 @@ public class Accounting_OfficeController
 		}
 		model.put("listAccounting", aService.list());
 
-		return "/accounting/listAccounting";
+		return "accounting/listAccounting";
 
 	}
 	@Secured("ROLE_USER")
@@ -99,7 +99,7 @@ public class Accounting_OfficeController
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/accounting/update";
+		return "accounting/update";
 	}
 
 	@Secured("ROLE_USER")
@@ -111,7 +111,7 @@ public class Accounting_OfficeController
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/accounting/find";
+		return "accounting/find";
 	}
 	@Secured("ROLE_USER")
 	@RequestMapping("/find")
@@ -140,7 +140,7 @@ public class Accounting_OfficeController
 			model.addAttribute("mensaje", "Se modificó correctamente");
 			model.addAttribute("listAccounting", aService.list());
 			status.setComplete();
-			return "/accounting/listAccounting";
+			return "accounting/listAccounting";
 		}
 	}
 }
